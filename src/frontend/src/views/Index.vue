@@ -11,7 +11,7 @@
             <div class="sheet__content dough">
               <label
                 v-for="dough in doughs"
-                v-bind:key="dough.name"
+                :key="dough.name"
                 class="dough__input"
                 :class="dough.style"
               >
@@ -36,7 +36,7 @@
             <div class="sheet__content diameter">
               <label
                 v-for="size in sizes"
-                v-bind:key="size.value"
+                :key="size.value"
                 class="diameter__input"
                 :class="size.style"
               >
@@ -65,7 +65,7 @@
 
                 <label
                   v-for="sauce in sauces"
-                  v-bind:key="sauce.name"
+                  :key="sauce.name"
                   class="radio ingridients__input"
                 >
                   <input
@@ -84,7 +84,7 @@
                 <ul class="ingridients__list">
                   <li
                     v-for="ingredient in ingredients"
-                    v-bind:key="ingredient.name"
+                    :key="ingredient.name"
                     class="ingridients__item"
                   >
                     <span class="filling" :class="ingredient.style">{{
@@ -191,7 +191,6 @@ export default {
       };
     },
     normalizeSauce(sauce) {
-      debugger;
       return {
         ...sauce,
       };
