@@ -1,25 +1,25 @@
 // Все возможные статусы
 export const statuses = [
   {
-    label: "Важно, не срочно",
-    value: "green",
+    label: 'Важно, не срочно',
+    value: 'green'
   },
   {
-    label: "Срочно, не важно",
-    value: "orange",
+    label: 'Срочно, не важно',
+    value: 'orange'
   },
   {
-    label: "Срочно, важно",
-    value: "red",
+    label: 'Срочно, важно',
+    value: 'red'
   },
   {
-    label: "Дедлайн",
-    value: "time",
+    label: 'Дедлайн',
+    value: 'time'
   },
   {
-    label: "Просрочено",
-    value: "alert",
-  },
+    label: 'Просрочено',
+    value: 'alert'
+  }
 ];
 
 // Для работы с временем создания задачи и статусом по времени
@@ -30,7 +30,4 @@ export const DAY_IN_SEC = HOUR_IN_SEC * 24;
 export const DAY_IN_MILLISEC = DAY_IN_SEC * SEC;
 
 // Разделитель тегов внутри строки тегов.
-export const TAG_SEPARATOR = "#";
-
-export const DATA_TRANSFER_PAYLOAD = "";
-export const MOVE = "";
+export const TAG_SEPARATOR = '#';

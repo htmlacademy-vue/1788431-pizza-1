@@ -1,21 +1,9 @@
 <template>
   <div class="app-layout">
-    <AppLayoutHeader
-      :filters="filters"
-      @applyFilters="$emit('applyFilters', $event)"
-    />
+    <AppLayoutHeader />
     <div class="content">
-      <AppLayoutMainSidebar
-        :tasks="tasks"
-        :filters="filters"
-        @updateTasks="$emit('updateTasks', $event)"
-      />
-      <IndexHome
-        :tasks="tasks"
-        :filters="filters"
-        @updateTasks="$emit('updateTasks', $event)"
-        @applyFilters="$emit('applyFilters', $event)"
-      />
+      <AppLayoutMainSidebar />
+      <IndexHome />
     </div>
   </div>
 </template>
@@ -23,7 +11,7 @@
 <script>
 import AppLayoutMainSidebar from "@/layouts/AppLayoutMainSidebar";
 import AppLayoutHeader from "@/layouts/AppLayoutHeader";
-import IndexHome from "@/views/Index";
+import IndexHome from "@/views/Index.vue";
 
 export default {
   name: "AppLayout",
@@ -32,17 +20,5 @@ export default {
     AppLayoutHeader,
     IndexHome,
   },
-  props: {
-    tasks: {
-      type: Array,
-      required: true,
-    },
-    filters: {
-      type: Object,
-      required: true,
-    },
-  },
 };
 </script>
-
-<style lang="scss" scoped></style>
