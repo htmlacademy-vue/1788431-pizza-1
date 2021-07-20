@@ -1,3 +1,5 @@
+//const path = require("path");
+
 module.exports = {
   css: {
     loaderOptions: {
@@ -32,4 +34,12 @@ module.exports = {
       errors: true,
     },
   },
+
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@': __dirname + '/src'
+      }
+    },
+  }
 };

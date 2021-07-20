@@ -2,7 +2,6 @@
   <header class="header">
     <div class="header__logo">
       <a class="logo">
-        // @ — это алиас, как при импорте в скриптах. Для доступа к src/assets/...
         <img
           src="@/assets/img/logo.svg"
           alt="VueWork logo"
@@ -12,19 +11,21 @@
       </a>
     </div>
     <div>
-      <form
-        action="#"
-        class="header__search"
-      >
+      <form action="#" class="header__search">
         <input
+          :value="filters.search"
           type="search"
           name="search"
           required
           placeholder="Поиск"
+          @input="
+            $emit('applyFilters', {
+              item: $event.target.value,
+              entity: 'search',
+            })
+          "
         />
-        <button type="submit">
-          Найти
-        </button>
+        <button type="submit">Найти</button>
       </form>
     </div>
   </header>
@@ -32,12 +33,14 @@
 
 <script>
 export default {
-  name: 'AppLayoutHeader'
+  name: "AppLayoutHeader",
+  props: {
+    filters: {
+      type: Object,
+      required: true,
+    },
+  },
 };
 </script>
 
-// Используем scss препроцессор и scoped, чтобы ограничить область
-// влияния стилей текущим компонентом.
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
