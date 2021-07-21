@@ -12,7 +12,11 @@
           ingredient.name
         }}</span>
 
-        <ItemCounter additionalClass="ingridients__counter"></ItemCounter>
+        <ItemCounter
+          additionalClass="ingridients__counter"
+          :initValue="ingredient.count"
+          @update="ingredient.count = $event"
+        ></ItemCounter>
       </li>
     </ul>
   </div>
@@ -43,6 +47,7 @@ export default {
       return {
         ...ingredient,
         style: "filling--" + ingredient.value,
+        count: 0,
       };
     },
   },

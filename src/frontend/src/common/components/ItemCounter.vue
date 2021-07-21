@@ -3,11 +3,16 @@
     <button
       type="button"
       class="counter__button counter__button--disabled counter__button--minus"
+      @click="onMinus"
     >
       <span class="visually-hidden">Меньше</span>
     </button>
-    <input type="text" name="counter" class="counter__input" value="0" />
-    <button type="button" class="counter__button counter__button--plus">
+    <input type="text" name="counter" class="counter__input" :value="value" />
+    <button
+      type="button"
+      class="counter__button counter__button--plus"
+      @click="onPlus"
+    >
       <span class="visually-hidden">Больше</span>
     </button>
   </div>
@@ -20,12 +25,29 @@ export default {
     additionalClass: {
       type: String,
     },
+    initValue: {
+      type: Number,
+    },
   },
 
   data() {
-    return {};
+    return {
+      value: this.initValue || 0,
+    };
   },
 
-  methods: {},
+  methods: {
+    onMinus() {
+      this.value = this.value - 1;
+      this.emit();
+    },
+    onPlus() {
+      this.value = this.value + 1;
+      this.emit();
+    },
+    emit() {
+      this.$emit("update", this.value);
+    },
+  },
 };
 </script>
