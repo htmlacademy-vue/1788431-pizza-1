@@ -46,5 +46,11 @@ export default {
       return defaultSauce ? defaultSauce.value : null;
     },
   },
+
+  watch: {
+    selectedSauce(newSauce) {
+      this.$emit("change", newSauce);
+    },
+  },
 };
 </script>

@@ -46,7 +46,7 @@ export default {
       this.emit();
     },
     emit() {
-      this.$emit("update", this.value);
+      this.$emit("change", this.value);
     },
   },
 };

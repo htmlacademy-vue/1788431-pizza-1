@@ -54,5 +54,11 @@ export default {
       return defaultDough ? defaultDough.value : null;
     },
   },
+
+  watch: {
+    selectedDough(newDough) {
+      this.$emit("change", newDough);
+    },
+  },
 };
 </script>

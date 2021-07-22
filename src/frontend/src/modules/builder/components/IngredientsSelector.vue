@@ -15,7 +15,7 @@
         <ItemCounter
           additionalClass="ingridients__counter"
           :initValue="ingredient.count"
-          @update="ingredient.count = $event"
+          @change="ingredient.count = $event"
         ></ItemCounter>
       </li>
     </ul>

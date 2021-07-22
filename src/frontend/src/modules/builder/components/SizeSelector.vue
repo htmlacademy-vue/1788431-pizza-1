@@ -3,28 +3,20 @@
     <div class="sheet">
       <h2 class="title title--small sheet__title">Выберите размер</h2>
 
-      <div class="sheet__content diameter">
-        <label
-          v-for="size in sizes"
-          :key="size.value"
-          class="diameter__input"
-          :class="size.style"
-        >
-          <input
-            type="radio"
-            name="diameter"
-            :value="size.value"
-            class="visually-hidden"
-            v-model="selectedSize"
-          />
-          <span>{{ size.name }}</span>
-        </label>
-      </div>
+      <RadioButton
+        name="diameter"
+        :items="normalizedSizes"
+        mainStyle="diameter"
+        :initValue="selectedSize"
+        @change="onChange"
+      ></RadioButton>
     </div>
   </div>
 </template>
 
 <script>
+import RadioButton from "@/common/components/RadioButton";
+
 export default {
   name: "SizeSelector",
   props: {
@@ -33,6 +25,8 @@ export default {
       required: true,
     },
   },
+
+  components: { RadioButton },
 
   data() {
     return {
@@ -45,12 +39,15 @@ export default {
     normalizeSize(size) {
       return {
         ...size,
-        style: "diameter__input--" + size.value,
+        style: "diameter__input diameter__input--" + size.value,
       };
     },
     getDefaultSizeValue() {
       const defaultSize = this.sizes.find((size) => size.default);
       return defaultSize ? defaultSize.value : null;
+    },
+    onChange(size) {
+      this.$emit("change", size);
     },
   },
 };
