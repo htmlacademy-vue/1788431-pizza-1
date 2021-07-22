@@ -38,8 +38,11 @@ export default {
 
   methods: {
     onMinus() {
-      this.value = this.value - 1;
-      this.emit();
+      const newValue = this.value - 1;
+      if (newValue >= 0) {
+        this.value = newValue;
+        this.emit();
+      }
     },
     onPlus() {
       this.value = this.value + 1;
