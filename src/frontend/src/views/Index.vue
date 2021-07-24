@@ -107,7 +107,13 @@ export default {
       const selectedSauce = pizza.sauces.find(
         (sauce) => sauce.value === this.selectedSauceValue
       );
-      return selectedDough.price + selectedSauce.price + this.ingredientsPrice;
+      const selectedSize = pizza.sizes.find(
+        (size) => size.value === this.selectedSizeValue
+      );
+      return (
+        (selectedDough.price + selectedSauce.price + this.ingredientsPrice) *
+        selectedSize.multiplier
+      );
     },
   },
   methods: {
