@@ -47,15 +47,11 @@
             />
           </label>
 
-          <div class="content__constructor">
-            <div class="pizza" :class="pizzaFoundationStyle">
-              <div class="pizza__wrapper">
-                <div class="pizza__filling pizza__filling--ananas"></div>
-                <div class="pizza__filling pizza__filling--bacon"></div>
-                <div class="pizza__filling pizza__filling--cheddar"></div>
-              </div>
-            </div>
-          </div>
+          <PizzaView
+            :sauce="selectedSauceValue"
+            :dough="selectedDoughValue"
+            :selectedIngredients="selectedIngredients"
+          ></PizzaView>
 
           <div class="content__result">
             <PriceCounter
@@ -85,6 +81,7 @@ import SizeSelector from "@/modules/builder/components/SizeSelector";
 import SauceSelector from "@/modules/builder/components/SauceSelector";
 import IngredientsSelector from "@/modules/builder/components/IngredientsSelector";
 import PriceCounter from "@/modules/builder/components/PriceCounter";
+import PizzaView from "@/modules/builder/components/PizzaView";
 import {
   getDefaultDoughValue,
   getDefaultSauceValue,
@@ -99,6 +96,7 @@ export default {
     SauceSelector,
     IngredientsSelector,
     PriceCounter,
+    PizzaView,
   },
   data() {
     return {

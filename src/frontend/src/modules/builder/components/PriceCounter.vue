@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "ItemCounter",
+  name: "PriceCounter",
   props: {
     sizes: Array,
     size: String,
