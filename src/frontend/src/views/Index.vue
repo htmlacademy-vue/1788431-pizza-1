@@ -58,7 +58,16 @@
           </div>
 
           <div class="content__result">
-            <p>Итого: {{ price }} ₽</p>
+            <PriceCounter
+              :sizes="pizza.sizes"
+              :sauces="pizza.sauces"
+              :doughs="pizza.dough"
+              :ingredients="pizza.ingredients"
+              :size="selectedSizeValue"
+              :sauce="selectedSauceValue"
+              :dough="selectedDoughValue"
+              :selectedIngredients="selectedIngredients"
+            ></PriceCounter>
             <button type="button" class="button button--disabled" disabled>
               Готовьте!
             </button>
@@ -75,6 +84,7 @@ import DoughSelector from "@/modules/builder/components/DoughSelector";
 import SizeSelector from "@/modules/builder/components/SizeSelector";
 import SauceSelector from "@/modules/builder/components/SauceSelector";
 import IngredientsSelector from "@/modules/builder/components/IngredientsSelector";
+import PriceCounter from "@/modules/builder/components/PriceCounter";
 import {
   getDefaultDoughValue,
   getDefaultSauceValue,
@@ -88,6 +98,7 @@ export default {
     SizeSelector,
     SauceSelector,
     IngredientsSelector,
+    PriceCounter,
   },
   data() {
     return {
@@ -100,21 +111,6 @@ export default {
     };
   },
   computed: {
-    price() {
-      const selectedDough = pizza.dough.find(
-        (dough) => dough.value === this.selectedDoughValue
-      );
-      const selectedSauce = pizza.sauces.find(
-        (sauce) => sauce.value === this.selectedSauceValue
-      );
-      const selectedSize = pizza.sizes.find(
-        (size) => size.value === this.selectedSizeValue
-      );
-      return (
-        (selectedDough.price + selectedSauce.price + this.ingredientsPrice) *
-        selectedSize.multiplier
-      );
-    },
     pizzaFoundationStyle() {
       const dough = { light: "small", large: "big" }[this.selectedDoughValue];
       return "pizza--foundation--" + dough + "-" + this.selectedSauceValue;
@@ -131,19 +127,11 @@ export default {
       this.selectedSauceValue = sauce;
     },
     onIngredientsChange(ingredients) {
-      this.selectedIngredients = ingredients;
-      this.updateIngredientsPrice();
-    },
-    updateIngredientsPrice() {
-      let ingredientsPrice = 0;
-      for (const selectedIngredientValue in this.selectedIngredients) {
-        const count = this.selectedIngredients[selectedIngredientValue];
-        const ingredient = pizza.ingredients.find(
-          (ingredient) => ingredient.value === selectedIngredientValue
-        );
-        ingredientsPrice += ingredient.price * count;
-      }
-      this.ingredientsPrice = ingredientsPrice;
+      this.selectedIngredients = Object.assign(
+        {},
+        this.selectedIngredients,
+        ingredients
+      );
     },
   },
 };
