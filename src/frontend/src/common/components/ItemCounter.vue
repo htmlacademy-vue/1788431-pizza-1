@@ -28,6 +28,9 @@ export default {
     initValue: {
       type: Number,
     },
+    max: {
+      type: Number,
+    },
   },
 
   data() {
@@ -45,7 +48,11 @@ export default {
       }
     },
     onPlus() {
-      this.value = this.value + 1;
+      const newValue = this.value + 1;
+      if (this.max && newValue > this.max) {
+        return;
+      }
+      this.value = newValue;
       this.emit();
     },
     emit() {

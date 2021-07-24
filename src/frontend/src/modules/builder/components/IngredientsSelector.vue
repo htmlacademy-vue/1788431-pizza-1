@@ -15,6 +15,7 @@
         <ItemCounter
           additionalClass="ingridients__counter"
           :initValue="ingredient.count"
+          max="3"
           @change="onChange(ingredient.value, $event)"
         ></ItemCounter>
       </li>
