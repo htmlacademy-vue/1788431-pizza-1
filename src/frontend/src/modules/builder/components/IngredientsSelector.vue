@@ -8,14 +8,21 @@
         :key="ingredient.name"
         class="ingredients__item"
       >
-        <span class="filling" :class="ingredient.style">{{
-          ingredient.name
-        }}</span>
+        <span
+          class="filling"
+          :class="ingredient.style"
+          :draggable="true"
+          @dragstart.self="onDrag($event, ingredient)"
+          @dragover.prevent
+          @dragenter.prevent
+        >
+          {{ ingredient.name }}
+        </span>
 
         <ItemCounter
           additionalClass="ingredients__counter"
-          :initValue="ingredient.count"
-          :max="3"
+          :value="selectedIngredients[ingredient.value]"
+          :max="max"
           @change="onChange(ingredient.value, $event)"
         ></ItemCounter>
       </li>
@@ -25,11 +32,17 @@
 
 <script>
 import ItemCounter from "@/common/components/ItemCounter";
+import { MAX_SAME_INGREDIENTS, DRAG_DATA_NAME } from "@/common/constants";
+
 export default {
   name: "IngredientsSelector",
   props: {
     ingredients: {
       type: Array,
+      required: true,
+    },
+    selectedIngredients: {
+      type: Object,
       required: true,
     },
   },
@@ -40,7 +53,7 @@ export default {
       normalizedIngredients: this.ingredients.map((ingredient) =>
         this.normalizeIngredient(ingredient)
       ),
-      selectedIngredients: {},
+      max: MAX_SAME_INGREDIENTS,
     };
   },
 
@@ -52,9 +65,11 @@ export default {
         count: 0,
       };
     },
-    onChange(value, count) {
-      this.selectedIngredients[value] = count;
-      this.$emit("change", this.selectedIngredients);
+    onChange(ingredientValue, delta) {
+      this.$emit("change", ingredientValue, delta);
+    },
+    onDrag(event, ingredient) {
+      event.dataTransfer.setData(DRAG_DATA_NAME, ingredient.value);
     },
   },
 };

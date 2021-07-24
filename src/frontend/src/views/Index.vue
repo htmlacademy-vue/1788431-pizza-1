@@ -31,7 +31,8 @@
 
               <IngredientsSelector
                 :ingredients="pizza.ingredients"
-                @change="onIngredientsChange"
+                :selectedIngredients="selectedIngredients"
+                @change="onIngredientChange(...arguments)"
               ></IngredientsSelector>
             </div>
           </div>
@@ -51,6 +52,7 @@
             :sauce="selectedSauceValue"
             :dough="selectedDoughValue"
             :selectedIngredients="selectedIngredients"
+            @drop="onIngredientDrop($event)"
           ></PizzaView>
 
           <div class="content__result">
@@ -87,6 +89,7 @@ import {
   getDefaultSauceValue,
   getDefaultSizeValue,
 } from "@/common/builderHelpers";
+import { MAX_SAME_INGREDIENTS } from "@/common/constants";
 
 export default {
   name: "Index",
@@ -124,11 +127,24 @@ export default {
     onSauceChange(sauce) {
       this.selectedSauceValue = sauce;
     },
-    onIngredientsChange(ingredients) {
-      this.selectedIngredients = Object.assign(
-        {},
+    onIngredientChange(ingredientValue, delta) {
+      this.changeIngredient(ingredientValue, delta);
+    },
+    onIngredientDrop(ingredientValue) {
+      this.changeIngredient(ingredientValue, +1);
+    },
+    changeIngredient(ingredientValue, delta) {
+      const currentCount = this.selectedIngredients[ingredientValue] || 0;
+      if (delta > 0 && currentCount >= MAX_SAME_INGREDIENTS) {
+        return;
+      }
+      if (delta < 0 && currentCount === 0) {
+        return;
+      }
+      this.$set(
         this.selectedIngredients,
-        ingredients
+        ingredientValue,
+        currentCount + delta
       );
     },
   },

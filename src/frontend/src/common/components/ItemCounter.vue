@@ -25,26 +25,20 @@ export default {
     additionalClass: {
       type: String,
     },
-    initValue: {
+    value: {
       type: Number,
+      default: 0,
     },
     max: {
       type: Number,
     },
   },
 
-  data() {
-    return {
-      value: this.initValue || 0,
-    };
-  },
-
   methods: {
     onMinus() {
       const newValue = this.value - 1;
       if (newValue >= 0) {
-        this.value = newValue;
-        this.emit();
+        this.$emit("change", -1);
       }
     },
     onPlus() {
@@ -52,11 +46,7 @@ export default {
       if (this.max && newValue > this.max) {
         return;
       }
-      this.value = newValue;
-      this.emit();
-    },
-    emit() {
-      this.$emit("change", this.value);
+      this.$emit("change", 1);
     },
   },
 };

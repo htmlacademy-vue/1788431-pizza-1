@@ -1,6 +1,12 @@
 <template>
   <div class="content__constructor">
-    <div class="pizza" :class="pizzaFoundationStyle">
+    <div
+      class="pizza"
+      :class="pizzaFoundationStyle"
+      @drop.stop="onDrop"
+      @dragover.prevent
+      @dragenter.prevent
+    >
       <div class="pizza__wrapper">
         <div
           v-for="ingredientStyle of pizzaIngredientStyles"
@@ -13,6 +19,7 @@
 </template>
 
 <script>
+import { DRAG_DATA_NAME } from "@/common/constants";
 export default {
   name: "PizzaView",
   props: {
@@ -54,6 +61,13 @@ export default {
     },
   },
 
-  methods: {},
+  methods: {
+    onDrop(event) {
+      const ingredientValue = event.dataTransfer.getData(DRAG_DATA_NAME);
+      if (ingredientValue) {
+        this.$emit("drop", ingredientValue);
+      }
+    },
+  },
 };
 </script>
