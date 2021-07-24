@@ -26,12 +26,15 @@ export default {
       type: Array,
       required: true,
     },
+    initValue: {
+      type: String,
+    },
   },
 
   data() {
     return {
       normalizedSauces: this.sauces.map((sauce) => this.normalizeSauce(sauce)),
-      selectedSauce: this.getDefaultSauceValue(),
+      selectedSauce: this.initValue,
     };
   },
 
@@ -40,10 +43,6 @@ export default {
       return {
         ...sauce,
       };
-    },
-    getDefaultSauceValue() {
-      const defaultSauce = this.sauces.find((sauce) => sauce.default);
-      return defaultSauce ? defaultSauce.value : null;
     },
   },
 

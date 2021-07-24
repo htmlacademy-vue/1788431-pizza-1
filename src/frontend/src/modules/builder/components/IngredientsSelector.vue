@@ -15,7 +15,7 @@
         <ItemCounter
           additionalClass="ingridients__counter"
           :initValue="ingredient.count"
-          @change="ingredient.count = $event"
+          @change="onChange(ingredient.value, $event)"
         ></ItemCounter>
       </li>
     </ul>
@@ -39,6 +39,7 @@ export default {
       normalizedIngredients: this.ingredients.map((ingredient) =>
         this.normalizeIngredient(ingredient)
       ),
+      selectedIngredients: {},
     };
   },
 
@@ -49,6 +50,10 @@ export default {
         style: "filling--" + ingredient.value,
         count: 0,
       };
+    },
+    onChange(value, count) {
+      this.selectedIngredients[value] = count;
+      this.$emit("change", this.selectedIngredients);
     },
   },
 };

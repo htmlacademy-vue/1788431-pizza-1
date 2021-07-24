@@ -33,12 +33,15 @@ export default {
       type: Array,
       required: true,
     },
+    initValue: {
+      type: String,
+    },
   },
 
   data() {
     return {
       normalizedDoughs: this.doughs.map((dough) => this.normalizeDough(dough)),
-      selectedDough: this.getDefaultDoughValue(),
+      selectedDough: this.initValue,
     };
   },
 
@@ -48,10 +51,6 @@ export default {
         ...dough,
         style: "dough__input--" + dough.value,
       };
-    },
-    getDefaultDoughValue() {
-      const defaultDough = this.doughs.find((dough) => dough.default);
-      return defaultDough ? defaultDough.value : null;
     },
   },
 

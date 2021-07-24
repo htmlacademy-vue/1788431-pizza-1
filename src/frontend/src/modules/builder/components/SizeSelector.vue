@@ -24,6 +24,9 @@ export default {
       type: Array,
       required: true,
     },
+    initValue: {
+      type: String,
+    },
   },
 
   components: { RadioButton },
@@ -31,7 +34,7 @@ export default {
   data() {
     return {
       normalizedSizes: this.sizes.map((size) => this.normalizeSize(size)),
-      selectedSize: this.getDefaultSizeValue(),
+      selectedSize: this.initValue,
     };
   },
 
@@ -41,10 +44,6 @@ export default {
         ...size,
         style: "diameter__input diameter__input--" + size.value,
       };
-    },
-    getDefaultSizeValue() {
-      const defaultSize = this.sizes.find((size) => size.default);
-      return defaultSize ? defaultSize.value : null;
     },
     onChange(size) {
       this.$emit("change", size);
