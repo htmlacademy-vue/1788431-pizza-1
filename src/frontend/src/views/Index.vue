@@ -48,7 +48,7 @@
           </label>
 
           <div class="content__constructor">
-            <div class="pizza pizza--foundation--big-tomato">
+            <div class="pizza" :class="pizzaFoundationStyle">
               <div class="pizza__wrapper">
                 <div class="pizza__filling pizza__filling--ananas"></div>
                 <div class="pizza__filling pizza__filling--bacon"></div>
@@ -114,6 +114,10 @@ export default {
         (selectedDough.price + selectedSauce.price + this.ingredientsPrice) *
         selectedSize.multiplier
       );
+    },
+    pizzaFoundationStyle() {
+      const dough = { light: "small", large: "big" }[this.selectedDoughValue];
+      return "pizza--foundation--" + dough + "-" + this.selectedSauceValue;
     },
   },
   methods: {
