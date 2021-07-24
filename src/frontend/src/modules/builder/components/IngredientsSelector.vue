@@ -1,19 +1,19 @@
 <template>
-  <div class="ingridients__filling">
+  <div class="ingredients__filling">
     <p>Начинка:</p>
 
-    <ul class="ingridients__list">
+    <ul class="ingredients__list">
       <li
         v-for="ingredient in normalizedIngredients"
         :key="ingredient.name"
-        class="ingridients__item"
+        class="ingredients__item"
       >
         <span class="filling" :class="ingredient.style">{{
           ingredient.name
         }}</span>
 
         <ItemCounter
-          additionalClass="ingridients__counter"
+          additionalClass="ingredients__counter"
           :initValue="ingredient.count"
           :max="3"
           @change="onChange(ingredient.value, $event)"

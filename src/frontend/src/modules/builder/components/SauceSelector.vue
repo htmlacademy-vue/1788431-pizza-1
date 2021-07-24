@@ -1,11 +1,11 @@
 <template>
-  <div class="ingridients__sauce">
+  <div class="ingredients__sauce">
     <p>Основной соус:</p>
 
     <label
       v-for="sauce in normalizedSauces"
       :key="sauce.name"
-      class="radio ingridients__input"
+      class="radio ingredients__input"
     >
       <input
         type="radio"

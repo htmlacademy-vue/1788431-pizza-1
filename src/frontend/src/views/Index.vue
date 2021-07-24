@@ -16,13 +16,13 @@
           @change="onSizeChange"
         ></SizeSelector>
 
-        <div class="content__ingridients">
+        <div class="content__ingredients">
           <div class="sheet">
             <h2 class="title title--small sheet__title">
               Выберите ингридиенты
             </h2>
 
-            <div class="sheet__content ingridients">
+            <div class="sheet__content ingredients">
               <SauceSelector
                 :sauces="pizza.sauces"
                 :initValue="selectedSauceValue"
