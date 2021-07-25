@@ -1,4 +1,4 @@
-.ingridients__sauce {
+.ingredients__sauce {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -15,12 +15,12 @@
   }
 }
 
-.ingridients__input {
+.ingredients__input {
   margin-right: 24px;
   margin-bottom: 10px;
 }
 
-.ingridients__filling {
+.ingredients__filling {
   width: 100%;
 
   p {
@@ -31,7 +31,7 @@
   }
 }
 
-.ingridients__list {
+.ingredients__list {
   @include clear-list;
 
   display: flex;
@@ -39,14 +39,14 @@
   flex-wrap: wrap;
 }
 
-.ingridients__item {
+.ingredients__item {
   width: 100px;
   min-height: 40px;
   margin-right: 17px;
   margin-bottom: 35px;
 }
 
-.ingridients__counter {
+.ingredients__counter {
   width: 54px;
   margin-top: 10px;
   margin-left: 36px;
