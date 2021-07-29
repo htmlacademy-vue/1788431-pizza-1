@@ -92,7 +92,7 @@ import {
 import { MAX_SAME_INGREDIENTS } from "@/common/constants";
 
 export default {
-  name: "Index",
+  name: "Builder",
   components: {
     DoughSelector,
     SizeSelector,
