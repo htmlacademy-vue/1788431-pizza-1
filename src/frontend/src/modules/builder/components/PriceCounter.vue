@@ -3,28 +3,31 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "PriceCounter",
-  props: {
-    sizes: Array,
-    size: String,
-    doughs: Array,
-    dough: String,
-    sauces: Array,
-    sauce: String,
-    ingredients: Array,
-    selectedIngredients: Object,
-  },
 
   computed: {
+    ...mapGetters("Builder", [
+      "doughs",
+      "sauces",
+      "sizes",
+      "ingredients",
+      "selectedDoughValue",
+      "selectedSauceValue",
+      "selectedSizeValue",
+      "selectedIngredients",
+    ]),
     totalPrice() {
       const selectedDough = this.doughs.find(
-        (dough) => dough.value === this.dough
+        (dough) => dough.value === this.selectedDoughValue
       );
       const selectedSauce = this.sauces.find(
-        (sauce) => sauce.value === this.sauce
+        (sauce) => sauce.value === this.selectedSauceValue
       );
-      const selectedSize = this.sizes.find((size) => size.value === this.size);
+      const selectedSize = this.sizes.find(
+        (size) => size.value === this.selectedSizeValue
+      );
 
       let ingredientsPrice = 0;
       for (const selectedIngredientValue in this.selectedIngredients) {
