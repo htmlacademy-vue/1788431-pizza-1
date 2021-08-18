@@ -33,6 +33,12 @@ export class Order extends Entity {
   id?: number;
 
   @property({
+    type: 'string',
+    required: false,
+  })
+  phone?: String;
+
+  @property({
     type: 'array',
     required: false,
     itemType: 'object',
