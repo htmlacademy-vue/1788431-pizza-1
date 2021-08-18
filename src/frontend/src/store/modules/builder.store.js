@@ -18,6 +18,7 @@ export default {
     selectedSauceValue: null,
     selectedSizeValue: null,
     selectedIngredients: {},
+    pizzaName: null,
   },
   getters: {
     doughs(state) {
@@ -44,6 +45,17 @@ export default {
     selectedIngredients(state) {
       return state.selectedIngredients;
     },
+    getPizzaName(state) {
+      return state.pizzaName;
+    },
+    orderAllowed(state) {
+      return (
+        state.pizzaName &&
+        state.selectedDoughValue &&
+        state.selectedSauceValue &&
+        state.selectedSizeValue
+      );
+    },
   },
   mutations: {
     setData(state, { dough, sauces, sizes, ingredients }) {
@@ -66,6 +78,9 @@ export default {
     },
     setIngredient(state, { ingredientValue, value }) {
       Vue.set(state.selectedIngredients, ingredientValue, value);
+    },
+    setPizzaName(state, pizzaName) {
+      state.pizzaName = pizzaName;
     },
   },
   actions: {
@@ -91,6 +106,9 @@ export default {
       }
       const value = currentCount + delta;
       commit("setIngredient", { ingredientValue, value });
+    },
+    savePizzaName({ commit }, pizzaName) {
+      commit("setPizzaName", pizzaName);
     },
   },
 };

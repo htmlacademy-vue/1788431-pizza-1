@@ -29,6 +29,7 @@
               type="text"
               name="pizza_name"
               placeholder="Введите название пиццы"
+              v-model="pizzaName"
             />
           </label>
 
@@ -36,7 +37,12 @@
 
           <div class="content__result">
             <PriceCounter></PriceCounter>
-            <button type="button" class="button button--disabled" disabled>
+            <button
+              type="button"
+              class="button"
+              :class="{ 'button--disabled': !orderAllowed }"
+              :disabled="!orderAllowed"
+            >
               Готовьте!
             </button>
           </div>
@@ -53,7 +59,7 @@ import SauceSelector from "@/modules/builder/components/SauceSelector";
 import IngredientsSelector from "@/modules/builder/components/IngredientsSelector";
 import PriceCounter from "@/modules/builder/components/PriceCounter";
 import PizzaView from "@/modules/builder/components/PizzaView";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Builder",
@@ -68,8 +74,19 @@ export default {
   created() {
     this.fetchData();
   },
+  computed: {
+    ...mapGetters("Builder", ["getPizzaName", "orderAllowed"]),
+    pizzaName: {
+      get() {
+        return this.getPizzaName;
+      },
+      set(pizzaName) {
+        this.savePizzaName(pizzaName);
+      },
+    },
+  },
   methods: {
-    ...mapActions("Builder", ["fetchData"]),
+    ...mapActions("Builder", ["fetchData", "savePizzaName"]),
     onIngredientChange(ingredientValue, delta) {
       this.changeIngredient(ingredientValue, delta);
     },
