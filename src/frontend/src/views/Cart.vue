@@ -57,129 +57,26 @@
 
         <div class="cart__additional">
           <ul class="additional-list">
-            <li class="additional-list__item sheet">
+            <li
+              v-for="misc in miscData"
+              :key="misc.id"
+              class="additional-list__item sheet"
+            >
               <p class="additional-list__description">
-                <img
-                  src="@/assets/img/cola.svg"
-                  width="39"
-                  height="60"
-                  alt="Coca-Cola 0,5 литра"
-                />
-                <span>Coca-Cola 0,5 литра</span>
+                <span class="misc" :class="misc.code"></span>
+                <span>{{ misc.name }} ({{ misc.price || 0 }} ₽)</span>
               </p>
 
               <div class="additional-list__wrapper">
-                <div class="counter additional-list__counter">
-                  <button
-                    type="button"
-                    class="counter__button counter__button--minus"
-                  >
-                    <span class="visually-hidden">Меньше</span>
-                  </button>
-                  <input
-                    type="text"
-                    name="counter"
-                    class="counter__input"
-                    value="2"
-                  />
-                  <button
-                    type="button"
-                    class="
-                      counter__button
-                      counter__button--plus
-                      counter__button--orange
-                    "
-                  >
-                    <span class="visually-hidden">Больше</span>
-                  </button>
-                </div>
+                <ItemCounter
+                  additionalClass="additional-list__counter"
+                  additionalButtonClass="counter__button--orange"
+                  :value="misc.count"
+                  @change="onMiscChange(misc.id, $event)"
+                ></ItemCounter>
 
                 <div class="additional-list__price">
-                  <b>56 ₽</b>
-                </div>
-              </div>
-            </li>
-            <li class="additional-list__item sheet">
-              <p class="additional-list__description">
-                <img
-                  src="@/assets/img/sauce.svg"
-                  width="39"
-                  height="60"
-                  alt="Острый соус"
-                />
-                <span>Острый соус</span>
-              </p>
-
-              <div class="additional-list__wrapper">
-                <div class="counter additional-list__counter">
-                  <button
-                    type="button"
-                    class="counter__button counter__button--minus"
-                  >
-                    <span class="visually-hidden">Меньше</span>
-                  </button>
-                  <input
-                    type="text"
-                    name="counter"
-                    class="counter__input"
-                    value="2"
-                  />
-                  <button
-                    type="button"
-                    class="
-                      counter__button
-                      counter__button--plus
-                      counter__button--orange
-                    "
-                  >
-                    <span class="visually-hidden">Больше</span>
-                  </button>
-                </div>
-
-                <div class="additional-list__price">
-                  <b>30 ₽</b>
-                </div>
-              </div>
-            </li>
-            <li class="additional-list__item sheet">
-              <p class="additional-list__description">
-                <img
-                  src="@/assets/img/potato.svg"
-                  width="39"
-                  height="60"
-                  alt="Картошка из печи"
-                />
-                <span>Картошка из печи</span>
-              </p>
-
-              <div class="additional-list__wrapper">
-                <div class="counter additional-list__counter">
-                  <button
-                    type="button"
-                    class="counter__button counter__button--minus"
-                  >
-                    <span class="visually-hidden">Меньше</span>
-                  </button>
-                  <input
-                    type="text"
-                    name="counter"
-                    class="counter__input"
-                    value="2"
-                  />
-                  <button
-                    type="button"
-                    class="
-                      counter__button
-                      counter__button--plus
-                      counter__button--orange
-                    "
-                  >
-                    <span class="visually-hidden">Больше</span>
-                  </button>
-                </div>
-
-                <div class="additional-list__price">
-                  <b>56 ₽</b>
+                  <b>{{ misc.totalPrice || 0 }} ₽</b>
                 </div>
               </div>
             </li>
@@ -261,15 +158,38 @@ export default {
     ItemCounter,
   },
   computed: {
-    ...mapGetters("Cart", ["pizzasCount", "pizzas", "totalPrice"]),
+    ...mapGetters("Cart", ["pizzasCount", "pizzas", "totalPrice", "miscData"]),
+  },
+  created() {
+    this.fetchMiscData();
   },
   methods: {
-    ...mapActions("Cart", ["changeCount"]),
+    ...mapActions("Cart", ["changeCount", "fetchMiscData", "changeMisc"]),
     onChange(pizzaName, delta) {
       this.changeCount({ pizzaName, delta });
+    },
+    onMiscChange(miscId, delta) {
+      this.changeMisc({ miscId, delta });
     },
   },
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+@import "~@/assets/scss/app";
+.misc {
+  display: inline-block;
+  width: 39px !important;
+  height: 60px !important;
+  background-repeat: no-repeat;
+}
+.cola {
+  background-image: url("~@/assets/img/cola.svg");
+}
+.sauce {
+  background-image: url("~@/assets/img/sauce.svg");
+}
+.potato {
+  background-image: url("~@/assets/img/potato.svg");
+}
+</style>

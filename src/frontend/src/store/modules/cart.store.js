@@ -1,6 +1,10 @@
+import miscData from "@/static/misc.json";
+import Vue from "vue";
+
 export default {
   namespaced: true,
   state: {
+    miscData: [],
     pizzas: [
       {
         pizzaName: "111",
@@ -30,10 +34,18 @@ export default {
       return state.pizzas;
     },
     totalPrice(state) {
-      return state.pizzas.reduce(
+      const pizzasPrice = state.pizzas.reduce(
         (sum, pizza) => sum + pizza.count * pizza.price,
         0
       );
+      const miscPrice = state.miscData.reduce(
+        (sum, misc) => sum + (misc.count || 0) * misc.price,
+        0
+      );
+      return pizzasPrice + miscPrice;
+    },
+    miscData(state) {
+      return state.miscData;
     },
   },
   mutations: {
@@ -65,6 +77,19 @@ export default {
 
       state.pizzas[existantPizzaIndex].count += delta;
     },
+    setMiscData(state, miscData) {
+      state.miscData = miscData;
+    },
+    changeMisc(state, { miscId, delta }) {
+      const misc = state.miscData.find((misc) => misc.id === miscId);
+      const currentMiscCount = misc.count || 0;
+      if (delta < 0 && currentMiscCount === 0) {
+        return;
+      }
+      const newCount = currentMiscCount + delta;
+      Vue.set(misc, "count", newCount);
+      Vue.set(misc, "totalPrice", newCount * misc.price);
+    },
   },
   actions: {
     addPizza({ commit }, pizzaData) {
@@ -72,6 +97,12 @@ export default {
     },
     changeCount({ commit }, { pizzaName, delta }) {
       commit("changeCount", { pizzaName, delta });
+    },
+    fetchMiscData({ commit }) {
+      commit("setMiscData", miscData);
+    },
+    changeMisc({ commit }, { miscId, delta }) {
+      commit("changeMisc", { miscId, delta });
     },
   },
 };
