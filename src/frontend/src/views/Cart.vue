@@ -11,77 +11,10 @@
         </div>
 
         <template v-if="pizzasCount">
-          <ul class="cart-list sheet">
-            <li
-              v-for="(pizza, pizzaIndex) in pizzas"
-              :key="pizzaIndex"
-              class="cart-list__item"
-            >
-              <div class="product cart-list__product">
-                <img
-                  src="@/assets/img/product.svg"
-                  class="product__img"
-                  width="56"
-                  height="56"
-                  alt="Капричоза"
-                />
-                <div class="product__text">
-                  <h2>{{ pizza.pizzaName }}</h2>
-                  <ul>
-                    <li>
-                      {{ pizza.humanize.size }}, {{ pizza.humanize.dough }}
-                    </li>
-                    <li>Соус: {{ pizza.humanize.sauce }}</li>
-                    <li>Начинка: {{ pizza.humanize.ingredients }}</li>
-                  </ul>
-                </div>
-              </div>
-
-              <ItemCounter
-                additionalClass="cart-list__counter"
-                additionalButtonClass="counter__button--orange"
-                :value="pizza.count"
-                @change="onChange(pizza.pizzaName, $event)"
-              ></ItemCounter>
-
-              <div class="cart-list__price">
-                <b>{{ pizza.price * pizza.count }} ₽</b>
-              </div>
-
-              <div class="cart-list__button">
-                <button type="button" class="cart-list__edit">Изменить</button>
-              </div>
-            </li>
-          </ul>
+          <PizzasList></PizzasList>
         </template>
 
-        <div class="cart__additional">
-          <ul class="additional-list">
-            <li
-              v-for="misc in miscData"
-              :key="misc.id"
-              class="additional-list__item sheet"
-            >
-              <p class="additional-list__description">
-                <span class="misc" :class="misc.code"></span>
-                <span>{{ misc.name }} ({{ misc.price || 0 }} ₽)</span>
-              </p>
-
-              <div class="additional-list__wrapper">
-                <ItemCounter
-                  additionalClass="additional-list__counter"
-                  additionalButtonClass="counter__button--orange"
-                  :value="misc.count"
-                  @change="onMiscChange(misc.id, $event)"
-                ></ItemCounter>
-
-                <div class="additional-list__price">
-                  <b>{{ misc.totalPrice || 0 }} ₽</b>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
+        <Misc></Misc>
 
         <div class="cart__form">
           <div class="cart-form">
@@ -150,27 +83,23 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import ItemCounter from "@/common/components/ItemCounter";
+import PizzasList from "@/modules/cart/components/PizzasList";
+import Misc from "@/modules/cart/components/Misc";
 
 export default {
   name: "Cart",
   components: {
-    ItemCounter,
+    PizzasList,
+    Misc,
   },
   computed: {
-    ...mapGetters("Cart", ["pizzasCount", "pizzas", "totalPrice", "miscData"]),
+    ...mapGetters("Cart", ["pizzasCount", "totalPrice"]),
   },
   created() {
     this.fetchMiscData();
   },
   methods: {
-    ...mapActions("Cart", ["changeCount", "fetchMiscData", "changeMisc"]),
-    onChange(pizzaName, delta) {
-      this.changeCount({ pizzaName, delta });
-    },
-    onMiscChange(miscId, delta) {
-      this.changeMisc({ miscId, delta });
-    },
+    ...mapActions("Cart", ["fetchMiscData"]),
   },
 };
 </script>
