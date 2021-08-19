@@ -29,6 +29,12 @@ export default {
     pizzas(state) {
       return state.pizzas;
     },
+    totalPrice(state) {
+      return state.pizzas.reduce(
+        (sum, pizza) => sum + pizza.count * pizza.price,
+        0
+      );
+    },
   },
   mutations: {
     addPizza(state, pizzaData) {

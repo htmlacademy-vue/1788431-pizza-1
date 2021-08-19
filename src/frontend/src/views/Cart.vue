@@ -233,15 +233,15 @@
     </main>
     <section class="footer">
       <div class="footer__more">
-        <a href="#" class="button button--border button--arrow"
-          >Хочу еще одну</a
+        <router-link to="/" class="button button--border button--arrow"
+          >Хочу еще одну</router-link
         >
       </div>
       <p class="footer__text">
         Перейти к конструктору<br />чтоб собрать ещё одну пиццу
       </p>
       <div class="footer__price">
-        <b>Итого: 2 228 ₽</b>
+        <b>Итого: {{ totalPrice }} ₽</b>
       </div>
 
       <div class="footer__submit">
@@ -261,7 +261,7 @@ export default {
     ItemCounter,
   },
   computed: {
-    ...mapGetters("Cart", ["pizzasCount", "pizzas"]),
+    ...mapGetters("Cart", ["pizzasCount", "pizzas", "totalPrice"]),
   },
   methods: {
     ...mapActions("Cart", ["changeCount"]),
