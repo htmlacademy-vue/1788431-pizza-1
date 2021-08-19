@@ -19,6 +19,13 @@ export default {
     selectedSizeValue: null,
     selectedIngredients: {},
     pizzaName: null,
+    price: 0,
+    humanize: {
+      dough: null,
+      sauce: null,
+      size: null,
+      ingredients: null,
+    },
   },
   getters: {
     doughs(state) {
@@ -55,6 +62,72 @@ export default {
         state.selectedSauceValue &&
         state.selectedSizeValue
       );
+    },
+    price(state) {
+      const selectedDough = state.doughs.find(
+        (dough) => dough.value === state.selectedDoughValue
+      );
+      const selectedSauce = state.sauces.find(
+        (sauce) => sauce.value === state.selectedSauceValue
+      );
+      const selectedSize = state.sizes.find(
+        (size) => size.value === state.selectedSizeValue
+      );
+
+      let ingredientsPrice = 0;
+      for (const selectedIngredientValue in state.selectedIngredients) {
+        const count = state.selectedIngredients[selectedIngredientValue];
+        const ingredient = state.ingredients.find(
+          (ingredient) => ingredient.value === selectedIngredientValue
+        );
+        ingredientsPrice += ingredient.price * count;
+      }
+
+      return (
+        (selectedDough.price + selectedSauce.price + ingredientsPrice) *
+        selectedSize.multiplier
+      );
+    },
+    humanize(state) {
+      const humanizedDoughs = {
+        light: "на тонком тесте",
+        large: "на толстом тесте",
+      };
+      state.humanize.dough = humanizedDoughs[state.selectedDoughValue];
+
+      state.humanize.sauce = state.sauces.find(
+        (sauce) => sauce.value === state.selectedSauceValue.toLowerCase()
+      ).name;
+
+      state.humanize.size = state.sizes.find(
+        (size) => size.value === state.selectedSizeValue
+      ).name;
+
+      let humanizedIngredients = [];
+      for (const selectedIngredientValue in state.selectedIngredients) {
+        const count = state.selectedIngredients[selectedIngredientValue];
+        if (count > 0) {
+          const ingredient = state.ingredients.find(
+            (ingredient) => ingredient.value === selectedIngredientValue
+          );
+          humanizedIngredients.push(ingredient.name.toLowerCase());
+        }
+      }
+      state.humanize.ingredients = humanizedIngredients.join(", ");
+
+      return state.humanize;
+    },
+    pizzaData(state, getters) {
+      return {
+        pizzaName: state.pizzaName,
+        selectedDoughValue: state.selectedDoughValue,
+        selectedSauceValue: state.selectedSauceValue,
+        selectedSizeValue: state.selectedSizeValue,
+        selectedIngredients: state.selectedIngredients,
+        price: getters.price,
+        count: 1,
+        humanize: getters.humanize,
+      };
     },
   },
   mutations: {

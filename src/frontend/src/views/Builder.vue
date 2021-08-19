@@ -42,6 +42,7 @@
               class="button"
               :class="{ 'button--disabled': !orderAllowed }"
               :disabled="!orderAllowed"
+              @click="onToCartClick"
             >
               Готовьте!
             </button>
@@ -75,7 +76,7 @@ export default {
     this.fetchData();
   },
   computed: {
-    ...mapGetters("Builder", ["getPizzaName", "orderAllowed"]),
+    ...mapGetters("Builder", ["getPizzaName", "orderAllowed", "pizzaData"]),
     pizzaName: {
       get() {
         return this.getPizzaName;
@@ -87,8 +88,12 @@ export default {
   },
   methods: {
     ...mapActions("Builder", ["fetchData", "savePizzaName"]),
+    ...mapActions("Cart", ["addPizza"]),
     onIngredientChange(ingredientValue, delta) {
       this.changeIngredient(ingredientValue, delta);
+    },
+    onToCartClick() {
+      this.addPizza(this.pizzaData);
     },
   },
 };

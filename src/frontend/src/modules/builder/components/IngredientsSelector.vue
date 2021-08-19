@@ -20,7 +20,7 @@
         </span>
 
         <ItemCounter
-          additionalClass="ingredients__counter"
+          additionalClass="counter--orange ingredients__counter"
           :value="selectedIngredients[ingredient.value]"
           :max="max"
           @change="onChange(ingredient.value, $event)"

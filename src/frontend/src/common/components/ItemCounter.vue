@@ -1,5 +1,5 @@
 <template>
-  <div class="counter counter--orange" :class="additionalClass">
+  <div class="counter" :class="additionalClass">
     <button
       type="button"
       class="counter__button counter__button--disabled counter__button--minus"
@@ -11,6 +11,7 @@
     <button
       type="button"
       class="counter__button counter__button--plus"
+      :class="additionalButtonClass"
       @click="onPlus"
     >
       <span class="visually-hidden">Больше</span>
@@ -23,6 +24,9 @@ export default {
   name: "ItemCounter",
   props: {
     additionalClass: {
+      type: String,
+    },
+    additionalButtonClass: {
       type: String,
     },
     value: {
