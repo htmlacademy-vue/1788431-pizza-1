@@ -95,9 +95,9 @@ export default {
       };
       state.humanize.dough = humanizedDoughs[state.selectedDoughValue];
 
-      state.humanize.sauce = state.sauces.find(
-        (sauce) => sauce.value === state.selectedSauceValue.toLowerCase()
-      ).name;
+      state.humanize.sauce = state.sauces
+        .find((sauce) => sauce.value === state.selectedSauceValue)
+        .name.toLowerCase();
 
       state.humanize.size = state.sizes.find(
         (size) => size.value === state.selectedSizeValue
@@ -136,9 +136,13 @@ export default {
       state.sauces = sauces;
       state.sizes = sizes;
       state.ingredients = ingredients;
-      state.selectedDoughValue = getDefaultDoughValue(dough);
-      state.selectedSauceValue = getDefaultSauceValue(sauces);
-      state.selectedSizeValue = getDefaultSizeValue(sizes);
+    },
+    setDefaultValues(state) {
+      state.selectedDoughValue = getDefaultDoughValue(state.doughs);
+      state.selectedSauceValue = getDefaultSauceValue(state.sauces);
+      state.selectedSizeValue = getDefaultSizeValue(state.sizes);
+      Vue.set(state, "selectedIngredients", {});
+      state.pizzaName = "";
     },
     setDoughValue(state, doughValue) {
       state.selectedDoughValue = doughValue;
@@ -155,10 +159,22 @@ export default {
     setPizzaName(state, pizzaName) {
       state.pizzaName = pizzaName;
     },
+    setDataFromCart(state, pizzaData) {
+      state.selectedDoughValue = pizzaData.selectedDoughValue;
+      state.selectedSizeValue = pizzaData.selectedSizeValue;
+      state.selectedSauceValue = pizzaData.selectedSauceValue;
+      state.selectedIngredients = Object.assign(
+        {},
+        state.selectedIngredients,
+        pizzaData.selectedIngredients
+      );
+      state.pizzaName = pizzaData.pizzaName;
+    },
   },
   actions: {
     fetchData({ commit }) {
       commit("setData", builderData);
+      commit("setDefaultValues");
     },
     saveDoughValue({ commit }, doughValue) {
       commit("setDoughValue", doughValue);
@@ -182,6 +198,12 @@ export default {
     },
     savePizzaName({ commit }, pizzaName) {
       commit("setPizzaName", pizzaName);
+    },
+    loadDataFromCart({ commit }, pizzaData) {
+      commit("setDataFromCart", pizzaData);
+    },
+    resetValues({ commit }) {
+      commit("setDefaultValues");
     },
   },
 };

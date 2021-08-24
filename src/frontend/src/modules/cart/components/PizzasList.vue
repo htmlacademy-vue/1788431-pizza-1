@@ -35,7 +35,14 @@
       </div>
 
       <div class="cart-list__button">
-        <button type="button" class="cart-list__edit">Изменить</button>
+        <router-link
+          class="cart-list__edit"
+          :to="{
+            name: 'Builder',
+            params: { pizzaNameToEdit: pizza.pizzaName },
+          }"
+          >Изменить</router-link
+        >
       </div>
     </li>
   </ul>

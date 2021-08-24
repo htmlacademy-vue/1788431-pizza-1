@@ -4,6 +4,7 @@ export default [
     name: "Builder",
     component: () => import("../views/Builder.vue"),
     meta: { layout: "AppLayoutMain" },
+    props: true,
   },
   {
     path: "/cart",

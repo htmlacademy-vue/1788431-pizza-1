@@ -8,9 +8,9 @@ export default {
     pizzas: [
       {
         pizzaName: "111",
-        selectedDoughValue: "light",
+        selectedDoughValue: "large",
         selectedSauceValue: "creamy",
-        selectedSizeValue: "small",
+        selectedSizeValue: "big",
         selectedIngredients: {
           olives: 2,
           jalapeno: 1,
@@ -47,6 +47,11 @@ export default {
     miscData(state) {
       return state.miscData;
     },
+    getPizzaDataByName(state) {
+      return (pizzaName) => {
+        return state.pizzas.find((pizza) => pizza.pizzaName === pizzaName);
+      };
+    },
   },
   mutations: {
     addPizza(state, pizzaData) {
@@ -54,7 +59,7 @@ export default {
         (pizza) => pizza.pizzaName === pizzaData.pizzaName
       );
 
-      if (existantPizzaIndex !== -1) {
+      if (existantPizzaIndex > -1) {
         state.pizzas[existantPizzaIndex] = Object.assign(
           {},
           state.pizzas[existantPizzaIndex],
@@ -63,6 +68,8 @@ export default {
       } else {
         state.pizzas.push(pizzaData);
       }
+
+      state.pizzas = [...state.pizzas];
     },
     changeCount(state, { pizzaName, delta }) {
       const existantPizzaIndex = state.pizzas.findIndex(

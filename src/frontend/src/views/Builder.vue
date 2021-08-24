@@ -72,11 +72,23 @@ export default {
     PriceCounter,
     PizzaView,
   },
-  created() {
+  props: {
+    pizzaNameToEdit: {
+      type: String,
+    },
+  },
+  beforeMount() {
     this.fetchData();
+    if (this.pizzaNameToEdit) {
+      const pizzaData = this.getPizzaDataByName(this.pizzaNameToEdit);
+      this.loadDataFromCart(pizzaData);
+    } else {
+      this.resetValues();
+    }
   },
   computed: {
     ...mapGetters("Builder", ["getPizzaName", "orderAllowed", "pizzaData"]),
+    ...mapGetters("Cart", ["getPizzaDataByName"]),
     pizzaName: {
       get() {
         return this.getPizzaName;
@@ -87,7 +99,12 @@ export default {
     },
   },
   methods: {
-    ...mapActions("Builder", ["fetchData", "savePizzaName"]),
+    ...mapActions("Builder", [
+      "fetchData",
+      "savePizzaName",
+      "loadDataFromCart",
+      "resetValues",
+    ]),
     ...mapActions("Cart", ["addPizza"]),
     onIngredientChange(ingredientValue, delta) {
       this.changeIngredient(ingredientValue, delta);
