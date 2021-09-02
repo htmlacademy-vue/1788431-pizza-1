@@ -1,5 +1,5 @@
 <template>
-  <form action="test.html" method="post" class="layout-form">
+  <form class="layout-form">
     <main class="content cart">
       <div class="container">
         <div class="cart__title">
@@ -61,6 +61,7 @@
         </div>
       </div>
     </main>
+    <router-view></router-view>
     <section class="footer">
       <div class="footer__more">
         <router-link to="/" class="button button--border button--arrow"
@@ -75,7 +76,9 @@
       </div>
 
       <div class="footer__submit">
-        <button type="submit" class="button">Оформить заказ</button>
+        <button @click.prevent="onOrderClick" class="button">
+          Оформить заказ
+        </button>
       </div>
     </section>
   </form>
@@ -100,6 +103,9 @@ export default {
   },
   methods: {
     ...mapActions("Cart", ["fetchMiscData"]),
+    onOrderClick() {
+      this.$router.push({ name: "CartOrdered" });
+    },
   },
 };
 </script>
