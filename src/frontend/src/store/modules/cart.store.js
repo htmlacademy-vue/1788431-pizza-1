@@ -5,26 +5,7 @@ export default {
   namespaced: true,
   state: {
     miscData: [],
-    pizzas: [
-      {
-        pizzaName: "111",
-        selectedDoughValue: "large",
-        selectedSauceValue: "creamy",
-        selectedSizeValue: "big",
-        selectedIngredients: {
-          olives: 2,
-          jalapeno: 1,
-        },
-        price: 555,
-        count: 1,
-        humanize: {
-          dough: "ddd",
-          sauce: "sss",
-          size: "eee",
-          ingredients: "iii",
-        },
-      },
-    ],
+    pizzas: [],
   },
   getters: {
     pizzasCount(state) {
