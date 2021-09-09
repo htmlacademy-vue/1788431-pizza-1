@@ -56,10 +56,20 @@ export default {
       return state.pizzaName;
     },
     orderAllowed(state) {
+      let hasIngredients = false;
+
+      for (const ingredientValue in state.selectedIngredients) {
+        if (state.selectedIngredients[ingredientValue] > 0) {
+          hasIngredients = true;
+          break;
+        }
+      }
+
       return (
         state.pizzaName &&
         state.selectedDoughValue &&
         state.selectedSauceValue &&
+        hasIngredients &&
         state.selectedSizeValue
       );
     },
