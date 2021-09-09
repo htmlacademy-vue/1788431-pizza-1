@@ -28,16 +28,16 @@ export default {
     miscData(state) {
       return state.miscData;
     },
-    getPizzaDataByName(state) {
-      return (pizzaName) => {
-        return state.pizzas.find((pizza) => pizza.pizzaName === pizzaName);
+    getPizzaDataById(state) {
+      return (id) => {
+        return state.pizzas.find((pizza) => pizza.id === id);
       };
     },
   },
   mutations: {
     addPizza(state, pizzaData) {
       const existantPizzaIndex = state.pizzas.findIndex(
-        (pizza) => pizza.pizzaName === pizzaData.pizzaName
+        (pizza) => pizza.id === pizzaData.id
       );
 
       if (existantPizzaIndex > -1) {
@@ -52,9 +52,9 @@ export default {
 
       state.pizzas = [...state.pizzas];
     },
-    changeCount(state, { pizzaName, delta }) {
+    changeCount(state, { id, delta }) {
       const existantPizzaIndex = state.pizzas.findIndex(
-        (pizza) => pizza.pizzaName === pizzaName
+        (pizza) => pizza.id === id
       );
       if (existantPizzaIndex === -1) {
         return;
@@ -83,8 +83,8 @@ export default {
     addPizza({ commit }, pizzaData) {
       commit("addPizza", pizzaData);
     },
-    changeCount({ commit }, { pizzaName, delta }) {
-      commit("changeCount", { pizzaName, delta });
+    changeCount({ commit }, { id, delta }) {
+      commit("changeCount", { id, delta });
     },
     fetchMiscData({ commit }) {
       commit("setMiscData", miscData);

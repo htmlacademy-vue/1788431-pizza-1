@@ -10,6 +10,8 @@ import { MAX_SAME_INGREDIENTS } from "@/common/constants";
 export default {
   namespaced: true,
   state: {
+    lastId: 0,
+    id: null,
     doughs: [],
     sauces: [],
     sizes: [],
@@ -129,13 +131,14 @@ export default {
     },
     pizzaData(state, getters) {
       return {
+        id: state.id,
         pizzaName: state.pizzaName,
         selectedDoughValue: state.selectedDoughValue,
         selectedSauceValue: state.selectedSauceValue,
         selectedSizeValue: state.selectedSizeValue,
         selectedIngredients: state.selectedIngredients,
         price: getters.price,
-        count: 1,
+        count: state.count,
         humanize: getters.humanize,
       };
     },
@@ -148,11 +151,15 @@ export default {
       state.ingredients = ingredients;
     },
     setDefaultValues(state) {
+      state.id = state.lastId + 1;
+      state.lastId++;
+
       state.selectedDoughValue = getDefaultDoughValue(state.doughs);
       state.selectedSauceValue = getDefaultSauceValue(state.sauces);
       state.selectedSizeValue = getDefaultSizeValue(state.sizes);
       Vue.set(state, "selectedIngredients", {});
       state.pizzaName = "";
+      state.count = 1;
     },
     setDoughValue(state, doughValue) {
       state.selectedDoughValue = doughValue;
@@ -170,6 +177,7 @@ export default {
       state.pizzaName = pizzaName;
     },
     setDataFromCart(state, pizzaData) {
+      state.id = pizzaData.id;
       state.selectedDoughValue = pizzaData.selectedDoughValue;
       state.selectedSizeValue = pizzaData.selectedSizeValue;
       state.selectedSauceValue = pizzaData.selectedSauceValue;
@@ -179,6 +187,7 @@ export default {
         pizzaData.selectedIngredients
       );
       state.pizzaName = pizzaData.pizzaName;
+      state.count = pizzaData.count;
     },
   },
   actions: {

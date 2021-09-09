@@ -73,14 +73,14 @@ export default {
     PizzaView,
   },
   props: {
-    pizzaNameToEdit: {
+    pizzaIdToEdit: {
       type: String,
     },
   },
   beforeMount() {
     this.fetchData();
-    if (this.pizzaNameToEdit) {
-      const pizzaData = this.getPizzaDataByName(this.pizzaNameToEdit);
+    if (this.pizzaIdToEdit) {
+      const pizzaData = this.getPizzaDataById(this.pizzaIdToEdit);
       this.loadDataFromCart(pizzaData);
     } else {
       this.resetValues();
@@ -88,7 +88,7 @@ export default {
   },
   computed: {
     ...mapGetters("Builder", ["getPizzaName", "orderAllowed", "pizzaData"]),
-    ...mapGetters("Cart", ["getPizzaDataByName"]),
+    ...mapGetters("Cart", ["getPizzaDataById"]),
     pizzaName: {
       get() {
         return this.getPizzaName;

@@ -27,7 +27,7 @@
         additionalClass="cart-list__counter"
         additionalButtonClass="counter__button--orange"
         :value="pizza.count"
-        @change="onChange(pizza.pizzaName, $event)"
+        @change="onChange(pizza.id, $event)"
       ></ItemCounter>
 
       <div class="cart-list__price">
@@ -39,7 +39,7 @@
           class="cart-list__edit"
           :to="{
             name: 'Builder',
-            params: { pizzaNameToEdit: pizza.pizzaName },
+            params: { pizzaIdToEdit: pizza.id },
           }"
           >Изменить</router-link
         >
@@ -64,8 +64,8 @@ export default {
 
   methods: {
     ...mapActions("Cart", ["changeCount"]),
-    onChange(pizzaName, delta) {
-      this.changeCount({ pizzaName, delta });
+    onChange(id, delta) {
+      this.changeCount({ id, delta });
     },
   },
 };
