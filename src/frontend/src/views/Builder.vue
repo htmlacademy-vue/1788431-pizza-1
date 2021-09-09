@@ -111,6 +111,7 @@ export default {
     },
     onToCartClick() {
       this.addPizza(this.pizzaData);
+      this.resetValues();
     },
   },
 };
