@@ -22,12 +22,6 @@ export default {
     selectedIngredients: {},
     pizzaName: null,
     price: 0,
-    humanize: {
-      dough: null,
-      sauce: null,
-      size: null,
-      ingredients: null,
-    },
   },
   getters: {
     doughs(state) {
@@ -105,13 +99,14 @@ export default {
         light: "на тонком тесте",
         large: "на толстом тесте",
       };
-      state.humanize.dough = humanizedDoughs[state.selectedDoughValue];
+      const humanize = {};
+      humanize.dough = humanizedDoughs[state.selectedDoughValue];
 
-      state.humanize.sauce = state.sauces
+      humanize.sauce = state.sauces
         .find((sauce) => sauce.value === state.selectedSauceValue)
         .name.toLowerCase();
 
-      state.humanize.size = state.sizes.find(
+      humanize.size = state.sizes.find(
         (size) => size.value === state.selectedSizeValue
       ).name;
 
@@ -125,9 +120,9 @@ export default {
           humanizedIngredients.push(ingredient.name.toLowerCase());
         }
       }
-      state.humanize.ingredients = humanizedIngredients.join(", ");
+      humanize.ingredients = humanizedIngredients.join(", ");
 
-      return state.humanize;
+      return humanize;
     },
     pizzaData(state, getters) {
       return {
