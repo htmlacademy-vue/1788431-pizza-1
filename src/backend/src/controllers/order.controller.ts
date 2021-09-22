@@ -1,7 +1,6 @@
 import {
   Count,
   CountSchema,
-  Filter,
   FilterExcludingWhere,
   repository,
   Where,
@@ -45,12 +44,12 @@ export class OrderController {
   @response(201, {
     description: 'Order model instance',
     content: {'application/json': {schema: {
-      example: {
-        id: 0,
-        userId: "string",
-        addressId: 0,
-      }
-    }}},
+          example: {
+            id: 0,
+            userId: "string",
+            addressId: 0,
+          }
+        }}},
   })
   async create(
     @requestBody({
@@ -59,6 +58,13 @@ export class OrderController {
           schema: {
             example: {
               "userId": "string",
+              "phone": "+7 999-999-99-99",
+              "address": {
+                "street": "string",
+                "building": "string",
+                "flat": "string",
+                "comment": "string"
+              },
               "pizzas": [
                 {
                   "name": "string",
@@ -80,19 +86,12 @@ export class OrderController {
                   "quantity": 0
                 }
               ],
-              "address": {
-                "name": "string",
-                "street": "string",
-                "building": "string",
-                "flat": "string",
-                "comment": "string"
-              },
             }
           }
         },
       },
     })
-    order: Omit<Order, 'id'>,
+      order: Omit<Order, 'id'>,
   ): Promise<Order> {
     const { address, pizzas, misc, ...orderToSave } = order;
     const userId = order.userId;
@@ -100,7 +99,8 @@ export class OrderController {
     let addressId = address?.id;
     // if it is a new address
     if (address && !addressId) {
-      const newAddress = await this.addressRepository.create({...address, userId});
+      const name = `ул.${address.street}, д.${address.building}, кв.${address.flat}`;
+      const newAddress = await this.addressRepository.create({...address, name, userId});
       addressId = newAddress.id;
     }
     const newOrder = await this.orderRepository.create({...orderToSave, addressId});
@@ -134,7 +134,7 @@ export class OrderController {
     content: {'application/json': {schema: CountSchema}},
   })
   async count(
-      @param.where(Order) where?: Where<Order>,
+    @param.where(Order) where?: Where<Order>,
   ): Promise<Count> {
     return this.orderRepository.count(where);
   }
@@ -234,7 +234,7 @@ export class OrderController {
         },
       },
     })
-    order: Order,
+      order: Order,
     @param.where(Order) where?: Where<Order>,
   ): Promise<Count> {
     return this.orderRepository.updateAll(order, where);
@@ -273,7 +273,7 @@ export class OrderController {
         },
       },
     })
-    order: Order,
+      order: Order,
   ): Promise<void> {
     await this.orderRepository.updateById(id, order);
   }

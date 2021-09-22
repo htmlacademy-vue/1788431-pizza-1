@@ -26,37 +26,33 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "DoughSelector",
-  props: {
-    doughs: {
-      type: Array,
-      required: true,
-    },
-    initValue: {
-      type: String,
-    },
-  },
 
-  data() {
-    return {
-      normalizedDoughs: this.doughs.map((dough) => this.normalizeDough(dough)),
-      selectedDough: this.initValue,
-    };
+  computed: {
+    ...mapGetters("Builder", ["doughs", "selectedDoughValue"]),
+    normalizedDoughs() {
+      const doughs = this.doughs;
+      return doughs.map((dough) => this.normalizeDough(dough));
+    },
+    selectedDough: {
+      get() {
+        return this.selectedDoughValue;
+      },
+      set(dough) {
+        this.saveDoughValue(dough);
+      },
+    },
   },
 
   methods: {
+    ...mapActions("Builder", ["saveDoughValue"]),
     normalizeDough(dough) {
       return {
         ...dough,
         style: "dough__input--" + dough.value,
       };
-    },
-  },
-
-  watch: {
-    selectedDough(newDough) {
-      this.$emit("change", newDough);
     },
   },
 };

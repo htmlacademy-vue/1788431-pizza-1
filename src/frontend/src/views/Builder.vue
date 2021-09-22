@@ -4,17 +4,9 @@
       <div class="content__wrapper">
         <h1 class="title title--big">Конструктор пиццы</h1>
 
-        <DoughSelector
-          :doughs="pizza.dough"
-          :initValue="selectedDoughValue"
-          @change="onDoughChange"
-        ></DoughSelector>
+        <DoughSelector></DoughSelector>
 
-        <SizeSelector
-          :sizes="pizza.sizes"
-          :initValue="selectedSizeValue"
-          @change="onSizeChange"
-        ></SizeSelector>
+        <SizeSelector></SizeSelector>
 
         <div class="content__ingredients">
           <div class="sheet">
@@ -23,17 +15,9 @@
             </h2>
 
             <div class="sheet__content ingredients">
-              <SauceSelector
-                :sauces="pizza.sauces"
-                :initValue="selectedSauceValue"
-                @change="onSauceChange"
-              ></SauceSelector>
+              <SauceSelector></SauceSelector>
 
-              <IngredientsSelector
-                :ingredients="pizza.ingredients"
-                :selectedIngredients="selectedIngredients"
-                @change="onIngredientChange(...arguments)"
-              ></IngredientsSelector>
+              <IngredientsSelector></IngredientsSelector>
             </div>
           </div>
         </div>
@@ -45,28 +29,21 @@
               type="text"
               name="pizza_name"
               placeholder="Введите название пиццы"
+              v-model="pizzaName"
             />
           </label>
 
-          <PizzaView
-            :sauce="selectedSauceValue"
-            :dough="selectedDoughValue"
-            :selectedIngredients="selectedIngredients"
-            @drop="onIngredientDrop($event)"
-          ></PizzaView>
+          <PizzaView></PizzaView>
 
           <div class="content__result">
-            <PriceCounter
-              :sizes="pizza.sizes"
-              :sauces="pizza.sauces"
-              :doughs="pizza.dough"
-              :ingredients="pizza.ingredients"
-              :size="selectedSizeValue"
-              :sauce="selectedSauceValue"
-              :dough="selectedDoughValue"
-              :selectedIngredients="selectedIngredients"
-            ></PriceCounter>
-            <button type="button" class="button button--disabled" disabled>
+            <PriceCounter></PriceCounter>
+            <button
+              type="button"
+              class="button"
+              :class="{ 'button--disabled': !orderAllowed }"
+              :disabled="!orderAllowed"
+              @click="onToCartClick"
+            >
               Готовьте!
             </button>
           </div>
@@ -77,19 +54,13 @@
 </template>
 
 <script>
-import pizza from "@/static/pizza.json";
 import DoughSelector from "@/modules/builder/components/DoughSelector";
 import SizeSelector from "@/modules/builder/components/SizeSelector";
 import SauceSelector from "@/modules/builder/components/SauceSelector";
 import IngredientsSelector from "@/modules/builder/components/IngredientsSelector";
 import PriceCounter from "@/modules/builder/components/PriceCounter";
 import PizzaView from "@/modules/builder/components/PizzaView";
-import {
-  getDefaultDoughValue,
-  getDefaultSauceValue,
-  getDefaultSizeValue,
-} from "@/common/builderHelpers";
-import { MAX_SAME_INGREDIENTS } from "@/common/constants";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Builder",
@@ -101,51 +72,46 @@ export default {
     PriceCounter,
     PizzaView,
   },
-  data() {
-    return {
-      pizza: pizza,
-      selectedDoughValue: getDefaultDoughValue(pizza.dough),
-      selectedSauceValue: getDefaultSauceValue(pizza.sauces),
-      selectedSizeValue: getDefaultSizeValue(pizza.sizes),
-      selectedIngredients: {},
-      ingredientsPrice: 0,
-    };
+  props: {
+    pizzaIdToEdit: {
+      type: String,
+    },
+  },
+  beforeMount() {
+    this.fetchData();
+    if (this.pizzaIdToEdit) {
+      const pizzaData = this.getPizzaDataById(this.pizzaIdToEdit);
+      this.loadDataFromCart(pizzaData);
+    } else {
+      this.resetValues();
+    }
   },
   computed: {
-    pizzaFoundationStyle() {
-      const dough = { light: "small", large: "big" }[this.selectedDoughValue];
-      return "pizza--foundation--" + dough + "-" + this.selectedSauceValue;
+    ...mapGetters("Builder", ["getPizzaName", "orderAllowed", "pizzaData"]),
+    ...mapGetters("Cart", ["getPizzaDataById"]),
+    pizzaName: {
+      get() {
+        return this.getPizzaName;
+      },
+      set(pizzaName) {
+        this.savePizzaName(pizzaName);
+      },
     },
   },
   methods: {
-    onDoughChange(dough) {
-      this.selectedDoughValue = dough;
-    },
-    onSizeChange(size) {
-      this.selectedSizeValue = size;
-    },
-    onSauceChange(sauce) {
-      this.selectedSauceValue = sauce;
-    },
+    ...mapActions("Builder", [
+      "fetchData",
+      "savePizzaName",
+      "loadDataFromCart",
+      "resetValues",
+    ]),
+    ...mapActions("Cart", ["addPizza"]),
     onIngredientChange(ingredientValue, delta) {
       this.changeIngredient(ingredientValue, delta);
     },
-    onIngredientDrop(ingredientValue) {
-      this.changeIngredient(ingredientValue, +1);
-    },
-    changeIngredient(ingredientValue, delta) {
-      const currentCount = this.selectedIngredients[ingredientValue] || 0;
-      if (delta > 0 && currentCount >= MAX_SAME_INGREDIENTS) {
-        return;
-      }
-      if (delta < 0 && currentCount === 0) {
-        return;
-      }
-      this.$set(
-        this.selectedIngredients,
-        ingredientValue,
-        currentCount + delta
-      );
+    onToCartClick() {
+      this.addPizza(this.pizzaData);
+      this.resetValues();
     },
   },
 };

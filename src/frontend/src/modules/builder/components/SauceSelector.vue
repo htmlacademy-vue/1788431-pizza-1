@@ -19,36 +19,33 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   name: "SauceSelector",
-  props: {
-    sauces: {
-      type: Array,
-      required: true,
-    },
-    initValue: {
-      type: String,
-    },
-  },
 
-  data() {
-    return {
-      normalizedSauces: this.sauces.map((sauce) => this.normalizeSauce(sauce)),
-      selectedSauce: this.initValue,
-    };
+  computed: {
+    ...mapGetters("Builder", ["sauces", "selectedSauceValue"]),
+    normalizedSauces() {
+      const sauces = this.sauces;
+      return sauces.map((sauce) => this.normalizeSauce(sauce));
+    },
+    selectedSauce: {
+      get() {
+        return this.selectedSauceValue;
+      },
+      set(sauce) {
+        this.saveSauceValue(sauce);
+      },
+    },
   },
 
   methods: {
+    ...mapActions("Builder", ["saveSauceValue"]),
     normalizeSauce(sauce) {
       return {
         ...sauce,
       };
-    },
-  },
-
-  watch: {
-    selectedSauce(newSauce) {
-      this.$emit("change", newSauce);
     },
   },
 };

@@ -20,7 +20,7 @@
         </span>
 
         <ItemCounter
-          additionalClass="ingredients__counter"
+          additionalClass="counter--orange ingredients__counter"
           :value="selectedIngredients[ingredient.value]"
           :max="max"
           @change="onChange(ingredient.value, $event)"
@@ -33,40 +33,39 @@
 <script>
 import ItemCounter from "@/common/components/ItemCounter";
 import { MAX_SAME_INGREDIENTS, DRAG_DATA_NAME } from "@/common/constants";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "IngredientsSelector",
-  props: {
-    ingredients: {
-      type: Array,
-      required: true,
-    },
-    selectedIngredients: {
-      type: Object,
-      required: true,
-    },
-  },
   components: { ItemCounter },
 
   data() {
     return {
-      normalizedIngredients: this.ingredients.map((ingredient) =>
-        this.normalizeIngredient(ingredient)
-      ),
       max: MAX_SAME_INGREDIENTS,
     };
   },
 
+  computed: {
+    ...mapGetters("Builder", ["ingredients", "selectedIngredients"]),
+    normalizedIngredients() {
+      const ingredients = this.ingredients;
+      return ingredients.map((ingredient) =>
+        this.normalizeIngredient(ingredient)
+      );
+    },
+  },
+
   methods: {
+    ...mapActions("Builder", ["changeIngredient"]),
     normalizeIngredient(ingredient) {
       return {
         ...ingredient,
         style: "filling--" + ingredient.value,
-        count: 0,
+        count: this.selectedIngredients[ingredient.value],
       };
     },
     onChange(ingredientValue, delta) {
-      this.$emit("change", ingredientValue, delta);
+      this.changeIngredient({ ingredientValue, delta });
     },
     onDrag(event, ingredient) {
       event.dataTransfer.setData(DRAG_DATA_NAME, ingredient.value);

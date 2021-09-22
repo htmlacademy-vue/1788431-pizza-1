@@ -15,30 +15,27 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 import RadioButton from "@/common/components/RadioButton";
 
 export default {
   name: "SizeSelector",
-  props: {
-    sizes: {
-      type: Array,
-      required: true,
-    },
-    initValue: {
-      type: String,
-    },
-  },
 
   components: { RadioButton },
 
-  data() {
-    return {
-      normalizedSizes: this.sizes.map((size) => this.normalizeSize(size)),
-      selectedSize: this.initValue,
-    };
+  computed: {
+    ...mapGetters("Builder", ["sizes", "selectedSizeValue"]),
+    normalizedSizes() {
+      const sizes = this.sizes;
+      return sizes.map((size) => this.normalizeSize(size));
+    },
+    selectedSize() {
+      return this.selectedSizeValue;
+    },
   },
 
   methods: {
+    ...mapActions("Builder", ["saveSizeValue"]),
     normalizeSize(size) {
       return {
         ...size,
@@ -46,7 +43,7 @@ export default {
       };
     },
     onChange(size) {
-      this.$emit("change", size);
+      this.saveSizeValue(size);
     },
   },
 };

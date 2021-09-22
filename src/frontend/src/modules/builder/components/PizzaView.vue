@@ -20,18 +20,20 @@
 
 <script>
 import { DRAG_DATA_NAME } from "@/common/constants";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "PizzaView",
-  props: {
-    dough: String,
-    sauce: String,
-    selectedIngredients: Object,
-  },
 
   computed: {
+    ...mapGetters("Builder", [
+      "selectedDoughValue",
+      "selectedSauceValue",
+      "selectedIngredients",
+    ]),
     pizzaFoundationStyle() {
-      const dough = { light: "small", large: "big" }[this.dough];
-      return "pizza--foundation--" + dough + "-" + this.sauce;
+      const dough = { light: "small", large: "big" }[this.selectedDoughValue];
+      const sauce = this.selectedSauceValue;
+      return "pizza--foundation--" + dough + "-" + sauce;
     },
     pizzaIngredientStyles() {
       const styles = [];
@@ -62,10 +64,11 @@ export default {
   },
 
   methods: {
+    ...mapActions("Builder", ["changeIngredient"]),
     onDrop(event) {
       const ingredientValue = event.dataTransfer.getData(DRAG_DATA_NAME);
       if (ingredientValue) {
-        this.$emit("drop", ingredientValue);
+        this.changeIngredient({ ingredientValue, delta: 1 });
       }
     },
   },
