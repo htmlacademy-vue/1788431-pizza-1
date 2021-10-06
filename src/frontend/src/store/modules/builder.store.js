@@ -1,10 +1,4 @@
 import Vue from "vue";
-import builderData from "@/static/pizza.json";
-import {
-  getDefaultDoughValue,
-  getDefaultSauceValue,
-  getDefaultSizeValue,
-} from "@/common/builderHelpers";
 import { MAX_SAME_INGREDIENTS } from "@/common/constants";
 
 export default {
@@ -16,9 +10,9 @@ export default {
     sauces: [],
     sizes: [],
     ingredients: [],
-    selectedDoughValue: null,
-    selectedSauceValue: null,
-    selectedSizeValue: null,
+    selectedDoughId: null,
+    selectedSauceId: null,
+    selectedSizeId: null,
     selectedIngredients: {},
     pizzaName: null,
     price: 0,
@@ -36,14 +30,14 @@ export default {
     ingredients(state) {
       return state.ingredients;
     },
-    selectedDoughValue(state) {
-      return state.selectedDoughValue;
+    selectedDoughId(state) {
+      return state.selectedDoughId;
     },
-    selectedSauceValue(state) {
-      return state.selectedSauceValue;
+    selectedSauceId(state) {
+      return state.selectedSauceId;
     },
-    selectedSizeValue(state) {
-      return state.selectedSizeValue;
+    selectedSizeId(state) {
+      return state.selectedSizeId;
     },
     selectedIngredients(state) {
       return state.selectedIngredients;
@@ -54,8 +48,8 @@ export default {
     orderAllowed(state) {
       let hasIngredients = false;
 
-      for (const ingredientValue in state.selectedIngredients) {
-        if (state.selectedIngredients[ingredientValue] > 0) {
+      for (const ingredientId in state.selectedIngredients) {
+        if (state.selectedIngredients[ingredientId] > 0) {
           hasIngredients = true;
           break;
         }
@@ -63,35 +57,35 @@ export default {
 
       return (
         state.pizzaName &&
-        state.selectedDoughValue &&
-        state.selectedSauceValue &&
+        state.selectedDoughId &&
+        state.selectedSauceId &&
         hasIngredients &&
-        state.selectedSizeValue
+        state.selectedSizeId
       );
     },
     price(state) {
       const selectedDough = state.doughs.find(
-        (dough) => dough.value === state.selectedDoughValue
+        (dough) => dough.id === state.selectedDoughId
       );
       const selectedSauce = state.sauces.find(
-        (sauce) => sauce.value === state.selectedSauceValue
+        (sauce) => sauce.id === state.selectedSauceId
       );
       const selectedSize = state.sizes.find(
-        (size) => size.value === state.selectedSizeValue
+        (size) => size.id === state.selectedSizeId
       );
 
       let ingredientsPrice = 0;
-      for (const selectedIngredientValue in state.selectedIngredients) {
-        const count = state.selectedIngredients[selectedIngredientValue];
+      for (const selectedIngredientId in state.selectedIngredients) {
+        const count = state.selectedIngredients[selectedIngredientId];
         const ingredient = state.ingredients.find(
-          (ingredient) => ingredient.value === selectedIngredientValue
+          (ingredient) => ingredient.id === +selectedIngredientId
         );
         ingredientsPrice += ingredient.price * count;
       }
 
       return (
-        (selectedDough.price + selectedSauce.price + ingredientsPrice) *
-        selectedSize.multiplier
+        (selectedDough?.price + selectedSauce?.price + ingredientsPrice) *
+        selectedSize?.multiplier
       );
     },
     humanize(state) {
@@ -100,22 +94,22 @@ export default {
         large: "на толстом тесте",
       };
       const humanize = {};
-      humanize.dough = humanizedDoughs[state.selectedDoughValue];
+      humanize.dough = humanizedDoughs[state.selectedDoughId];
 
       humanize.sauce = state.sauces
-        .find((sauce) => sauce.value === state.selectedSauceValue)
+        .find((sauce) => sauce.id === state.selectedSauceId)
         .name.toLowerCase();
 
       humanize.size = state.sizes.find(
-        (size) => size.value === state.selectedSizeValue
+        (size) => size.id === state.selectedSizeId
       ).name;
 
       let humanizedIngredients = [];
-      for (const selectedIngredientValue in state.selectedIngredients) {
-        const count = state.selectedIngredients[selectedIngredientValue];
+      for (const selectedIngredientId in state.selectedIngredients) {
+        const count = state.selectedIngredients[selectedIngredientId];
         if (count > 0) {
           const ingredient = state.ingredients.find(
-            (ingredient) => ingredient.value === selectedIngredientValue
+            (ingredient) => ingredient.id === selectedIngredientId
           );
           humanizedIngredients.push(ingredient.name.toLowerCase());
         }
@@ -128,54 +122,57 @@ export default {
       return {
         id: state.id,
         pizzaName: state.pizzaName,
-        selectedDoughValue: state.selectedDoughValue,
-        selectedSauceValue: state.selectedSauceValue,
-        selectedSizeValue: state.selectedSizeValue,
+        selectedDoughId: state.selectedDoughId,
+        selectedSauceId: state.selectedSauceId,
+        selectedSizeId: state.selectedSizeId,
         selectedIngredients: state.selectedIngredients,
         price: getters.price,
         count: state.count,
         humanize: getters.humanize,
       };
     },
+    getIngredientById: (state) => (id) => {
+      return state.ingredients.find((ingredient) => ingredient.id === +id);
+    },
   },
   mutations: {
-    setData(state, { dough, sauces, sizes, ingredients }) {
-      state.doughs = dough;
+    setData(state, { doughs, sauces, sizes, ingredients }) {
+      state.doughs = doughs;
       state.sauces = sauces;
       state.sizes = sizes;
       state.ingredients = ingredients;
     },
-    setDefaultValues(state) {
+    setDefaults(state) {
       state.id = state.lastId + 1;
       state.lastId++;
 
-      state.selectedDoughValue = getDefaultDoughValue(state.doughs);
-      state.selectedSauceValue = getDefaultSauceValue(state.sauces);
-      state.selectedSizeValue = getDefaultSizeValue(state.sizes);
+      state.selectedDoughId = state.doughs[0]?.id;
+      state.selectedSauceId = state.sauces[0]?.id;
+      state.selectedSizeId = state.sizes[0]?.id;
       Vue.set(state, "selectedIngredients", {});
       state.pizzaName = "";
       state.count = 1;
     },
-    setDoughValue(state, doughValue) {
-      state.selectedDoughValue = doughValue;
+    setDoughId(state, doughId) {
+      state.selectedDoughId = doughId;
     },
-    setSauceValue(state, sauceValue) {
-      state.selectedSauceValue = sauceValue;
+    setSauceId(state, sauceId) {
+      state.selectedSauceId = sauceId;
     },
-    setSizeValue(state, sizeValue) {
-      state.selectedSizeValue = sizeValue;
+    setSizeId(state, sizeId) {
+      state.selectedSizeId = sizeId;
     },
-    setIngredient(state, { ingredientValue, value }) {
-      Vue.set(state.selectedIngredients, ingredientValue, value);
+    setIngredient(state, { ingredientId, value }) {
+      Vue.set(state.selectedIngredients, ingredientId, value);
     },
     setPizzaName(state, pizzaName) {
       state.pizzaName = pizzaName;
     },
     setDataFromCart(state, pizzaData) {
       state.id = pizzaData.id;
-      state.selectedDoughValue = pizzaData.selectedDoughValue;
-      state.selectedSizeValue = pizzaData.selectedSizeValue;
-      state.selectedSauceValue = pizzaData.selectedSauceValue;
+      state.selectedDoughId = pizzaData.selectedDoughId;
+      state.selectedSizeId = pizzaData.selectedSizeId;
+      state.selectedSauceId = pizzaData.selectedSauceId;
       state.selectedIngredients = Object.assign(
         {},
         state.selectedIngredients,
@@ -186,21 +183,29 @@ export default {
     },
   },
   actions: {
-    fetchData({ commit }) {
-      commit("setData", builderData);
-      commit("setDefaultValues");
+    async fetchData({ commit }) {
+      const sauces = await this.$api.sauces.query();
+      const sizes = await this.$api.sizes.query();
+      const doughs = await this.$api.dough.query();
+      const ingredients = await this.$api.ingredients.query();
+      const reg = new RegExp(".*/([^.]+).svg");
+      for (const index in ingredients) {
+        ingredients[index].value = ingredients[index].image.replace(reg, "$1");
+      }
+      commit("setData", { sauces, sizes, doughs, ingredients });
+      commit("setDefaults");
     },
-    saveDoughValue({ commit }, doughValue) {
-      commit("setDoughValue", doughValue);
+    saveDoughId({ commit }, doughId) {
+      commit("setDoughId", doughId);
     },
-    saveSauceValue({ commit }, sauceValue) {
-      commit("setSauceValue", sauceValue);
+    saveSauceId({ commit }, sauceId) {
+      commit("setSauceId", sauceId);
     },
-    saveSizeValue({ commit }, sizeValue) {
-      commit("setSizeValue", sizeValue);
+    saveSizeId({ commit }, sizeId) {
+      commit("setSizeId", sizeId);
     },
-    changeIngredient({ commit, state }, { ingredientValue, delta }) {
-      const currentCount = state.selectedIngredients[ingredientValue] || 0;
+    changeIngredient({ commit, state }, { ingredientId, delta }) {
+      const currentCount = state.selectedIngredients[ingredientId] || 0;
       if (delta > 0 && currentCount >= MAX_SAME_INGREDIENTS) {
         return;
       }
@@ -208,7 +213,7 @@ export default {
         return;
       }
       const value = currentCount + delta;
-      commit("setIngredient", { ingredientValue, value });
+      commit("setIngredient", { ingredientId, value });
     },
     savePizzaName({ commit }, pizzaName) {
       commit("setPizzaName", pizzaName);
@@ -217,7 +222,7 @@ export default {
       commit("setDataFromCart", pizzaData);
     },
     resetValues({ commit }) {
-      commit("setDefaultValues");
+      commit("setDefaults");
     },
   },
 };

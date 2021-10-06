@@ -10,7 +10,7 @@
       <input
         type="radio"
         name="sauce"
-        :value="sauce.value"
+        :value="sauce.id"
         v-model="selectedSauce"
       />
       <span>{{ sauce.name }}</span>
@@ -25,23 +25,23 @@ export default {
   name: "SauceSelector",
 
   computed: {
-    ...mapGetters("Builder", ["sauces", "selectedSauceValue"]),
+    ...mapGetters("Builder", ["sauces", "selectedSauceId"]),
     normalizedSauces() {
       const sauces = this.sauces;
       return sauces.map((sauce) => this.normalizeSauce(sauce));
     },
     selectedSauce: {
       get() {
-        return this.selectedSauceValue;
+        return this.selectedSauceId;
       },
       set(sauce) {
-        this.saveSauceValue(sauce);
+        this.saveSauceId(sauce);
       },
     },
   },
 
   methods: {
-    ...mapActions("Builder", ["saveSauceValue"]),
+    ...mapActions("Builder", ["saveSauceId"]),
     normalizeSauce(sauce) {
       return {
         ...sauce,

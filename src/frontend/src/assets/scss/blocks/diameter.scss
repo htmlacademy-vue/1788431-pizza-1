@@ -34,19 +34,19 @@
     margin-right: 0;
   }
 
-  &--small {
+  &--1 {
     span::before {
       background-size: 18px;
     }
   }
 
-  &--normal {
+  &--2 {
     span::before {
       background-size: 29px;
     }
   }
 
-  &--big {
+  &--3 {
     span::before {
       background-size: 100%;
     }

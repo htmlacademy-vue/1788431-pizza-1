@@ -14,20 +14,40 @@
       <router-link to="/cart">{{ totalPrice }} ₽</router-link>
     </div>
     <div class="header__user">
-      <router-link to="/sign-in" class="header__login"
+      <router-link v-if="!isAuthenticated" to="/sign-in" class="header__login"
         ><span>Войти</span></router-link
       >
+      <template v-if="isAuthenticated">
+        <router-link to="/user-data">
+          <picture>
+            <img :src="user.avatar" :alt="user.name" width="32" height="32" />
+          </picture>
+          <span>{{ user.name }}</span>
+        </router-link>
+        <a @click="onLogoutClick" class="header__logout"><span>Выйти</span></a>
+      </template>
     </div>
   </header>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState, mapActions } from "vuex";
 
 export default {
   name: "Header",
   computed: {
     ...mapGetters("Cart", ["totalPrice"]),
+    ...mapState("Auth", {
+      isAuthenticated: (state) => state.isAuthenticated,
+      user: (state) => state.user,
+    }),
+  },
+  methods: {
+    ...mapActions("Auth", ["logout"]),
+    async onLogoutClick() {
+      await this.logout();
+      await this.$router.push("/sign-in");
+    },
   },
 };
 </script>

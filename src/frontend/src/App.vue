@@ -8,10 +8,16 @@
 
 <script>
 import AppLayout from "@/layouts/AppLayout.vue";
+import { setAuth } from "@/common/helpers";
 
 export default {
   name: "App",
   components: { AppLayout },
+  created() {
+    if (this.$jwt.getToken()) {
+      setAuth(this.$store);
+    }
+  },
 };
 </script>
 
