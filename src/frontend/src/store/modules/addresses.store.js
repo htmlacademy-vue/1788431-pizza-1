@@ -6,7 +6,11 @@ export default {
     addresses: [],
   },
 
-  getters: {},
+  getters: {
+    getById: (state) => (addressId) => {
+      return state.addresses.find((address) => address.id === addressId);
+    },
+  },
 
   mutations: {
     set(state, data) {

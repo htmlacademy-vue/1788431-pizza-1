@@ -86,3 +86,6 @@ export class SaucesApiService extends ReadOnlyApiService {}
 export class SizesApiService extends ReadOnlyApiService {}
 export class DoughsApiService extends ReadOnlyApiService {}
 export class IngredientsApiService extends ReadOnlyApiService {}
+export class MiscApiService extends ReadOnlyApiService {}
+
+export class OrdersApiService extends CrudApiService {}

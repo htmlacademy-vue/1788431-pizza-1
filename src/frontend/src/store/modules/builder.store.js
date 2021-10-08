@@ -109,7 +109,7 @@ export default {
         const count = state.selectedIngredients[selectedIngredientId];
         if (count > 0) {
           const ingredient = state.ingredients.find(
-            (ingredient) => ingredient.id === selectedIngredientId
+            (ingredient) => ingredient.id === +selectedIngredientId
           );
           humanizedIngredients.push(ingredient.name.toLowerCase());
         }

@@ -7,6 +7,8 @@ import {
   SizesApiService,
   DoughsApiService,
   IngredientsApiService,
+  MiscApiService,
+  OrdersApiService,
 } from "@/services/api.service";
 import { SET_ENTITY } from "@/store/mutations-types";
 
@@ -38,5 +40,7 @@ export const createResources = (notifier) => {
       resources.INGREDIENTS,
       notifier
     ),
+    [resources.MISC]: new MiscApiService(resources.MISC, notifier),
+    [resources.ORDERS]: new OrdersApiService(resources.ORDERS, notifier),
   };
 };
