@@ -51,3 +51,9 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.header {
+  z-index: 1000;
+}
+</style>

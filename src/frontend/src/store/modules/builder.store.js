@@ -1,5 +1,6 @@
 import Vue from "vue";
 import { MAX_SAME_INGREDIENTS } from "@/common/constants";
+import { humanizePizza, pizzaPrice } from "@/common/builderHelpers";
 
 export default {
   namespaced: true,
@@ -64,59 +65,27 @@ export default {
       );
     },
     price(state) {
-      const selectedDough = state.doughs.find(
-        (dough) => dough.id === state.selectedDoughId
-      );
-      const selectedSauce = state.sauces.find(
-        (sauce) => sauce.id === state.selectedSauceId
-      );
-      const selectedSize = state.sizes.find(
-        (size) => size.id === state.selectedSizeId
-      );
-
-      let ingredientsPrice = 0;
-      for (const selectedIngredientId in state.selectedIngredients) {
-        const count = state.selectedIngredients[selectedIngredientId];
-        const ingredient = state.ingredients.find(
-          (ingredient) => ingredient.id === +selectedIngredientId
-        );
-        ingredientsPrice += ingredient.price * count;
-      }
-
-      return (
-        (selectedDough?.price + selectedSauce?.price + ingredientsPrice) *
-        selectedSize?.multiplier
-      );
+      return pizzaPrice({
+        doughs: state.doughs,
+        sauces: state.sauces,
+        sizes: state.sizes,
+        ingredients: state.ingredients,
+        doughId: state.selectedDoughId,
+        sauceId: state.selectedSauceId,
+        sizeId: state.selectedSizeId,
+        selectedIngredients: state.selectedIngredients,
+      });
     },
     humanize(state) {
-      const humanizedDoughs = {
-        light: "на тонком тесте",
-        large: "на толстом тесте",
-      };
-      const humanize = {};
-      humanize.dough = humanizedDoughs[state.selectedDoughId];
-
-      humanize.sauce = state.sauces
-        .find((sauce) => sauce.id === state.selectedSauceId)
-        .name.toLowerCase();
-
-      humanize.size = state.sizes.find(
-        (size) => size.id === state.selectedSizeId
-      ).name;
-
-      let humanizedIngredients = [];
-      for (const selectedIngredientId in state.selectedIngredients) {
-        const count = state.selectedIngredients[selectedIngredientId];
-        if (count > 0) {
-          const ingredient = state.ingredients.find(
-            (ingredient) => ingredient.id === +selectedIngredientId
-          );
-          humanizedIngredients.push(ingredient.name.toLowerCase());
-        }
-      }
-      humanize.ingredients = humanizedIngredients.join(", ");
-
-      return humanize;
+      return humanizePizza({
+        sauces: state.sauces,
+        sizes: state.sizes,
+        ingredients: state.ingredients,
+        doughId: state.selectedDoughId,
+        sauceId: state.selectedSauceId,
+        sizeId: state.selectedSizeId,
+        selectedIngredients: state.selectedIngredients,
+      });
     },
     pizzaData(state, getters) {
       return {
