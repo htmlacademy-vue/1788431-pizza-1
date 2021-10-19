@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AppNotifications />
     <Header></Header>
     <slot />
   </div>

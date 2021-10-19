@@ -70,7 +70,7 @@ export default {
     },
   },
   mounted() {
-    this.$refs.emailInput.focus();
+    this.$refs.email.$refs.input.focus();
   },
   methods: {
     ...mapActions("Auth", ["login"]),
