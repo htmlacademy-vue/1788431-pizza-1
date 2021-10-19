@@ -9,24 +9,27 @@
     <form>
       <div class="sign-form__input">
         <label class="input">
-          <span>E-mail</span>
-          <input
+          <AppInput
+            ref="email"
+            v-model="email"
             type="email"
             name="email"
-            placeholder="example@mail.ru"
-            v-model="email"
+            class="input"
+            placeholder="E-mail"
+            :error-text="validations.email.error"
           />
         </label>
       </div>
 
       <div class="sign-form__input">
         <label class="input">
-          <span>Пароль</span>
-          <input
+          <AppInput
+            v-model="password"
             type="password"
             name="password"
-            placeholder="***********"
-            v-model="password"
+            class="input"
+            placeholder="Пароль"
+            :error-text="validations.password.error"
           />
         </label>
       </div>
@@ -37,16 +40,49 @@
 
 <script>
 import { mapActions } from "vuex";
+import { validator } from "@/common/mixins";
+import AppInput from "@/common/components/AppInput";
 
 export default {
   name: "SignIn",
+  mixins: [validator],
+  components: { AppInput },
   data: () => ({
     email: "",
     password: "",
+    validations: {
+      email: {
+        error: "",
+        rules: ["required", "email"],
+      },
+      password: {
+        error: "",
+        rules: ["required"],
+      },
+    },
   }),
+  watch: {
+    email() {
+      this.$clearValidationErrors();
+    },
+    password() {
+      this.$clearValidationErrors();
+    },
+  },
+  mounted() {
+    this.$refs.emailInput.focus();
+  },
   methods: {
     ...mapActions("Auth", ["login"]),
     async onSubmit() {
+      if (
+        !this.$validateFields(
+          { email: this.email, password: this.password },
+          this.validations
+        )
+      ) {
+        return;
+      }
       await this.login({ email: this.email, password: this.password });
       await this.$router.push("/");
     },
