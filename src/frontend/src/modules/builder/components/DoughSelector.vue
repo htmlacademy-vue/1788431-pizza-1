@@ -13,7 +13,7 @@
           <input
             type="radio"
             name="dough"
-            :value="dough.value"
+            :value="dough.id"
             class="visually-hidden"
             v-model="selectedDough"
           />
@@ -31,27 +31,27 @@ export default {
   name: "DoughSelector",
 
   computed: {
-    ...mapGetters("Builder", ["doughs", "selectedDoughValue"]),
+    ...mapGetters("Builder", ["doughs", "selectedDoughId"]),
     normalizedDoughs() {
       const doughs = this.doughs;
       return doughs.map((dough) => this.normalizeDough(dough));
     },
     selectedDough: {
       get() {
-        return this.selectedDoughValue;
+        return this.selectedDoughId;
       },
       set(dough) {
-        this.saveDoughValue(dough);
+        this.saveDoughId(dough);
       },
     },
   },
 
   methods: {
-    ...mapActions("Builder", ["saveDoughValue"]),
+    ...mapActions("Builder", ["saveDoughId"]),
     normalizeDough(dough) {
       return {
         ...dough,
-        style: "dough__input--" + dough.value,
+        style: "dough__input--" + dough.id,
       };
     },
   },

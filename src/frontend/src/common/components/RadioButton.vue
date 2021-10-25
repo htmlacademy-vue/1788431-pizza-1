@@ -1,12 +1,12 @@
 <template>
   <div class="sheet__content" :class="mainStyle">
-    <label v-for="item in items" :key="item.value" :class="item.style">
+    <label v-for="item in items" :key="item.id" :class="item.style">
       <input
         type="radio"
         :name="name"
-        :value="item.value"
+        :value="item.id"
         class="visually-hidden"
-        v-model="value"
+        v-model="id"
       />
       <span>{{ item.name }}</span>
     </label>
@@ -25,7 +25,9 @@ export default {
       type: Array,
       required: true,
     },
-    initValue: {},
+    initId: {
+      type: Number,
+    },
     mainStyle: {
       type: String,
     },
@@ -33,13 +35,13 @@ export default {
 
   data() {
     return {
-      value: this.initValue || null,
+      id: this.initId || null,
     };
   },
 
   watch: {
-    value(newValue) {
-      this.$emit("change", newValue);
+    id(newId) {
+      this.$emit("change", newId);
     },
   },
 };

@@ -18,42 +18,65 @@
 
         <div class="cart__form">
           <div class="cart-form">
-            <label class="cart-form__select">
+            <label class="cart-form__select" style="margin-bottom: 20px">
               <span class="cart-form__label">Получение заказа:</span>
 
-              <select name="test" class="select">
-                <option value="1">Заберу сам</option>
-                <option value="2">Новый адрес</option>
-                <option value="3">Дом</option>
+              <select name="address" class="select" v-model="address">
+                <option value="self">Заберу сам</option>
+                <option value="new">Новый адрес</option>
+                <option
+                  v-for="address in addresses"
+                  :key="address.id"
+                  :value="address.id"
+                >
+                  {{ address.name }}
+                </option>
               </select>
             </label>
 
-            <label class="input input--big-label">
+            <label class="input input--big-label" style="margin-bottom: 20px">
               <span>Контактный телефон:</span>
-              <input type="text" name="tel" placeholder="+7 999-999-99-99" />
+              <input
+                type="text"
+                name="tel"
+                placeholder="+7 999-999-99-99"
+                v-model="phone"
+              />
             </label>
 
-            <div class="cart-form__address">
+            <div class="cart-form__address" v-if="address === 'new'">
               <span class="cart-form__label">Новый адрес:</span>
 
               <div class="cart-form__input">
                 <label class="input">
                   <span>Улица*</span>
-                  <input type="text" name="street" />
+                  <input
+                    type="text"
+                    name="street"
+                    v-model="tempAddress.street"
+                  />
                 </label>
               </div>
 
               <div class="cart-form__input cart-form__input--small">
                 <label class="input">
                   <span>Дом*</span>
-                  <input type="text" name="house" />
+                  <input
+                    type="text"
+                    name="house"
+                    v-model="tempAddress.building"
+                  />
                 </label>
               </div>
 
               <div class="cart-form__input cart-form__input--small">
                 <label class="input">
                   <span>Квартира</span>
-                  <input type="text" name="apartment" />
+                  <input
+                    type="text"
+                    name="apartment"
+                    v-model="tempAddress.flat"
+                  />
                 </label>
               </div>
             </div>
@@ -85,7 +108,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapState } from "vuex";
 import PizzasList from "@/modules/cart/components/PizzasList";
 import Misc from "@/modules/cart/components/Misc";
 
@@ -95,15 +118,53 @@ export default {
     PizzasList,
     Misc,
   },
-  computed: {
-    ...mapGetters("Cart", ["pizzasCount", "totalPrice"]),
+  data() {
+    return {
+      address: "self",
+      tempAddress: {},
+      phone: "",
+    };
   },
-  created() {
-    this.fetchMiscData();
+  computed: {
+    ...mapGetters("Cart", [
+      "pizzasCount",
+      "totalPrice",
+      "pizzasForOrder",
+      "miscForOrder",
+    ]),
+    ...mapGetters("Addresses", { getAddressById: "getById" }),
+    ...mapState("Addresses", {
+      addresses: (state) => state.addresses,
+    }),
+    ...mapState("Auth", {
+      user: (state) => state.user,
+    }),
+  },
+  async created() {
+    await this.fetchMiscData();
+    await this.fetchAddresses();
   },
   methods: {
-    ...mapActions("Cart", ["fetchMiscData"]),
-    onOrderClick() {
+    ...mapActions("Cart", ["fetchMiscData", "makeOrder"]),
+    ...mapActions("Addresses", { fetchAddresses: "fetch" }),
+    ...mapActions("Orders", { createOrder: "create" }),
+    async onOrderClick() {
+      let address;
+      if (this.address === "self") {
+        address = null;
+      } else if (this.address === "new") {
+        address = this.tempAddress;
+      } else {
+        address = this.getAddressById(this.address);
+      }
+
+      await this.createOrder({
+        userId: this.user.id,
+        phone: this.phone,
+        address: address,
+        pizzas: this.pizzasForOrder,
+        misc: this.miscForOrder,
+      });
       this.$router.push({ name: "CartOrdered" });
     },
   },

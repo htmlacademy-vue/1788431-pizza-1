@@ -1,3 +1,5 @@
+import { isLoggedIn, auth } from "@/middlewares";
+
 export default [
   {
     path: "/",
@@ -10,7 +12,7 @@ export default [
     path: "/cart",
     name: "Cart",
     component: () => import("@/views/Cart.vue"),
-    meta: { layout: "AppLayoutMain" },
+    meta: { layout: "AppLayoutMain", middlewares: [auth] },
     children: [
       {
         path: "ordered",
@@ -23,18 +25,18 @@ export default [
     path: "/orders",
     name: "Orders",
     component: () => import("@/views/Orders.vue"),
-    meta: { layout: "AppLayoutUser" },
+    meta: { layout: "AppLayoutUser", middlewares: [auth] },
   },
   {
     path: "/user-data",
     name: "UserData",
     component: () => import("@/views/UserData.vue"),
-    meta: { layout: "AppLayoutUser" },
+    meta: { layout: "AppLayoutUser", middlewares: [auth] },
   },
   {
     path: "/sign-in",
     name: "SignIn",
     component: () => import("@/views/SignIn.vue"),
-    meta: { layout: "AppLayoutEmpty" },
+    meta: { layout: "AppLayoutEmpty", middlewares: [isLoggedIn] },
   },
 ];

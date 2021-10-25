@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AppNotifications />
     <Header></Header>
     <main class="layout">
       <div class="layout__sidebar sidebar">
@@ -12,10 +13,12 @@
           />
         </router-link>
 
-        <a class="layout__link layout__link--active" href="/orders"
-          >История заказов</a
+        <router-link to="/orders" class="layout__link"
+          >История заказов</router-link
         >
-        <a class="layout__link" href="/user-data">Мои данные</a>
+        <router-link to="/user-data" class="layout__link"
+          >Мои данные</router-link
+        >
       </div>
 
       <div class="layout__content">
@@ -35,3 +38,11 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+@import "~@/assets/scss/layout/layout.scss";
+
+.router-link-active {
+  @extend .layout__link--active;
+}
+</style>

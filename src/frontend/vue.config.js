@@ -16,7 +16,7 @@ module.exports = {
       },
       "^/public": {
         target: "http://backend:3000/",
-        changeOrigin: false,
+        changeOrigin: true,
         pathRewrite: { "^/public/": "/public/" },
       },
       "/explorer": {

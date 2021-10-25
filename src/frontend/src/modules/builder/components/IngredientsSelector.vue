@@ -21,9 +21,9 @@
 
         <ItemCounter
           additionalClass="counter--orange ingredients__counter"
-          :value="selectedIngredients[ingredient.value]"
+          :value="selectedIngredients[ingredient.id]"
           :max="max"
-          @change="onChange(ingredient.value, $event)"
+          @change="onChange(ingredient.id, $event)"
         ></ItemCounter>
       </li>
     </ul>
@@ -61,14 +61,14 @@ export default {
       return {
         ...ingredient,
         style: "filling--" + ingredient.value,
-        count: this.selectedIngredients[ingredient.value],
+        count: this.selectedIngredients[ingredient.id],
       };
     },
-    onChange(ingredientValue, delta) {
-      this.changeIngredient({ ingredientValue, delta });
+    onChange(ingredientId, delta) {
+      this.changeIngredient({ ingredientId, delta });
     },
     onDrag(event, ingredient) {
-      event.dataTransfer.setData(DRAG_DATA_NAME, ingredient.value);
+      event.dataTransfer.setData(DRAG_DATA_NAME, ingredient.id);
     },
   },
 };

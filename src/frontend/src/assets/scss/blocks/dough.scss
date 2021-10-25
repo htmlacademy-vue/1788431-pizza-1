@@ -32,7 +32,7 @@
     display: block;
   }
 
-  &--light {
+  &--1 {
     b {
       &::before {
         background-image: url("~@/assets/img/dough-light.svg");
@@ -40,7 +40,7 @@
     }
   }
 
-  &--large {
+  &--2 {
     b {
       &::before {
         background-image: url("~@/assets/img/dough-large.svg");

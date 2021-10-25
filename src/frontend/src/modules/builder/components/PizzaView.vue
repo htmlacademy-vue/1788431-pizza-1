@@ -26,34 +26,39 @@ export default {
 
   computed: {
     ...mapGetters("Builder", [
-      "selectedDoughValue",
-      "selectedSauceValue",
+      "selectedDoughId",
+      "selectedSauceId",
       "selectedIngredients",
+      "getIngredientById",
     ]),
     pizzaFoundationStyle() {
-      const dough = { light: "small", large: "big" }[this.selectedDoughValue];
-      const sauce = this.selectedSauceValue;
-      return "pizza--foundation--" + dough + "-" + sauce;
+      return (
+        "pizza--foundation--" +
+        this.selectedDoughId +
+        "-" +
+        this.selectedSauceId
+      );
     },
     pizzaIngredientStyles() {
       const styles = [];
 
-      for (const ingredient in this.selectedIngredients) {
-        const count = this.selectedIngredients[ingredient];
+      for (const ingredientId in this.selectedIngredients) {
+        const ingredient = this.getIngredientById(ingredientId);
+        const count = this.selectedIngredients[ingredientId];
         if (count > 0) {
-          styles.push("pizza__filling pizza__filling--" + ingredient);
+          styles.push("pizza__filling pizza__filling--" + ingredient.value);
         }
         if (count > 1) {
           styles.push(
             "pizza__filling pizza__filling--" +
-              ingredient +
+              ingredient.value +
               " pizza__filling--second"
           );
         }
         if (count > 2) {
           styles.push(
             "pizza__filling pizza__filling--" +
-              ingredient +
+              ingredient.value +
               " pizza__filling--third"
           );
         }
@@ -66,9 +71,10 @@ export default {
   methods: {
     ...mapActions("Builder", ["changeIngredient"]),
     onDrop(event) {
-      const ingredientValue = event.dataTransfer.getData(DRAG_DATA_NAME);
-      if (ingredientValue) {
-        this.changeIngredient({ ingredientValue, delta: 1 });
+      //debugger;
+      const ingredientId = event.dataTransfer.getData(DRAG_DATA_NAME);
+      if (ingredientId) {
+        this.changeIngredient({ ingredientId, delta: 1 });
       }
     },
   },

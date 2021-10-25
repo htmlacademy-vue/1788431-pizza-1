@@ -1,4 +1,3 @@
-import miscData from "@/static/misc.json";
 import Vue from "vue";
 
 export default {
@@ -32,6 +31,43 @@ export default {
       return (id) => {
         return state.pizzas.find((pizza) => pizza.id === id);
       };
+    },
+    pizzasForOrder(state) {
+      const pizzas = [];
+      for (const pizzaIndex in state.pizzas) {
+        const pizza = state.pizzas[pizzaIndex];
+        const ingredients = Object.keys(pizza.selectedIngredients).map(
+          function (key) {
+            return {
+              ingredientId: +key,
+              quantity: +pizza.selectedIngredients[key],
+            };
+          }
+        );
+        pizzas.push({
+          name: pizza.pizzaName,
+          sauceId: pizza.selectedSauceId,
+          doughId: pizza.selectedDoughId,
+          sizeId: pizza.selectedSizeId,
+          quantity: pizza.count,
+          ingredients: ingredients,
+        });
+      }
+      return pizzas;
+    },
+    miscForOrder(state) {
+      const misc = [];
+
+      for (const miscIndex in state.miscData) {
+        if (state.miscData[miscIndex].count) {
+          misc.push({
+            miscId: state.miscData[miscIndex].id,
+            quantity: state.miscData[miscIndex].count,
+          });
+        }
+      }
+
+      return misc;
     },
   },
   mutations: {
@@ -86,7 +122,12 @@ export default {
     changeCount({ commit }, { id, delta }) {
       commit("changeCount", { id, delta });
     },
-    fetchMiscData({ commit }) {
+    async fetchMiscData({ commit }) {
+      const miscData = await this.$api.misc.query();
+      const reg = new RegExp(".*/([^.]+).svg");
+      for (const index in miscData) {
+        miscData[index].code = miscData[index].image.replace(reg, "$1");
+      }
       commit("setMiscData", miscData);
     },
     changeMisc({ commit }, { miscId, delta }) {
