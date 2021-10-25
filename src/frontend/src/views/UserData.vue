@@ -54,89 +54,10 @@
         class="layout__address"
         :key="addressIndex"
       >
-        <form method="post" class="address-form address-form--opened sheet">
-          <div class="address-form__header">
-            <b>Адрес №1</b>
-          </div>
-
-          <div class="address-form__wrapper">
-            <div class="address-form__input">
-              <label class="input">
-                <span>Название адреса*</span>
-                <input
-                  v-model="addressItem.name"
-                  type="text"
-                  name="addr-name"
-                  placeholder="Введите название адреса"
-                  required
-                />
-              </label>
-            </div>
-            <div class="address-form__input address-form__input--size--normal">
-              <label class="input">
-                <span>Улица*</span>
-                <input
-                  v-model="addressItem.street"
-                  type="text"
-                  name="addr-street"
-                  placeholder="Введите название улицы"
-                  required
-                />
-              </label>
-            </div>
-            <div class="address-form__input address-form__input--size--small">
-              <label class="input">
-                <span>Дом*</span>
-                <input
-                  v-model="addressItem.building"
-                  type="text"
-                  name="addr-house"
-                  placeholder="Введите номер дома"
-                  required
-                />
-              </label>
-            </div>
-            <div class="address-form__input address-form__input--size--small">
-              <label class="input">
-                <span>Квартира</span>
-                <input
-                  v-model="addressItem.flat"
-                  type="text"
-                  name="addr-apartment"
-                  placeholder="Введите № квартиры"
-                />
-              </label>
-            </div>
-            <div class="address-form__input">
-              <label class="input">
-                <span>Комментарий</span>
-                <input
-                  v-model="addressItem.comment"
-                  type="text"
-                  name="addr-comment"
-                  placeholder="Введите комментарий"
-                />
-              </label>
-            </div>
-          </div>
-
-          <div class="address-form__buttons">
-            <button
-              type="button"
-              class="button button--transparent"
-              @click="onDeleteAddressClick(addressItem)"
-            >
-              Удалить
-            </button>
-            <button
-              type="submit"
-              class="button"
-              @click.prevent="onSaveAddressClick(addressItem)"
-            >
-              Сохранить
-            </button>
-          </div>
-        </form>
+        <AddressForm
+          :address="addressItem"
+          @save="onSaveAddress($event)"
+        ></AddressForm>
       </div>
     </template>
 
@@ -154,11 +75,16 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import AddressForm from "@/modules/user-data/AddressForm";
 
 export default {
   name: "UserData",
+  components: { AddressForm },
+
   data() {
-    return { showEditForm: false, editAddressId: null };
+    return {
+      editAddressId: null,
+    };
   },
   computed: {
     ...mapState("Auth", {
@@ -184,19 +110,13 @@ export default {
       this.deleteUnsaved();
       this.editAddressId = addressId;
     },
-    onAddAddressClick() {
-      this.address = {};
-      this.showEditForm = true;
-    },
-    async onDeleteAddressClick(address) {
-      this.delete(address);
-    },
     onCreateAddressClick() {
       this.create(this.user.id);
     },
-    async onSaveAddressClick(address) {
+    async onSaveAddress(address) {
       await this.save(address);
       this.editAddressId = null;
+      this.$notifier.success("Адрес сохранен");
     },
     humanizeAddress(address) {
       let addr = address.street + ", " + address.building;
