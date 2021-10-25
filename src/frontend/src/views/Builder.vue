@@ -112,6 +112,7 @@ export default {
     onToCartClick() {
       this.addPizza(this.pizzaData);
       this.resetValues();
+      this.$notifier.success("Пицца добавлена в корзину");
     },
   },
 };

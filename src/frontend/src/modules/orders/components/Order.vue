@@ -91,9 +91,11 @@ export default {
     ...mapActions("Orders", ["delete", "repeat"]),
     async onDeleteClick() {
       await this.delete(this.order.id);
+      this.$notifier.success("Заказ удален");
     },
     async onRepeatClick() {
       await this.repeat(this.order);
+      this.$notifier.success("Заказ продублирован");
     },
   },
 };
