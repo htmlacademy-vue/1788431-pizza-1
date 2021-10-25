@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AppNotifications />
     <Header></Header>
     <main class="layout">
       <div class="layout__sidebar sidebar">

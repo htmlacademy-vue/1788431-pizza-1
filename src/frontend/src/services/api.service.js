@@ -1,5 +1,6 @@
 import JwtService from "@/services/jwt.service";
 import axios from "@/plugins/axios";
+import resources from "@/common/enums/resources";
 
 class BaseApiService {
   constructor(notifier) {
@@ -80,12 +81,40 @@ export class CrudApiService extends ReadOnlyApiService {
   }
 }
 
-export class AddressesApiService extends CrudApiService {}
+export class AddressesApiService extends CrudApiService {
+  constructor(notifier) {
+    super(resources.ADDRESSES, notifier);
+  }
+}
 
-export class SaucesApiService extends ReadOnlyApiService {}
-export class SizesApiService extends ReadOnlyApiService {}
-export class DoughsApiService extends ReadOnlyApiService {}
-export class IngredientsApiService extends ReadOnlyApiService {}
-export class MiscApiService extends ReadOnlyApiService {}
+export class SaucesApiService extends ReadOnlyApiService {
+  constructor(notifier) {
+    super(resources.SAUCES, notifier);
+  }
+}
+export class SizesApiService extends ReadOnlyApiService {
+  constructor(notifier) {
+    super(resources.SIZES, notifier);
+  }
+}
+export class DoughsApiService extends ReadOnlyApiService {
+  constructor(notifier) {
+    super(resources.DOUGHS, notifier);
+  }
+}
+export class IngredientsApiService extends ReadOnlyApiService {
+  constructor(notifier) {
+    super(resources.INGREDIENTS, notifier);
+  }
+}
+export class MiscApiService extends ReadOnlyApiService {
+  constructor(notifier) {
+    super(resources.MISC, notifier);
+  }
+}
 
-export class OrdersApiService extends CrudApiService {}
+export class OrdersApiService extends CrudApiService {
+  constructor(notifier) {
+    super(resources.ORDERS, notifier);
+  }
+}
