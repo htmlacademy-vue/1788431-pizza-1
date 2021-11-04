@@ -1,6 +1,6 @@
 <template>
   <div class="popup">
-    <router-link to="/cart" class="close">
+    <router-link to="/orders" class="close">
       <span class="visually-hidden">Закрыть попап</span>
     </router-link>
     <div class="popup__title">

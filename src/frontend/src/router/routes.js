@@ -13,13 +13,6 @@ export default [
     name: "Cart",
     component: () => import("@/views/Cart.vue"),
     meta: { layout: "AppLayoutMain", middlewares: [auth] },
-    children: [
-      {
-        path: "ordered",
-        name: "CartOrdered",
-        component: () => import("@/views/Thanx.vue"),
-      },
-    ],
   },
   {
     path: "/orders",
