@@ -1,4 +1,5 @@
 import Vue from "vue";
+import each from "lodash/each";
 
 export default {
   namespaced: true,
@@ -114,6 +115,13 @@ export default {
       Vue.set(misc, "count", newCount);
       Vue.set(misc, "totalPrice", newCount * misc.price);
     },
+    resetCart(state) {
+      each(state.miscData, (misc) => {
+        Vue.set(misc, "count", 0);
+        Vue.set(misc, "totalPrice", 0);
+      });
+      Vue.set(state, "pizzas", []);
+    },
   },
   actions: {
     addPizza({ commit }, pizzaData) {
@@ -132,6 +140,9 @@ export default {
     },
     changeMisc({ commit }, { miscId, delta }) {
       commit("changeMisc", { miscId, delta });
+    },
+    resetCart({ commit }) {
+      commit("resetCart");
     },
   },
 };

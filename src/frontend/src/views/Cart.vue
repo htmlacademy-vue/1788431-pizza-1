@@ -84,9 +84,6 @@
         </div>
       </div>
     </main>
-    <transition name="popup">
-      <Thanx v-if="showThanx" class="popup"></Thanx>
-    </transition>
     <section class="footer">
       <div class="footer__more">
         <router-link to="/" class="button button--border button--arrow"
@@ -114,15 +111,13 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from "vuex";
+import { mapGetters, mapActions, mapState, mapMutations } from "vuex";
 import PizzasList from "@/modules/cart/components/PizzasList";
 import Misc from "@/modules/cart/components/Misc";
-import Thanx from "@/views/Thanx";
 
 export default {
   name: "Cart",
   components: {
-    Thanx,
     PizzasList,
     Misc,
   },
@@ -131,7 +126,6 @@ export default {
       address: "self",
       tempAddress: {},
       phone: "",
-      showThanx: false,
     };
   },
   computed: {
@@ -154,9 +148,10 @@ export default {
     await this.fetchAddresses();
   },
   methods: {
-    ...mapActions("Cart", ["fetchMiscData", "makeOrder"]),
+    ...mapActions("Cart", ["fetchMiscData", "makeOrder", "resetCart"]),
     ...mapActions("Addresses", { fetchAddresses: "fetch" }),
     ...mapActions("Orders", { createOrder: "create" }),
+    ...mapMutations("App", ["showThanx"]),
     async onOrderClick() {
       let address;
       if (this.address === "self") {
@@ -174,7 +169,8 @@ export default {
         pizzas: this.pizzasForOrder,
         misc: this.miscForOrder,
       });
-      this.showThanx = true;
+      this.showThanx();
+      this.resetCart();
     },
   },
 };
@@ -196,17 +192,5 @@ export default {
 }
 .potato {
   background-image: url("~@/assets/img/potato.svg");
-}
-
-.popup {
-  transition: all 0.5s;
-}
-.popup-enter-to,
-.popup-leave {
-  margin-top: 0;
-}
-.popup-enter,
-.popup-leave-to {
-  margin-top: -150vh;
 }
 </style>
