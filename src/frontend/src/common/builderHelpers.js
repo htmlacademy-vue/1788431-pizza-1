@@ -59,9 +59,7 @@ export const pizzaPrice = ({
     const ingredient = ingredients.find(
       (ingredient) => ingredient.id === +selectedIngredientId
     );
-    if (ingredient) {
-      ingredientsPrice += ingredient.price * count;
-    }
+    ingredientsPrice += ingredient.price * count;
   }
 
   return (
@@ -82,10 +80,6 @@ export const processOrders = ({
     let orderPrice = 0;
 
     each(order.orderPizzas, (pizza) => {
-      if (!pizza.price) {
-        return;
-      }
-
       const selectedIngredients = mapValues(
         keyBy(pizza.ingredients, "ingredientId"),
         "quantity"
