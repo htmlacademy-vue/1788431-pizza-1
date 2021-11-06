@@ -84,7 +84,6 @@
         </div>
       </div>
     </main>
-    <router-view></router-view>
     <section class="footer">
       <div class="footer__more">
         <router-link to="/" class="button button--border button--arrow"
@@ -99,7 +98,11 @@
       </div>
 
       <div class="footer__submit">
-        <button @click.prevent="onOrderClick" class="button">
+        <button
+          @click.prevent="onOrderClick"
+          :disabled="!totalPrice"
+          class="button"
+        >
           Оформить заказ
         </button>
       </div>
@@ -108,7 +111,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from "vuex";
+import { mapGetters, mapActions, mapState, mapMutations } from "vuex";
 import PizzasList from "@/modules/cart/components/PizzasList";
 import Misc from "@/modules/cart/components/Misc";
 
@@ -145,9 +148,10 @@ export default {
     await this.fetchAddresses();
   },
   methods: {
-    ...mapActions("Cart", ["fetchMiscData", "makeOrder"]),
+    ...mapActions("Cart", ["fetchMiscData", "makeOrder", "resetCart"]),
     ...mapActions("Addresses", { fetchAddresses: "fetch" }),
     ...mapActions("Orders", { createOrder: "create" }),
+    ...mapMutations("App", ["showThanx"]),
     async onOrderClick() {
       let address;
       if (this.address === "self") {
@@ -165,7 +169,8 @@ export default {
         pizzas: this.pizzasForOrder,
         misc: this.miscForOrder,
       });
-      this.$router.push({ name: "CartOrdered" });
+      this.showThanx();
+      this.resetCart();
     },
   },
 };

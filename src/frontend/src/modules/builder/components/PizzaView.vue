@@ -7,13 +7,14 @@
       @dragover.prevent
       @dragenter.prevent
     >
-      <div class="pizza__wrapper">
+      <transition-group name="ingredient" tag="div" class="pizza__wrapper">
         <div
           v-for="ingredientStyle of pizzaIngredientStyles"
           :key="ingredientStyle"
+          class="ingredient"
           :class="ingredientStyle"
         ></div>
-      </div>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -71,7 +72,6 @@ export default {
   methods: {
     ...mapActions("Builder", ["changeIngredient"]),
     onDrop(event) {
-      //debugger;
       const ingredientId = event.dataTransfer.getData(DRAG_DATA_NAME);
       if (ingredientId) {
         this.changeIngredient({ ingredientId, delta: 1 });
@@ -80,3 +80,16 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.ingredient {
+  transition: all 1s;
+}
+.ingredient-enter,
+.ingredient-leave-to {
+  opacity: 0;
+}
+.ingredient-enter-to {
+  opacity: 1;
+}
+</style>
