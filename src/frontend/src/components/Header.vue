@@ -24,7 +24,9 @@
           </picture>
           <span>{{ user.name }}</span>
         </router-link>
-        <a @click="onLogoutClick" class="header__logout"><span>Выйти</span></a>
+        <a @click="onLogoutClick" data-test="logout-btn" class="header__logout"
+          ><span>Выйти</span></a
+        >
       </template>
     </div>
   </header>
