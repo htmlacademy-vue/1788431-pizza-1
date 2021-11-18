@@ -2,6 +2,7 @@ import { shallowMount } from "@vue/test-utils";
 import DoughSelector from "@/modules/builder/components/DoughSelector.vue";
 import { generateMockStore } from "@/store/mocks";
 import { fillPizzaData } from "@/common/testHelpers";
+import pizza from "@/static/pizza";
 
 describe("DoughSelector.vue", () => {
   let wrapper;
@@ -19,6 +20,7 @@ describe("DoughSelector.vue", () => {
       },
     };
     store = generateMockStore(actions);
+    fillPizzaData(store);
   });
 
   afterEach(() => {
@@ -31,19 +33,24 @@ describe("DoughSelector.vue", () => {
   });
 
   it("should render doughs", () => {
-    fillPizzaData(store);
     createComponent({ store });
     expect(wrapper.findAll("input").length).toBe(2);
   });
 
   it("should be selected default dough", () => {
-    fillPizzaData(store);
     createComponent({ store });
-    expect(wrapper.find("input").element.value).toBe("1");
+    expect(wrapper.findAll("input").at(0).element.checked).toBe(true);
+    expect(wrapper.findAll("input").at(1).element.checked).toBe(false);
+  });
+
+  it("should be selected right dough", () => {
+    store.commit("Builder/setDoughId", pizza.dough[1].id);
+    createComponent({ store });
+    expect(wrapper.findAll("input").at(0).element.checked).toBe(false);
+    expect(wrapper.findAll("input").at(1).element.checked).toBe(true);
   });
 
   it("can select dough", () => {
-    fillPizzaData(store);
     createComponent({ store });
     wrapper.findAll("input").at(1).trigger("click");
     expect(actions.Builder.saveDoughId).toHaveBeenCalledWith(

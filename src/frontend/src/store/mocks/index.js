@@ -16,7 +16,10 @@ export const generateMockStore = (actions) => {
   const modulesCopy = cloneDeep(modules);
   if (actions) {
     Object.entries(actions).forEach(([module, actions]) => {
-      modulesCopy[module] = { ...modulesCopy[module], actions };
+      modulesCopy[module].actions = {
+        ...modulesCopy[module].actions,
+        ...actions,
+      };
     });
   }
 
