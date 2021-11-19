@@ -8,19 +8,13 @@ import Vue from "vue";
 describe("PizzaView.vue", () => {
   let wrapper;
   let store;
-  let actions;
 
   const createComponent = (options) => {
     wrapper = shallowMount(PizzaView, options);
   };
 
   beforeEach(() => {
-    actions = {
-      /*Builder: {
-        saveSizeId: jest.fn(),
-      },*/
-    };
-    store = generateMockStore(actions);
+    store = generateMockStore();
     fillPizzaData(store);
   });
 
@@ -91,5 +85,20 @@ describe("PizzaView.vue", () => {
     store.commit("Builder/setDoughId", pizza.sauces[1].id);
     await Vue.nextTick();
     expect(wrapper.findAll(".pizza--foundation--2-2").exists()).toBeTruthy();
+  });
+
+  it("should increase ingredient on drop", async () => {
+    createComponent({ store });
+    wrapper
+      .find(".pizza")
+      .trigger("drop", { dataTransfer: { getData: () => 1 } });
+    await Vue.nextTick();
+    expect(
+      wrapper
+        .find(
+          ".pizza__filling--mushrooms:not(.pizza__filling--second):not(.pizza__filling--third)"
+        )
+        .exists()
+    ).toBeTruthy();
   });
 });
