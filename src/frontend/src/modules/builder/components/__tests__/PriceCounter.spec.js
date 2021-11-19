@@ -8,19 +8,13 @@ import Vue from "vue";
 describe("PriceCounter.vue", () => {
   let wrapper;
   let store;
-  let actions;
 
   const createComponent = (options) => {
     wrapper = shallowMount(PriceCounter, options);
   };
 
   beforeEach(() => {
-    actions = {
-      /*Builder: {
-        saveSizeId: jest.fn(),
-      },*/
-    };
-    store = generateMockStore(actions);
+    store = generateMockStore();
     fillPizzaData(store);
   });
 
