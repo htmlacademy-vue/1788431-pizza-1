@@ -1,6 +1,7 @@
 import { SET_ENTITY } from "@/store/mutations-types";
 import users from "@/static/users";
 import pizza from "@/static/pizza";
+import misc from "@/static/misc";
 
 export const authenticateUser = (store) => {
   store.commit(
@@ -31,4 +32,8 @@ export const fillPizzaData = (store) => {
     ingredients: pizza.ingredients,
   });
   store.commit("Builder/setDefaults");
+};
+
+export const fillMiscData = (store) => {
+  store.commit("Cart/setMiscData", misc);
 };

@@ -19,7 +19,7 @@
             @change="onMiscChange(misc.id, $event)"
           ></ItemCounter>
 
-          <div class="additional-list__price">
+          <div class="additional-list__price" data-test="price">
             <b>{{ misc.totalPrice || 0 }} ₽</b>
           </div>
         </div>
