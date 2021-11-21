@@ -37,3 +37,37 @@ export const fillPizzaData = (store) => {
 export const fillMiscData = (store) => {
   store.commit("Cart/setMiscData", misc);
 };
+
+export const pizzaData1 = {
+  id: 1,
+  pizzaName: "pizza",
+  selectedDoughId: 1,
+  selectedSauceId: 1,
+  selectedSizeId: 1,
+  selectedIngredients: { 1: 2, 2: 1 },
+  price: 458,
+  count: 1,
+  humanize: {
+    dough: "на тонком тесте",
+    sauce: "томатный",
+    size: "23 см",
+    ingredients: "грибы, чеддер",
+  },
+};
+
+export const pizzaData2 = {
+  id: 2,
+  pizzaName: "pizza",
+  selectedDoughId: 1,
+  selectedSauceId: 1,
+  selectedSizeId: 1,
+  selectedIngredients: { 1: 2, 2: 1 },
+  price: 458,
+  count: 1,
+  humanize: {
+    dough: "на тонком тесте",
+    sauce: "томатный",
+    size: "23 см",
+    ingredients: "грибы, чеддер",
+  },
+};
