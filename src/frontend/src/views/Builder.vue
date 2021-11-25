@@ -30,6 +30,7 @@
               name="pizza_name"
               placeholder="Введите название пиццы"
               v-model="pizzaName"
+              data-test="builder-name"
             />
           </label>
 
@@ -43,6 +44,7 @@
               :class="{ 'button--disabled': !orderAllowed }"
               :disabled="!orderAllowed"
               @click="onToCartClick"
+              data-test="builder-to-cart"
             >
               Готовьте!
             </button>
@@ -74,7 +76,7 @@ export default {
   },
   props: {
     pizzaIdToEdit: {
-      type: String,
+      type: Number,
     },
   },
   async created() {
@@ -106,9 +108,6 @@ export default {
       "resetValues",
     ]),
     ...mapActions("Cart", ["addPizza"]),
-    onIngredientChange(ingredientValue, delta) {
-      this.changeIngredient(ingredientValue, delta);
-    },
     onToCartClick() {
       this.addPizza(this.pizzaData);
       this.resetValues();
