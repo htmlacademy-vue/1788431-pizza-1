@@ -11,7 +11,7 @@
       :required="required"
       @input="$emit('input', $event.target.value)"
     />
-    <span v-if="showError" class="text-field__text">
+    <span v-if="showError" class="text-field__text" data-test="error">
       {{ errorText }}
     </span>
   </div>
