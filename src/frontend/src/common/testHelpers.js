@@ -124,3 +124,17 @@ export const orderData2 = {
   orderMisc: [],
   price: 0,
 };
+
+export const addressData1 = {
+  building: "house",
+  comment: "comment",
+  flat: "flat",
+  id: 1,
+  name: "name",
+  street: "street",
+  userId: "c4f0ef0c-180e-4590-895c-5041700f585e",
+};
+
+export const fillAddressesData = (store) => {
+  store.commit("Addresses/set", { addresses: [addressData1] });
+};

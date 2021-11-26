@@ -15,5 +15,9 @@ export default {
     },
   },
 
-  actions: {},
+  actions: {
+    showThanx({ commit }) {
+      commit("showThanx");
+    },
+  },
 };
