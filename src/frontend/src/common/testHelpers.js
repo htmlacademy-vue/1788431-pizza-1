@@ -125,6 +125,10 @@ export const orderData2 = {
   price: 0,
 };
 
+export const fillOrdersData = (store) => {
+  store.commit("Orders/set", { orders: [orderData1] });
+};
+
 export const addressData1 = {
   building: "house",
   comment: "comment",
