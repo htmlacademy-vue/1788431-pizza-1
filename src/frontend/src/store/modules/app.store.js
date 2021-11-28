@@ -19,5 +19,8 @@ export default {
     showThanx({ commit }) {
       commit("showThanx");
     },
+    hideThanx({ commit }) {
+      commit("hideThanx");
+    },
   },
 };
