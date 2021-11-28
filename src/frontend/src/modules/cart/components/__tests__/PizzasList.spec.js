@@ -79,7 +79,7 @@ describe("PizzasList.vue", () => {
   it("route to pizza edit", async () => {
     store.commit("Cart/addPizza", pizzaData1);
     createComponent({ store, stubs });
-    expect(wrapper.find(RouterLinkStub).props().to).toStrictEqual({
+    expect(wrapper.findComponent(RouterLinkStub).props().to).toStrictEqual({
       name: "Builder",
       params: { pizzaIdToEdit: pizzaData1.id },
     });

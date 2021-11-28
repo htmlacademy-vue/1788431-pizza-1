@@ -2,6 +2,7 @@ import { SET_ENTITY } from "@/store/mutations-types";
 import users from "@/static/users";
 import pizza from "@/static/pizza";
 import misc from "@/static/misc";
+import { cloneDeep } from "lodash";
 
 export const authenticateUser = (store) => {
   store.commit(
@@ -26,16 +27,16 @@ export const authenticateUser = (store) => {
 
 export const fillPizzaData = (store) => {
   store.commit("Builder/setData", {
-    doughs: pizza.dough,
-    sauces: pizza.sauces,
-    sizes: pizza.sizes,
-    ingredients: pizza.ingredients,
+    doughs: cloneDeep(pizza.dough),
+    sauces: cloneDeep(pizza.sauces),
+    sizes: cloneDeep(pizza.sizes),
+    ingredients: cloneDeep(pizza.ingredients),
   });
   store.commit("Builder/setDefaults");
 };
 
 export const fillMiscData = (store) => {
-  store.commit("Cart/setMiscData", misc);
+  store.commit("Cart/setMiscData", cloneDeep(misc));
 };
 
 export const pizzaData1 = {
@@ -126,7 +127,7 @@ export const orderData2 = {
 };
 
 export const fillOrdersData = (store) => {
-  store.commit("Orders/set", { orders: [orderData1] });
+  store.commit("Orders/set", { orders: [cloneDeep(orderData1)] });
 };
 
 export const addressData1 = {
@@ -140,5 +141,5 @@ export const addressData1 = {
 };
 
 export const fillAddressesData = (store) => {
-  store.commit("Addresses/set", { addresses: [addressData1] });
+  store.commit("Addresses/set", { addresses: [cloneDeep(addressData1)] });
 };

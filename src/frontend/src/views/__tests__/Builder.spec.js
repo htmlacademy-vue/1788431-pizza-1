@@ -15,6 +15,7 @@ describe("Builder.vue", () => {
   beforeEach(() => {
     actions = {
       Builder: {
+        fetchData: jest.fn(),
         savePizzaName: jest.fn(),
       },
     };
@@ -69,6 +70,7 @@ describe("Builder.vue", () => {
         addPizza: jest.fn(),
       },
       Builder: {
+        fetchData: jest.fn(),
         resetValues: jest.fn(),
       },
     };
@@ -151,9 +153,9 @@ describe("Builder.vue on created", () => {
   beforeEach(() => {
     actions = {
       Builder: {
+        fetchData: jest.fn(),
         resetValues: jest.fn(),
         loadDataFromCart: jest.fn(),
-        fetchData: jest.fn(),
       },
     };
     store = generateMockStore(actions);

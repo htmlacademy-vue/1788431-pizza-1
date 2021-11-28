@@ -24,10 +24,14 @@ describe("Cart.vue", () => {
   beforeEach(() => {
     actions = {
       Cart: {
+        fetchMiscData: jest.fn(),
         resetCart: jest.fn(),
       },
       Orders: {
         create: jest.fn(),
+      },
+      Addresses: {
+        fetch: jest.fn(),
       },
       App: {
         showThanx: jest.fn(),
@@ -112,13 +116,6 @@ describe("Cart.vue", () => {
   it("show zero price", async () => {
     createComponent({ store, stubs });
     expect(wrapper.find('[data-test="cart-price"]').text()).toBe("Итого: 0 ₽");
-  });
-
-  it("show correct price when pizza added", async () => {
-    createComponent({ store, stubs });
-    expect(wrapper.find('[data-test="cart-price"]').text()).toBe(
-      "Итого: 458 ₽"
-    );
   });
 
   it("show correct price when misc added", async () => {
