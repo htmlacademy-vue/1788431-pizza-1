@@ -16,13 +16,15 @@
           :alt="user.name"
           width="72"
           height="72"
+          data-test="user-data-avatar"
         />
       </picture>
       <div class="user__name">
-        <span>{{ user.name }}</span>
+        <span data-test="user-data-name">{{ user.name }}</span>
       </div>
       <p class="user__phone">
-        Контактный телефон: <span>{{ user.phone }}</span>
+        Контактный телефон:
+        <span data-test="user-data-phone">{{ user.phone }}</span>
       </p>
     </div>
 
@@ -31,6 +33,7 @@
         v-if="addressItem.id && addressItem.id !== editAddressId"
         class="layout__address"
         :key="addressIndex"
+        data-test="user-data-address"
       >
         <div class="sheet address-form">
           <div class="address-form__header">
@@ -40,6 +43,7 @@
                 @click="onEditAddressClick(addressItem.id)"
                 type="button"
                 class="icon"
+                data-test="user-data-address-edit"
               >
                 <span class="visually-hidden">Изменить адрес</span>
               </button>
@@ -57,6 +61,7 @@
         <AddressForm
           :address="addressItem"
           @save="onSaveAddress($event)"
+          data-test="user-data-address-form"
         ></AddressForm>
       </div>
     </template>
@@ -66,6 +71,7 @@
         type="button"
         class="button button--border"
         @click="onCreateAddressClick"
+        data-test="user-data-add-address"
       >
         Добавить новый адрес
       </button>
@@ -99,13 +105,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions("Addresses", [
-      "fetch",
-      "create",
-      "deleteUnsaved",
-      "save",
-      "delete",
-    ]),
+    ...mapActions("Addresses", ["fetch", "create", "deleteUnsaved", "save"]),
     onEditAddressClick(addressId) {
       this.deleteUnsaved();
       this.editAddressId = addressId;
