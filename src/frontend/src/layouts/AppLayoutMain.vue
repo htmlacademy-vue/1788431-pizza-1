@@ -4,7 +4,7 @@
     <Header></Header>
     <slot />
     <transition name="popup">
-      <Thanx v-if="showThanx"></Thanx>
+      <Thanx v-if="showThanx" data-test="layout-thanx"></Thanx>
     </transition>
   </div>
 </template>
