@@ -36,9 +36,8 @@ describe("SignIn.vue", () => {
 
   it("should validate fields before signin", async () => {
     createComponent({ store, mocks });
-    const spyValidateFields = jest.spyOn(wrapper.vm, "$validateFields");
     await wrapper.find('[data-test="signin-button"]').trigger("click");
-    expect(spyValidateFields).toHaveBeenCalled();
+    expect(actions.Auth.login).not.toHaveBeenCalled();
   });
 
   it("should not sign in if fields is empty", async () => {
