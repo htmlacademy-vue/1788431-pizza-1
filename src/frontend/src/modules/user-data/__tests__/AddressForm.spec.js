@@ -195,31 +195,16 @@ describe("AddressForm.vue", () => {
       store,
       propsData: propsDataEmpty,
     });
-    await wrapper.setData({
-      validations: {
-        name: {
-          error: "name error",
-          rules: ["required"],
-        },
-        street: {
-          error: "street error",
-          rules: ["required"],
-        },
-        building: {
-          error: "building error",
-          rules: ["required"],
-        },
-      },
-    });
+    await wrapper.find('[data-test="address-save"]').trigger("click");
     expect(
       wrapper.find('[data-test="address-name"] [data-test="error"]').text()
-    ).toBe("name error");
+    ).toBe("Поле обязательно для заполнения");
     expect(
       wrapper.find('[data-test="address-street"] [data-test="error"]').text()
-    ).toBe("street error");
+    ).toBe("Поле обязательно для заполнения");
     expect(
       wrapper.find('[data-test="address-building"] [data-test="error"]').text()
-    ).toBe("building error");
+    ).toBe("Поле обязательно для заполнения");
   });
 
   it("clear validation error", async () => {
@@ -228,18 +213,19 @@ describe("AddressForm.vue", () => {
       store,
       propsData: propsDataEmpty,
     });
-    await wrapper.setData({
-      validations: {
-        name: {
-          error: "name error",
-          rules: ["required"],
-        },
-      },
-    });
-
-    const spyClearValidation = jest.spyOn(wrapper.vm, "$clearValidationErrors");
-
+    // заполняем улицу и здание, но не заполняем название
+    await wrapper.find('[data-test="address-street"] input').setValue("street");
+    await wrapper
+      .find('[data-test="address-building"] input')
+      .setValue("building");
+    // после попытки сохранения появляется ошибка
+    await wrapper.find('[data-test="address-save"]').trigger("click");
+    // вводим что-то в название адреса
     await wrapper.find('[data-test="address-name"] input').setValue("n");
-    expect(spyClearValidation).toHaveBeenCalled();
+    expect(
+      wrapper
+        .find('[data-test="address-building"] [data-test="error"]')
+        .exists()
+    ).toBeFalsy();
   });
 });
