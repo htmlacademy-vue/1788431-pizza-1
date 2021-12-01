@@ -13,6 +13,7 @@
           class="input"
           placeholder="Название адреса*"
           :error-text="validations.name.error"
+          data-test="address-name"
         />
       </div>
       <div class="address-form__input">
@@ -23,6 +24,7 @@
           class="input"
           placeholder="Введите название улицы*"
           :error-text="validations.street.error"
+          data-test="address-street"
         />
       </div>
       <div class="address-form__input address-form__input--size--normal">
@@ -33,6 +35,7 @@
           class="input"
           placeholder="Дом*"
           :error-text="validations.building.error"
+          data-test="address-building"
         />
       </div>
       <div class="address-form__input address-form__input--size--small">
@@ -42,6 +45,7 @@
           name="addr-apartment"
           class="input"
           placeholder="Квартира"
+          data-test="address-flat"
         />
       </div>
       <div class="address-form__input">
@@ -51,6 +55,7 @@
           name="comment"
           class="input"
           placeholder="Введите комментарий"
+          data-test="address-comment"
         />
       </div>
     </div>
@@ -61,6 +66,7 @@
         type="button"
         class="button button--transparent"
         @click="onDeleteAddressClick(address)"
+        data-test="address-delete"
       >
         Удалить
       </button>
@@ -68,6 +74,7 @@
         type="submit"
         class="button"
         @click.prevent="onSaveAddressClick(address)"
+        data-test="address-save"
       >
         Сохранить
       </button>
@@ -115,7 +122,7 @@ export default {
   methods: {
     ...mapActions("Addresses", ["delete"]),
     async onDeleteAddressClick(address) {
-      this.delete(address);
+      await this.delete(address);
       this.$notifier.success("Адрес удален");
     },
     async onSaveAddressClick(address) {

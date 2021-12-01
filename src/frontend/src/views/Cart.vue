@@ -6,12 +6,16 @@
           <h1 class="title title--big">Корзина</h1>
         </div>
 
-        <div v-if="!pizzasCount" class="sheet cart__empty">
+        <div
+          v-if="!pizzasCount"
+          class="sheet cart__empty"
+          data-test="cart-message"
+        >
           <p>В корзине нет ни одного товара</p>
         </div>
 
         <template v-if="pizzasCount">
-          <PizzasList></PizzasList>
+          <PizzasList data-test="cart-pizza-list"></PizzasList>
         </template>
 
         <Misc></Misc>
@@ -21,7 +25,12 @@
             <label class="cart-form__select" style="margin-bottom: 20px">
               <span class="cart-form__label">Получение заказа:</span>
 
-              <select name="address" class="select" v-model="address">
+              <select
+                name="address"
+                class="select"
+                v-model="address"
+                data-test="cart-address"
+              >
                 <option value="self">Заберу сам</option>
                 <option value="new">Новый адрес</option>
                 <option
@@ -44,7 +53,11 @@
               />
             </label>
 
-            <div class="cart-form__address" v-if="address === 'new'">
+            <div
+              class="cart-form__address"
+              v-if="address === 'new'"
+              data-test="cart-address-form"
+            >
               <span class="cart-form__label">Новый адрес:</span>
 
               <div class="cart-form__input">
@@ -54,6 +67,7 @@
                     type="text"
                     name="street"
                     v-model="tempAddress.street"
+                    data-test="cart-address-street"
                   />
                 </label>
               </div>
@@ -65,6 +79,7 @@
                     type="text"
                     name="house"
                     v-model="tempAddress.building"
+                    data-test="cart-address-building"
                   />
                 </label>
               </div>
@@ -76,6 +91,7 @@
                     type="text"
                     name="apartment"
                     v-model="tempAddress.flat"
+                    data-test="cart-address-flat"
                   />
                 </label>
               </div>
@@ -94,7 +110,7 @@
         Перейти к конструктору<br />чтоб собрать ещё одну пиццу
       </p>
       <div class="footer__price">
-        <b>Итого: {{ totalPrice }} ₽</b>
+        <b data-test="cart-price">Итого: {{ totalPrice }} ₽</b>
       </div>
 
       <div class="footer__submit">
@@ -102,6 +118,7 @@
           @click.prevent="onOrderClick"
           :disabled="!totalPrice"
           class="button"
+          data-test="cart-order-button"
         >
           Оформить заказ
         </button>
@@ -111,7 +128,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState, mapMutations } from "vuex";
+import { mapGetters, mapActions, mapState } from "vuex";
 import PizzasList from "@/modules/cart/components/PizzasList";
 import Misc from "@/modules/cart/components/Misc";
 
@@ -151,7 +168,7 @@ export default {
     ...mapActions("Cart", ["fetchMiscData", "makeOrder", "resetCart"]),
     ...mapActions("Addresses", { fetchAddresses: "fetch" }),
     ...mapActions("Orders", { createOrder: "create" }),
-    ...mapMutations("App", ["showThanx"]),
+    ...mapActions("App", ["showThanx"]),
     async onOrderClick() {
       let address;
       if (this.address === "self") {

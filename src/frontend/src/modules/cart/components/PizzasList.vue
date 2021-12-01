@@ -4,6 +4,7 @@
       v-for="(pizza, pizzaIndex) in pizzas"
       :key="pizzaIndex"
       class="cart-list__item"
+      data-test="list-item"
     >
       <div class="product cart-list__product">
         <img
@@ -14,11 +15,15 @@
           alt="Капричоза"
         />
         <div class="product__text">
-          <h2>{{ pizza.pizzaName }}</h2>
+          <h2 data-test="name">{{ pizza.pizzaName }}</h2>
           <ul>
-            <li>{{ pizza.humanize.size }}, {{ pizza.humanize.dough }}</li>
-            <li>Соус: {{ pizza.humanize.sauce }}</li>
-            <li>Начинка: {{ pizza.humanize.ingredients }}</li>
+            <li data-test="size">
+              {{ pizza.humanize.size }}, {{ pizza.humanize.dough }}
+            </li>
+            <li data-test="sauce">Соус: {{ pizza.humanize.sauce }}</li>
+            <li data-test="ingredients">
+              Начинка: {{ pizza.humanize.ingredients }}
+            </li>
           </ul>
         </div>
       </div>
@@ -30,7 +35,7 @@
         @change="onChange(pizza.id, $event)"
       ></ItemCounter>
 
-      <div class="cart-list__price">
+      <div class="cart-list__price" data-test="price">
         <b>{{ pizza.price * pizza.count }} ₽</b>
       </div>
 

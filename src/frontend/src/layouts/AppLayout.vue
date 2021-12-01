@@ -7,12 +7,10 @@
 </template>
 
 <script>
-import Thanx from "@/views/Thanx";
 const defaultLayout = "AppLayoutMain";
 
 export default {
   name: "AppLayout",
-  components: { Thanx },
   computed: {
     layout() {
       const layout = this.$route.meta.layout || defaultLayout;

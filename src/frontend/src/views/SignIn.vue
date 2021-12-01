@@ -17,6 +17,7 @@
             class="input"
             placeholder="E-mail"
             :error-text="validations.email.error"
+            data-test="signin-email"
           />
         </label>
       </div>
@@ -30,10 +31,17 @@
             class="input"
             placeholder="Пароль"
             :error-text="validations.password.error"
+            data-test="signin-password"
           />
         </label>
       </div>
-      <button class="button" @click.prevent="onSubmit">Авторизоваться</button>
+      <button
+        class="button"
+        @click.prevent="onSubmit"
+        data-test="signin-button"
+      >
+        Авторизоваться
+      </button>
     </form>
   </div>
 </template>

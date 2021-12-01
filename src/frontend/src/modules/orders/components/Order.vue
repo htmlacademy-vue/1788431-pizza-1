@@ -1,12 +1,12 @@
 <template>
   <section class="sheet order">
     <div class="order__wrapper">
-      <div class="order__number">
+      <div class="order__number" data-test="order-number">
         <b>Заказ #{{ order.id }}</b>
       </div>
 
       <div class="order__sum">
-        <span>Сумма заказа: {{ order.price }} ₽</span>
+        <span data-test="order-price">Сумма заказа: {{ order.price }} ₽</span>
       </div>
 
       <div class="order__button">
@@ -14,12 +14,18 @@
           type="button"
           class="button button--border"
           @click="onDeleteClick"
+          data-test="order-delete"
         >
           Удалить
         </button>
       </div>
       <div class="order__button">
-        <button type="button" class="button" @click="onRepeatClick">
+        <button
+          type="button"
+          class="button"
+          @click="onRepeatClick"
+          data-test="order-repeat"
+        >
           Повторить
         </button>
       </div>
@@ -30,6 +36,7 @@
         v-for="pizza in order.orderPizzas"
         :key="pizza.id"
         class="order__item"
+        data-test="order-pizza"
       >
         <div class="product">
           <img
@@ -40,32 +47,44 @@
             alt="Капричоза"
           />
           <div class="product__text">
-            <h2>{{ pizza.name }}</h2>
+            <h2 data-test="order-pizza-name">{{ pizza.name }}</h2>
             <ul>
-              <li>{{ pizza.humanize.size }}, {{ pizza.humanize.dough }}</li>
-              <li>Соус: {{ pizza.humanize.sauce }}</li>
-              <li>Начинка: {{ pizza.humanize.ingredients }}</li>
+              <li data-test="order-pizza-size">
+                {{ pizza.humanize.size }}, {{ pizza.humanize.dough }}
+              </li>
+              <li data-test="order-pizza-sauce">
+                Соус: {{ pizza.humanize.sauce }}
+              </li>
+              <li data-test="order-pizza-ingredients">
+                Начинка: {{ pizza.humanize.ingredients }}
+              </li>
             </ul>
           </div>
         </div>
 
-        <p class="order__price">{{ pizza.price }} ₽</p>
+        <p class="order__price" data-test="order-pizza-price">
+          {{ pizza.price }} ₽
+        </p>
       </li>
     </ul>
 
     <ul class="order__additional">
-      <li v-for="misc in order.orderMisc" :key="misc.id">
+      <li
+        v-for="misc in order.orderMisc"
+        :key="misc.id"
+        data-test="order-miscs"
+      >
         <span class="order-misc" :class="misc.code"></span>
         <p>
-          <span>{{ misc.name }}</span>
-          <b
+          <span data-test="order-misc-name">{{ misc.name }}</span>
+          <b data-test="order-misc-price"
             >{{ misc.totalPrice }} ₽ ({{ misc.quantity }} * {{ misc.price }})</b
           >
         </p>
       </li>
     </ul>
 
-    <p v-if="order.address" class="order__address">
+    <p v-if="order.address" class="order__address" data-test="order-address">
       Адрес доставки: {{ order.address }}
     </p>
   </section>
