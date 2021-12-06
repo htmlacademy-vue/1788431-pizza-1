@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 import { generateMockStore } from "@/store/mocks";
-import UserData from "@/views/UserData.vue";
+import UserData from "@/views/user-data/Index.vue";
 import { authenticateUser, fillAddressesData } from "@/common/testHelpers";
 import Vue from "vue";
 import AddressForm from "@/modules/user-data/AddressForm";

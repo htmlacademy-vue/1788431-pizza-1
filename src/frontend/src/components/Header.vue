@@ -14,7 +14,7 @@
       <router-link to="/cart">{{ totalPrice }} ₽</router-link>
     </div>
     <div class="header__user">
-      <router-link v-if="!isAuthenticated" to="/sign-in" class="header__login"
+      <router-link v-if="!isAuthenticated" to="/signin" class="header__login"
         ><span>Войти</span></router-link
       >
       <template v-if="isAuthenticated">
@@ -48,7 +48,7 @@ export default {
     ...mapActions("Auth", ["logout"]),
     async onLogoutClick() {
       await this.logout();
-      await this.$router.push("/sign-in");
+      await this.$router.push("/signin");
     },
   },
 };

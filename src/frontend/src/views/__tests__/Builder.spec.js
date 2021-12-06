@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 import { generateMockStore } from "@/store/mocks";
-import Builder from "@/views/Builder.vue";
+import Builder from "@/views/index/Index.vue";
 import { fillPizzaData, pizzaData1 } from "@/common/testHelpers";
 import Vue from "vue";
 

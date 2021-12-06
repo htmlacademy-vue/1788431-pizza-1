@@ -131,9 +131,12 @@
 import { mapGetters, mapActions, mapState } from "vuex";
 import PizzasList from "@/modules/cart/components/PizzasList";
 import Misc from "@/modules/cart/components/Misc";
+import { auth } from "@/middlewares";
 
 export default {
   name: "Cart",
+  layout: "AppLayoutMain",
+  middlewares: { auth: auth },
   components: {
     PizzasList,
     Misc,
