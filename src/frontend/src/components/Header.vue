@@ -17,7 +17,7 @@
       <router-link v-if="!isAuthenticated" to="/signin" class="header__login"
         ><span>Войти</span></router-link
       >
-      <template v-if="isAuthenticated">
+      <template v-if="isAuthenticated && user">
         <router-link to="/user-data">
           <picture>
             <img :src="user.avatar" :alt="user.name" width="32" height="32" />
