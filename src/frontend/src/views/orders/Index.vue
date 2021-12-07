@@ -15,9 +15,12 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import Order from "@/modules/orders/components/Order";
+import { auth } from "@/middlewares";
 
 export default {
   name: "Orders",
+  layout: "AppLayoutUser",
+  middlewares: { auth: auth },
   components: {
     Order,
   },

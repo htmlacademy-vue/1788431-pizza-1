@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 import { generateMockStore } from "@/store/mocks";
-import Orders from "@/views/Orders.vue";
+import Orders from "@/views/orders/Index.vue";
 import { fillOrdersData } from "@/common/testHelpers";
 import Vue from "vue";
 

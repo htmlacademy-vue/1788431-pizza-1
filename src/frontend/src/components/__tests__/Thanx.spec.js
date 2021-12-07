@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 import { generateMockStore } from "@/store/mocks";
-import Thanx from "@/views/Thanx.vue";
+import Thanx from "@/components/Thanx.vue";
 
 describe("Thanx.vue", () => {
   let actions;

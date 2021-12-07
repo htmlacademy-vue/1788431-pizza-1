@@ -82,9 +82,12 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import AddressForm from "@/modules/user-data/AddressForm";
+import { auth } from "@/middlewares";
 
 export default {
   name: "UserData",
+  layout: "AppLayoutUser",
+  middlewares: { auth: auth },
   components: { AddressForm },
 
   data() {
