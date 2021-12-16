@@ -1,11 +1,11 @@
 import { shallowMount } from "@vue/test-utils";
 import { generateMockStore } from "@/store/mocks";
-import UserData from "@/views/UserData.vue";
+import UserDataView from "@/views/UserDataView.vue";
 import { authenticateUser, fillAddressesData } from "@/common/testHelpers";
 import Vue from "vue";
 import AddressForm from "@/modules/user-data/AddressForm";
 
-describe("UserData.vue", () => {
+describe("UserDataView.vue", () => {
   let actions;
   let store;
   let wrapper;
@@ -16,7 +16,7 @@ describe("UserData.vue", () => {
   };
 
   const createComponent = (options) => {
-    wrapper = shallowMount(UserData, options);
+    wrapper = shallowMount(UserDataView, options);
   };
 
   beforeEach(() => {

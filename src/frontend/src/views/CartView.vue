@@ -134,7 +134,7 @@ import PizzasList from "@/modules/cart/components/PizzasList";
 import Misc from "@/modules/cart/components/Misc";
 
 export default {
-  name: "Cart",
+  name: "CartView",
   components: {
     PizzasList,
     Misc,

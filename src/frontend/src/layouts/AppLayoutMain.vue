@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import Header from "@/components/Header";
-import Thanx from "@/views/Thanx";
+import Header from "@/components/HeaderComponent";
+import Thanx from "@/views/ThanxView";
 import { mapState } from "vuex";
 
 export default {

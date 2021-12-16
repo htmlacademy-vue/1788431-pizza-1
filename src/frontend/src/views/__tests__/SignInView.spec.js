@@ -1,9 +1,9 @@
 import { mount } from "@vue/test-utils";
 import { generateMockStore } from "@/store/mocks";
-import SignIn from "@/views/SignIn.vue";
+import SignInView from "@/views/SignInView.vue";
 import $validator from "@/common/mixins/validator";
 
-describe("SignIn.vue", () => {
+describe("SignInView.vue", () => {
   let actions;
   let store;
   let wrapper;
@@ -15,7 +15,7 @@ describe("SignIn.vue", () => {
   };
 
   const createComponent = (options) => {
-    wrapper = mount(SignIn, options);
+    wrapper = mount(SignInView, options);
   };
 
   beforeEach(() => {

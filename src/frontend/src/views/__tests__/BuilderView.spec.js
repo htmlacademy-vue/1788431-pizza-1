@@ -1,15 +1,15 @@
 import { shallowMount } from "@vue/test-utils";
 import { generateMockStore } from "@/store/mocks";
-import Builder from "@/views/Builder.vue";
+import BuilderView from "@/views/BuilderView.vue";
 import { fillPizzaData, pizzaData1 } from "@/common/testHelpers";
 import Vue from "vue";
 
-describe("Builder.vue", () => {
+describe("BuilderView.vue", () => {
   let actions;
   let store;
   let wrapper;
   const createComponent = (options) => {
-    wrapper = shallowMount(Builder, options);
+    wrapper = shallowMount(BuilderView, options);
   };
 
   beforeEach(() => {
@@ -49,7 +49,7 @@ describe("Builder.vue", () => {
   });
 });
 
-describe("Builder.vue", () => {
+describe("BuilderView.vue", () => {
   let store;
   let wrapper;
   let actions;
@@ -141,7 +141,7 @@ describe("Builder.vue", () => {
   });
 });
 
-describe("Builder.vue on created", () => {
+describe("BuilderView.vue on created", () => {
   let store;
   let wrapper;
   let actions;

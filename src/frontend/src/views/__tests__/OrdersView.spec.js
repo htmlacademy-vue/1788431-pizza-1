@@ -1,16 +1,16 @@
 import { shallowMount } from "@vue/test-utils";
 import { generateMockStore } from "@/store/mocks";
-import Orders from "@/views/Orders.vue";
+import OrdersView from "@/views/OrdersView.vue";
 import { fillOrdersData } from "@/common/testHelpers";
 import Vue from "vue";
 
-describe("Orders.vue", () => {
+describe("OrdersView.vue", () => {
   let actions;
   let store;
   let wrapper;
 
   const createComponent = (options) => {
-    wrapper = shallowMount(Orders, options);
+    wrapper = shallowMount(OrdersView, options);
   };
 
   beforeEach(() => {

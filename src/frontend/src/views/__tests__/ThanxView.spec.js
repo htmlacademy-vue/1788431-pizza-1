@@ -1,9 +1,9 @@
 import { shallowMount } from "@vue/test-utils";
 import { generateMockStore } from "@/store/mocks";
-import Thanx from "@/views/Thanx.vue";
+import ThanxView from "@/views/ThanxView.vue";
 import { authenticateUser } from "@/common/testHelpers";
 
-describe("Thanx.vue", () => {
+describe("ThanxComponent.vue", () => {
   let actions;
   let store;
   let wrapper;
@@ -14,7 +14,7 @@ describe("Thanx.vue", () => {
   };
 
   const createComponent = (options) => {
-    wrapper = shallowMount(Thanx, options);
+    wrapper = shallowMount(ThanxView, options);
   };
 
   beforeEach(() => {

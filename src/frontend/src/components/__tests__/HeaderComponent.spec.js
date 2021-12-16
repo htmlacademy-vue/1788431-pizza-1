@@ -1,9 +1,9 @@
 import { shallowMount } from "@vue/test-utils";
-import Header from "@/components/Header.vue";
+import HeaderComponent from "@/components/HeaderComponent.vue";
 import { generateMockStore } from "@/store/mocks";
 import { authenticateUser } from "@/common/testHelpers";
 
-describe("Header.vue", () => {
+describe("HeaderComponent.vue", () => {
   let wrapper;
   const stubs = ["router-link"];
   let store;
@@ -19,7 +19,7 @@ describe("Header.vue", () => {
   };
 
   const createComponent = (options) => {
-    wrapper = shallowMount(Header, options);
+    wrapper = shallowMount(HeaderComponent, options);
   };
 
   beforeEach(() => {

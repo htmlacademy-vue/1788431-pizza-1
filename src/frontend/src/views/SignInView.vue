@@ -52,7 +52,7 @@ import { validator } from "@/common/mixins";
 import AppInput from "@/common/components/AppInput";
 
 export default {
-  name: "SignIn",
+  name: "SignInView",
   mixins: [validator],
   components: { AppInput },
   data: () => ({

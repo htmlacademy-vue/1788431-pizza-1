@@ -36,7 +36,7 @@
 import { mapGetters, mapState, mapActions } from "vuex";
 
 export default {
-  name: "Header",
+  name: "HeaderComponent",
   computed: {
     ...mapGetters("Cart", ["totalPrice"]),
     ...mapState("Auth", {

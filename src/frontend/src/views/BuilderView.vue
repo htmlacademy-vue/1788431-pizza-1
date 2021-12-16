@@ -65,7 +65,7 @@ import PizzaView from "@/modules/builder/components/PizzaView";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-  name: "Builder",
+  name: "BuilderView",
   components: {
     DoughSelector,
     SizeSelector,

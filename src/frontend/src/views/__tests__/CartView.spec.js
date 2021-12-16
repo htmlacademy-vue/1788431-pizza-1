@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 import { generateMockStore } from "@/store/mocks";
-import Cart from "@/views/Cart.vue";
+import CartView from "@/views/CartView.vue";
 import {
   fillPizzaData,
   pizzaData1,
@@ -11,14 +11,14 @@ import {
 } from "@/common/testHelpers";
 import Vue from "vue";
 
-describe("Cart.vue", () => {
+describe("CartView.vue", () => {
   let actions;
   let store;
   let wrapper;
   let stubs = ["router-link"];
 
   const createComponent = (options) => {
-    wrapper = shallowMount(Cart, options);
+    wrapper = shallowMount(CartView, options);
   };
 
   beforeEach(() => {

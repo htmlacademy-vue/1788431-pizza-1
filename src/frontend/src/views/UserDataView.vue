@@ -84,7 +84,7 @@ import { mapState, mapActions } from "vuex";
 import AddressForm from "@/modules/user-data/AddressForm";
 
 export default {
-  name: "UserData",
+  name: "UserDataView",
   components: { AddressForm },
 
   data() {

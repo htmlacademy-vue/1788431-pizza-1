@@ -17,7 +17,7 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "Thanx",
+  name: "ThanxView",
   computed: {
     ...mapState("Auth", {
       isAuthenticated: (state) => state.isAuthenticated,
