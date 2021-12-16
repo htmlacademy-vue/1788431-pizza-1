@@ -24,7 +24,7 @@ git push
 ¹ В `academy` должна быть ссылка на репозиторий Академии. Если его там нет, добавьте:
 
 ```
-git remote add academy git@github.com:htmlacademy-vue/1788431-pizza-1.git
+git remote add academy {{sshUrl}}
 ```
 
 Когда вы обновили `master`, создайте ветку для нового задания:

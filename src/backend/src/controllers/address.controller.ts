@@ -51,7 +51,7 @@ export class AddressController {
         },
       },
     })
-    address: Address,
+      address: Address,
   ): Promise<Address> {
     return this.addressRepository.create(address);
   }
@@ -81,7 +81,8 @@ export class AddressController {
     },
   })
   async find(): Promise<Address[]> {
-    return this.addressRepository.find();
+    const addresses = await this.addressRepository.find();
+    return addresses.filter(address => !!address.userId);
   }
 
   @oas.visibility(OperationVisibility.UNDOCUMENTED)
@@ -98,7 +99,7 @@ export class AddressController {
         },
       },
     })
-    address: Address,
+      address: Address,
     @param.where(Address) where?: Where<Address>,
   ): Promise<Count> {
     return this.addressRepository.updateAll(address, where);
@@ -135,7 +136,7 @@ export class AddressController {
         },
       },
     })
-    address: Address,
+      address: Address,
   ): Promise<void> {
     await this.addressRepository.updateById(id, address);
   }
