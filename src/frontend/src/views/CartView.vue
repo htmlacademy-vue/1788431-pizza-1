@@ -200,7 +200,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~@/assets/scss/app";
 .misc {
   display: inline-block;
   width: 39px !important;
