@@ -1,9 +1,9 @@
 import { shallowMount } from "@vue/test-utils";
-import Order from "@/modules/orders/components/Order.vue";
+import OrderComponent from "@/modules/orders/components/OrderComponent.vue";
 import { generateMockStore } from "@/store/mocks";
 import { orderData1, orderData2 } from "@/common/testHelpers";
 
-describe("Order.vue", () => {
+describe("OrderComponent.vue", () => {
   let wrapper;
   let store;
   let propsData = {
@@ -22,7 +22,7 @@ describe("Order.vue", () => {
   };
 
   const createComponent = (options) => {
-    wrapper = shallowMount(Order, options);
+    wrapper = shallowMount(OrderComponent, options);
   };
 
   beforeEach(async () => {

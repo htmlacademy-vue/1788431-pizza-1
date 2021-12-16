@@ -3,7 +3,7 @@ import { generateMockStore } from "@/store/mocks";
 import UserDataView from "@/views/UserDataView.vue";
 import { authenticateUser, fillAddressesData } from "@/common/testHelpers";
 import Vue from "vue";
-import AddressForm from "@/modules/user-data/AddressForm";
+import AddressForm from "@/modules/user-data/components/AddressForm";
 
 describe("UserDataView.vue", () => {
   let actions;

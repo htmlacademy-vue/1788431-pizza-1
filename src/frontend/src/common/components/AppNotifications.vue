@@ -14,7 +14,7 @@
 import { mapState } from "vuex";
 
 export default {
-  name: "Notifications",
+  name: "AppNotifications",
   computed: {
     ...mapState(["notifications"]),
   },

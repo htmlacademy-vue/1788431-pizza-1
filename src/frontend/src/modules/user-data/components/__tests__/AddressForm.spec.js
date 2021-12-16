@@ -1,5 +1,5 @@
 import { createLocalVue, mount } from "@vue/test-utils";
-import AddressForm from "@/modules/user-data/AddressForm.vue";
+import AddressForm from "@/modules/user-data/components/AddressForm.vue";
 import AppInput from "@/common/components/AppInput.vue";
 import { generateMockStore } from "@/store/mocks";
 import Vuex from "vuex";
