@@ -1,5 +1,3 @@
-//const path = require("path");
-
 module.exports = {
   css: {
     loaderOptions: {
@@ -18,7 +16,7 @@ module.exports = {
       },
       "^/public": {
         target: "http://backend:3000/",
-        changeOrigin: false,
+        changeOrigin: true,
         pathRewrite: { "^/public/": "/public/" },
       },
       "/explorer": {
@@ -38,8 +36,8 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        '@': __dirname + '/src'
-      }
+        "@": __dirname + "/src",
+      },
     },
-  }
+  },
 };
