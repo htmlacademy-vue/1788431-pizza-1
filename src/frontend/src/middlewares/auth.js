@@ -1,6 +1,6 @@
 import { setAuth } from "@/common/helpers";
 
-export default function auth({ next, store }) {
+export default function auth({ next, store, nextMiddleware }) {
   if (!store.state.Auth.isAuthenticated) {
     const token = store.$jwt.getToken();
     if (token) {
@@ -9,4 +9,5 @@ export default function auth({ next, store }) {
       next("/");
     }
   }
+  return nextMiddleware();
 }

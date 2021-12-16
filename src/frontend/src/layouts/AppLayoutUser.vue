@@ -16,9 +16,7 @@
         <router-link to="/orders" class="layout__link"
           >История заказов</router-link
         >
-        <router-link to="/user-data" class="layout__link"
-          >Мои данные</router-link
-        >
+        <router-link to="/profile" class="layout__link">Мои данные</router-link>
       </div>
 
       <div class="layout__content">

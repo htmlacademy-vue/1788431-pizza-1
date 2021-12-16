@@ -2,7 +2,7 @@ import { RouterLinkStub, shallowMount } from "@vue/test-utils";
 import AppLayoutMain from "@/layouts/AppLayoutMain";
 import { generateMockStore } from "@/store/mocks";
 import AppNotifications from "@/common/components/AppNotifications";
-import Thanx from "@/components/Thanx";
+import Thanx from "@/views/Thanx";
 import Header from "@/components/Header";
 import Vue from "vue";
 

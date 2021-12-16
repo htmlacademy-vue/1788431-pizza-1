@@ -11,7 +11,7 @@
 
 <script>
 import Header from "@/components/Header";
-import Thanx from "@/components/Thanx";
+import Thanx from "@/views/Thanx";
 import { mapState } from "vuex";
 
 export default {

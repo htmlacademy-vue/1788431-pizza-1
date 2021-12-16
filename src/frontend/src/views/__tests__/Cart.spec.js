@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 import { generateMockStore } from "@/store/mocks";
-import Cart from "@/views/cart/Index.vue";
+import Cart from "@/views/Cart.vue";
 import {
   fillPizzaData,
   pizzaData1,

@@ -68,6 +68,6 @@ describe("Header.vue", () => {
     const logoutBtn = wrapper.find('[data-test="logout-btn"]');
     await logoutBtn.trigger("click");
     expect(actions.Auth.logout).toHaveBeenCalled();
-    expect(mocks.$router.push).toHaveBeenCalledWith("/signin");
+    expect(mocks.$router.push).toHaveBeenCalledWith("/login");
   });
 });

@@ -1,6 +1,6 @@
 import { shallowMount } from "@vue/test-utils";
 import { generateMockStore } from "@/store/mocks";
-import Builder from "@/views/index/Index.vue";
+import Builder from "@/views/Builder.vue";
 import { fillPizzaData, pizzaData1 } from "@/common/testHelpers";
 import Vue from "vue";
 
@@ -168,8 +168,9 @@ describe("Builder.vue on created", () => {
 
   it("reset and fetch if no pizzaIdToEdit passed", async () => {
     createComponent({ store });
-    expect(actions.Builder.resetValues).toHaveBeenCalled();
     expect(actions.Builder.fetchData).toHaveBeenCalled();
+    await Vue.nextTick();
+    expect(actions.Builder.resetValues).toHaveBeenCalled();
     expect(actions.Builder.loadDataFromCart).not.toHaveBeenCalled();
   });
 
@@ -181,12 +182,13 @@ describe("Builder.vue on created", () => {
         pizzaIdToEdit: pizzaData1.id,
       },
     });
+    expect(actions.Builder.fetchData).toHaveBeenCalled();
+    await Vue.nextTick();
     expect(actions.Builder.loadDataFromCart).toHaveBeenCalledWith(
       expect.any(Object),
       pizzaData1
     );
     await Vue.nextTick();
-    expect(actions.Builder.fetchData).toHaveBeenCalled();
     expect(actions.Builder.resetValues).not.toHaveBeenCalled();
   });
 });
