@@ -56,12 +56,12 @@
 </template>
 
 <script>
-import DoughSelector from "@/modules/builder/components/DoughSelector";
-import SizeSelector from "@/modules/builder/components/SizeSelector";
-import SauceSelector from "@/modules/builder/components/SauceSelector";
-import IngredientsSelector from "@/modules/builder/components/IngredientsSelector";
-import PriceCounter from "@/modules/builder/components/PriceCounter";
-import PizzaView from "@/modules/builder/components/PizzaView";
+import DoughSelector from "@/modules/builder/components/BuilderDoughSelector";
+import SizeSelector from "@/modules/builder/components/BuilderSizeSelector";
+import SauceSelector from "@/modules/builder/components/BuilderSauceSelector";
+import IngredientsSelector from "@/modules/builder/components/BuilderIngredientsSelector";
+import PriceCounter from "@/modules/builder/components/BuilderPriceCounter";
+import PizzaView from "@/modules/builder/components/BuilderPizzaView";
 import { mapActions, mapGetters } from "vuex";
 
 export default {

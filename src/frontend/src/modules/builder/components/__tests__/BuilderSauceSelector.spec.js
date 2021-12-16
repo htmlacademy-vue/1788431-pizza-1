@@ -1,22 +1,22 @@
 import { shallowMount } from "@vue/test-utils";
-import SizeSelector from "@/modules/builder/components/SizeSelector.vue";
+import BuilderSauceSelector from "@/modules/builder/components/BuilderSauceSelector.vue";
 import { generateMockStore } from "@/store/mocks";
 import { fillPizzaData } from "@/common/testHelpers";
 import pizza from "@/static/pizza";
 
-describe("SizeSelector.vue", () => {
+describe("BuilderSauceSelector.vue", () => {
   let wrapper;
   let store;
   let actions;
 
   const createComponent = (options) => {
-    wrapper = shallowMount(SizeSelector, options);
+    wrapper = shallowMount(BuilderSauceSelector, options);
   };
 
   beforeEach(() => {
     actions = {
       Builder: {
-        saveSizeId: jest.fn(),
+        saveSauceId: jest.fn(),
       },
     };
     store = generateMockStore(actions);
@@ -32,30 +32,28 @@ describe("SizeSelector.vue", () => {
     expect(wrapper.exists()).toBeTruthy();
   });
 
-  it("should render sizes", () => {
+  it("should render sauces", () => {
     createComponent({ store });
-    expect(wrapper.findAll("input").length).toBe(pizza.sizes.length);
+    expect(wrapper.findAll("input").length).toBe(pizza.sauces.length);
   });
 
-  it("should be selected default size", () => {
+  it("should be selected default sauce", () => {
     createComponent({ store });
     expect(wrapper.findAll("input").at(0).element.checked).toBe(true);
     expect(wrapper.findAll("input").at(1).element.checked).toBe(false);
-    expect(wrapper.findAll("input").at(2).element.checked).toBe(false);
   });
 
-  it("should be selected right size", () => {
-    store.commit("Builder/setSizeId", pizza.sizes[2].id);
+  it("should be selected right sauce", () => {
+    store.commit("Builder/setSauceId", pizza.sauces[1].id);
     createComponent({ store });
     expect(wrapper.findAll("input").at(0).element.checked).toBe(false);
-    expect(wrapper.findAll("input").at(1).element.checked).toBe(false);
-    expect(wrapper.findAll("input").at(2).element.checked).toBe(true);
+    expect(wrapper.findAll("input").at(1).element.checked).toBe(true);
   });
 
-  it("can select size", () => {
+  it("can select sauce", () => {
     createComponent({ store });
     wrapper.findAll("input").at(1).trigger("click");
-    expect(actions.Builder.saveSizeId).toHaveBeenCalledWith(
+    expect(actions.Builder.saveSauceId).toHaveBeenCalledWith(
       expect.any(Object),
       2
     );

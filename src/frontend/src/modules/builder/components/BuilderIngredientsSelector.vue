@@ -36,7 +36,7 @@ import { MAX_SAME_INGREDIENTS, DRAG_DATA_NAME } from "@/common/constants";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-  name: "IngredientsSelector",
+  name: "BuilderIngredientsSelector",
   components: { ItemCounter },
 
   data() {

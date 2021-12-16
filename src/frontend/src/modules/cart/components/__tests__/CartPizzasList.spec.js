@@ -1,10 +1,10 @@
 import { mount, RouterLinkStub } from "@vue/test-utils";
-import PizzasList from "@/modules/cart/components/PizzasList.vue";
+import CartPizzasList from "@/modules/cart/components/CartPizzasList.vue";
 import { generateMockStore } from "@/store/mocks";
 import { pizzaData1, pizzaData2 } from "@/common/testHelpers";
 import Vue from "vue";
 
-describe("PizzasList.vue", () => {
+describe("CartPizzasList.vue", () => {
   let wrapper;
   let store;
   let stubs = {
@@ -12,7 +12,7 @@ describe("PizzasList.vue", () => {
   };
 
   const createComponent = (options) => {
-    wrapper = mount(PizzasList, options);
+    wrapper = mount(CartPizzasList, options);
   };
 
   beforeEach(() => {

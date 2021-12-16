@@ -87,7 +87,7 @@ import { validator } from "@/common/mixins";
 import { mapActions } from "vuex";
 
 export default {
-  name: "AddressForm",
+  name: "UserDataAddressForm",
   props: ["address"],
   mixins: [validator],
   data() {

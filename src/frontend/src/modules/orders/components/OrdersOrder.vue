@@ -94,7 +94,7 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "OrderComponent",
+  name: "OrdersOrder",
   props: {
     order: {
       type: Object,

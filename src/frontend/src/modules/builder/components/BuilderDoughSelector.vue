@@ -28,7 +28,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 export default {
-  name: "DoughSelector",
+  name: "BuilderDoughSelector",
 
   computed: {
     ...mapGetters("Builder", ["doughs", "selectedDoughId"]),

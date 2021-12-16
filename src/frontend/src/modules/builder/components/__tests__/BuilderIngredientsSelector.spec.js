@@ -1,17 +1,17 @@
 import { mount } from "@vue/test-utils";
-import IngredientsSelector from "@/modules/builder/components/IngredientsSelector.vue";
+import BuilderIngredientsSelector from "@/modules/builder/components/BuilderIngredientsSelector.vue";
 import { generateMockStore } from "@/store/mocks";
 import { fillPizzaData } from "@/common/testHelpers";
 import pizza from "@/static/pizza";
 import Vue from "vue";
 
-describe("IngredientsSelector.vue", () => {
+describe("BuilderIngredientsSelector.vue", () => {
   let wrapper;
   let store;
   let actions;
 
   const createComponent = (options) => {
-    wrapper = mount(IngredientsSelector, options);
+    wrapper = mount(BuilderIngredientsSelector, options);
   };
 
   beforeEach(() => {

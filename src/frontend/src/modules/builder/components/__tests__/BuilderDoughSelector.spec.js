@@ -1,16 +1,16 @@
 import { shallowMount } from "@vue/test-utils";
-import DoughSelector from "@/modules/builder/components/DoughSelector.vue";
+import BuilderDoughSelector from "@/modules/builder/components/BuilderDoughSelector.vue";
 import { generateMockStore } from "@/store/mocks";
 import { fillPizzaData } from "@/common/testHelpers";
 import pizza from "@/static/pizza";
 
-describe("DoughSelector.vue", () => {
+describe("BuilderDoughSelector.vue", () => {
   let wrapper;
   let store;
   let actions;
 
   const createComponent = (options) => {
-    wrapper = shallowMount(DoughSelector, options);
+    wrapper = shallowMount(BuilderDoughSelector, options);
   };
 
   beforeEach(() => {

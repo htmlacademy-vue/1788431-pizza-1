@@ -58,7 +58,7 @@ import { mapActions, mapGetters } from "vuex";
 import ItemCounter from "@/common/components/ItemCounter";
 
 export default {
-  name: "PizzasList",
+  name: "CartPizzasList",
   components: {
     ItemCounter,
   },

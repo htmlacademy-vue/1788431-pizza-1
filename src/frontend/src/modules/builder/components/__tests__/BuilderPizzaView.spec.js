@@ -1,16 +1,16 @@
 import { shallowMount } from "@vue/test-utils";
-import PizzaView from "@/modules/builder/components/PizzaView.vue";
+import BuilderPizzaView from "@/modules/builder/components/BuilderPizzaView.vue";
 import { generateMockStore } from "@/store/mocks";
 import { fillPizzaData } from "@/common/testHelpers";
 import pizza from "@/static/pizza";
 import Vue from "vue";
 
-describe("PizzaView.vue", () => {
+describe("BuilderPizzaView.vue", () => {
   let wrapper;
   let store;
 
   const createComponent = (options) => {
-    wrapper = shallowMount(PizzaView, options);
+    wrapper = shallowMount(BuilderPizzaView, options);
   };
 
   beforeEach(() => {

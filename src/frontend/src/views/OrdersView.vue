@@ -14,7 +14,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import Order from "@/modules/orders/components/OrderComponent";
+import Order from "@/modules/orders/components/OrdersOrder";
 
 export default {
   name: "OrdersView",

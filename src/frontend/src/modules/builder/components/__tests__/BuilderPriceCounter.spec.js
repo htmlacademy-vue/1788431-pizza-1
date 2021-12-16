@@ -1,16 +1,16 @@
 import { shallowMount } from "@vue/test-utils";
-import PriceCounter from "@/modules/builder/components/PriceCounter.vue";
+import BuilderPriceCounter from "@/modules/builder/components/BuilderPriceCounter.vue";
 import { generateMockStore } from "@/store/mocks";
 import { fillPizzaData } from "@/common/testHelpers";
 import pizza from "@/static/pizza";
 import Vue from "vue";
 
-describe("PriceCounter.vue", () => {
+describe("BuilderPriceCounter.vue", () => {
   let wrapper;
   let store;
 
   const createComponent = (options) => {
-    wrapper = shallowMount(PriceCounter, options);
+    wrapper = shallowMount(BuilderPriceCounter, options);
   };
 
   beforeEach(() => {

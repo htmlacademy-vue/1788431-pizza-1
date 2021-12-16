@@ -1,5 +1,5 @@
 import { createLocalVue, mount } from "@vue/test-utils";
-import AddressForm from "@/modules/user-data/components/AddressForm.vue";
+import UserDataAddressForm from "@/modules/user-data/components/UserDataAddressForm.vue";
 import AppInput from "@/common/components/AppInput.vue";
 import { generateMockStore } from "@/store/mocks";
 import Vuex from "vuex";
@@ -8,7 +8,7 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 localVue.component("AppInput", AppInput);
 
-describe("AddressForm.vue", () => {
+describe("UserDataAddressForm.vue", () => {
   let wrapper;
   let store;
   let propsData = {
@@ -42,7 +42,7 @@ describe("AddressForm.vue", () => {
   };
 
   const createComponent = (options) => {
-    wrapper = mount(AddressForm, options);
+    wrapper = mount(UserDataAddressForm, options);
   };
 
   beforeEach(async () => {

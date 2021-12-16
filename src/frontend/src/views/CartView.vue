@@ -130,8 +130,8 @@
 
 <script>
 import { mapGetters, mapActions, mapState } from "vuex";
-import PizzasList from "@/modules/cart/components/PizzasList";
-import Misc from "@/modules/cart/components/MiscList";
+import PizzasList from "@/modules/cart/components/CartPizzasList";
+import Misc from "@/modules/cart/components/CartMiscList";
 
 export default {
   name: "CartView",

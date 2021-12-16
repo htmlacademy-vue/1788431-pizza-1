@@ -1,16 +1,16 @@
 import { mount } from "@vue/test-utils";
-import MiscList from "@/modules/cart/components/MiscList.vue";
+import CartMiscList from "@/modules/cart/components/CartMiscList.vue";
 import { generateMockStore } from "@/store/mocks";
 import { fillMiscData } from "@/common/testHelpers";
 import misc from "@/static/misc.json";
 import Vue from "vue";
 
-describe("MiscList.vue", () => {
+describe("CartMiscList.vue", () => {
   let wrapper;
   let store;
 
   const createComponent = (options) => {
-    wrapper = mount(MiscList, options);
+    wrapper = mount(CartMiscList, options);
   };
 
   beforeEach(() => {

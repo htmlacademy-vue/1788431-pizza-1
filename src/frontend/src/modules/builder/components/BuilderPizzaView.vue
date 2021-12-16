@@ -23,7 +23,7 @@
 import { DRAG_DATA_NAME } from "@/common/constants";
 import { mapActions, mapGetters } from "vuex";
 export default {
-  name: "PizzaView",
+  name: "BuilderPizzaView",
 
   computed: {
     ...mapGetters("Builder", [

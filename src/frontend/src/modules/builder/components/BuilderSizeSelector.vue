@@ -27,7 +27,7 @@
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-  name: "SizeSelector",
+  name: "BuilderSizeSelector",
 
   computed: {
     ...mapGetters("Builder", ["sizes", "selectedSizeId"]),

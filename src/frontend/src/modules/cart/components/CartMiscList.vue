@@ -33,7 +33,7 @@ import { mapActions, mapGetters } from "vuex";
 import ItemCounter from "@/common/components/ItemCounter";
 
 export default {
-  name: "MiscList",
+  name: "CartMiscList",
   components: {
     ItemCounter,
   },
