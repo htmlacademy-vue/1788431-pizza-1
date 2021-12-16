@@ -38,9 +38,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "~@/assets/scss/layout/layout.scss";
-
 .router-link-active {
-  @extend .layout__link--active;
+  background-color: rgba(65, 182, 25, 0.1);
 }
 </style>
