@@ -58,8 +58,8 @@ import AppInput from "@/common/components/AppInput";
 
 export default {
   name: "SignInView",
-  mixins: [validator],
   components: { AppInput },
+  mixins: [validator],
   data: () => ({
     email: "",
     password: "",

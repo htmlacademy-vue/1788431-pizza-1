@@ -106,6 +106,9 @@ export default {
       return this.user.avatar.replace(/(.*)\.[^.]+/, "$1");
     },
   },
+  created() {
+    this.fetch();
+  },
   methods: {
     ...mapActions("Addresses", ["fetch", "create", "deleteUnsaved", "save"]),
     onEditAddressClick(addressId) {
@@ -129,9 +132,6 @@ export default {
 
       return addr;
     },
-  },
-  created() {
-    this.fetch();
   },
 };
 </script>

@@ -85,15 +85,6 @@ export default {
       default: 0,
     },
   },
-  async created() {
-    await this.fetchData();
-    if (this.pizzaIdToEdit) {
-      const pizzaData = this.getPizzaDataById(this.pizzaIdToEdit);
-      await this.loadDataFromCart(pizzaData);
-    } else {
-      this.resetValues();
-    }
-  },
   computed: {
     ...mapGetters("Builder", ["getPizzaName", "orderAllowed", "pizzaData"]),
     ...mapGetters("Cart", ["getPizzaDataById"]),
@@ -105,6 +96,15 @@ export default {
         this.savePizzaName(pizzaName);
       },
     },
+  },
+  async created() {
+    await this.fetchData();
+    if (this.pizzaIdToEdit) {
+      const pizzaData = this.getPizzaDataById(this.pizzaIdToEdit);
+      await this.loadDataFromCart(pizzaData);
+    } else {
+      this.resetValues();
+    }
   },
   methods: {
     ...mapActions("Builder", [

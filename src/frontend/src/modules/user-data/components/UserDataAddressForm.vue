@@ -91,13 +91,13 @@ import { mapActions } from "vuex";
 
 export default {
   name: "UserDataAddressForm",
+  mixins: [validator],
   props: {
     address: {
       type: Object,
       default: () => {},
     },
   },
-  mixins: [validator],
   data() {
     return {
       validations: {

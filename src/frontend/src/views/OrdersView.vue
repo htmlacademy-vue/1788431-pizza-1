@@ -28,17 +28,17 @@ export default {
       orders: (state) => state.orders,
     }),
   },
-  methods: {
-    ...mapActions("Orders", { fetchOrders: "fetch" }),
-    ...mapActions("Addresses", { fetchAddresses: "fetch" }),
-    ...mapActions("Builder", { fetchBuilderData: "fetchData" }),
-    ...mapActions("Cart", { fetchMiscData: "fetchMiscData" }),
-  },
   async created() {
     await this.fetchAddresses();
     await this.fetchBuilderData();
     await this.fetchMiscData();
     await this.fetchOrders();
+  },
+  methods: {
+    ...mapActions("Orders", { fetchOrders: "fetch" }),
+    ...mapActions("Addresses", { fetchAddresses: "fetch" }),
+    ...mapActions("Builder", { fetchBuilderData: "fetchData" }),
+    ...mapActions("Cart", { fetchMiscData: "fetchMiscData" }),
   },
 };
 </script>
