@@ -30,10 +30,12 @@ export default {
       const sauces = this.sauces;
       return sauces.map((sauce) => this.normalizeSauce(sauce));
     },
+
     selectedSauce: {
       get() {
         return this.selectedSauceId;
       },
+
       set(sauce) {
         this.saveSauceId(sauce);
       },

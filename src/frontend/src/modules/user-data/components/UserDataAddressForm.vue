@@ -11,7 +11,7 @@
       <div class="address-form__input">
         <AppInput
           ref="name"
-          v-model="address.name"
+          v-model="addressDraft.name"
           name="name"
           class="input"
           placeholder="Название адреса*"
@@ -22,7 +22,7 @@
       <div class="address-form__input">
         <AppInput
           ref="street"
-          v-model="address.street"
+          v-model="addressDraft.street"
           name="street"
           class="input"
           placeholder="Введите название улицы*"
@@ -33,7 +33,7 @@
       <div class="address-form__input address-form__input--size--normal">
         <AppInput
           ref="building"
-          v-model="address.building"
+          v-model="addressDraft.building"
           name="building"
           class="input"
           placeholder="Дом*"
@@ -44,7 +44,7 @@
       <div class="address-form__input address-form__input--size--small">
         <AppInput
           ref="flat"
-          v-model="address.flat"
+          v-model="addressDraft.flat"
           name="addr-apartment"
           class="input"
           placeholder="Квартира"
@@ -54,7 +54,7 @@
       <div class="address-form__input">
         <AppInput
           ref="comment"
-          v-model="address.comment"
+          v-model="addressDraft.comment"
           name="comment"
           class="input"
           placeholder="Введите комментарий"
@@ -65,11 +65,11 @@
 
     <div class="address-form__buttons">
       <button
-        v-if="address.id"
+        v-if="addressDraft.id"
         type="button"
         class="button button--transparent"
         data-test="address-delete"
-        @click="onDeleteAddressClick(address)"
+        @click="onDeleteAddressClick(addressDraft)"
       >
         Удалить
       </button>
@@ -77,7 +77,7 @@
         type="submit"
         class="button"
         data-test="address-save"
-        @click.prevent="onSaveAddressClick(address)"
+        @click.prevent="onSaveAddressClick(addressDraft)"
       >
         Сохранить
       </button>
@@ -98,6 +98,7 @@ export default {
       default: () => {},
     },
   },
+
   data() {
     return {
       validations: {
@@ -105,34 +106,43 @@ export default {
           error: "",
           rules: ["required"],
         },
+
         street: {
           error: "",
           rules: ["required"],
         },
+
         building: {
           error: "",
           rules: ["required"],
         },
       },
+
+      addressDraft: { ...this.address },
     };
   },
+
   watch: {
     "address.name"() {
       this.$clearValidationErrors();
     },
+
     "address.street"() {
       this.$clearValidationErrors();
     },
+
     "address.building"() {
       this.$clearValidationErrors();
     },
   },
+
   methods: {
     ...mapActions("Addresses", ["delete"]),
     async onDeleteAddressClick(address) {
       await this.delete(address);
       this.$notifier.success("Адрес удален");
     },
+
     async onSaveAddressClick(address) {
       if (
         !this.$validateFields(

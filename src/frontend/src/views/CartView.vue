@@ -150,6 +150,7 @@ export default {
     PizzasList,
     Misc,
   },
+
   data() {
     return {
       address: "self",
@@ -157,6 +158,7 @@ export default {
       phone: "",
     };
   },
+
   computed: {
     ...mapGetters("Cart", [
       "pizzasCount",
@@ -164,21 +166,25 @@ export default {
       "pizzasForOrder",
       "miscForOrder",
     ]),
+
     ...mapGetters("Addresses", { getAddressById: "getById" }),
     ...mapState("Addresses", {
       addresses: (state) => state.addresses,
     }),
+
     ...mapState("Auth", {
       isAuthenticated: (state) => state.isAuthenticated,
       user: (state) => state.user,
     }),
   },
+
   async created() {
     await this.fetchMiscData();
     if (this.isAuthenticated) {
       await this.fetchAddresses();
     }
   },
+
   methods: {
     ...mapActions("Cart", ["fetchMiscData", "makeOrder", "resetCart"]),
     ...mapActions("Addresses", { fetchAddresses: "fetch" }),

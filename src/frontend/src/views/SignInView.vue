@@ -68,23 +68,28 @@ export default {
         error: "",
         rules: ["required", "email"],
       },
+
       password: {
         error: "",
         rules: ["required"],
       },
     },
   }),
+
   watch: {
     email() {
       this.$clearValidationErrors();
     },
+
     password() {
       this.$clearValidationErrors();
     },
   },
+
   mounted() {
     this.$refs.email.$refs.input.focus();
   },
+
   methods: {
     ...mapActions("Auth", ["login"]),
     async onSubmit() {

@@ -37,10 +37,12 @@ export default {
       const sizes = this.sizes;
       return sizes.map((size) => this.normalizeSize(size));
     },
+
     selectedSize: {
       get() {
         return this.selectedSizeId;
       },
+
       set(size) {
         this.saveSizeId(size);
       },

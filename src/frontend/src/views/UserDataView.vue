@@ -94,35 +94,43 @@ export default {
       editAddressId: null,
     };
   },
+
   computed: {
     ...mapState("Auth", {
       isAuthenticated: (state) => state.isAuthenticated,
       user: (state) => state.user,
     }),
+
     ...mapState("Addresses", {
       addresses: (state) => state.addresses,
     }),
+
     avatar() {
       return this.user.avatar.replace(/(.*)\.[^.]+/, "$1");
     },
   },
+
   created() {
     this.fetch();
   },
+
   methods: {
     ...mapActions("Addresses", ["fetch", "create", "deleteUnsaved", "save"]),
     onEditAddressClick(addressId) {
       this.deleteUnsaved();
       this.editAddressId = addressId;
     },
+
     onCreateAddressClick() {
       this.create(this.user.id);
     },
+
     async onSaveAddress(address) {
       await this.save(address);
       this.editAddressId = null;
       this.$notifier.success("Адрес сохранен");
     },
+
     humanizeAddress(address) {
       let addr = address.street + ", " + address.building;
 

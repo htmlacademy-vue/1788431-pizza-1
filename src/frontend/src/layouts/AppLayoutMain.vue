@@ -23,6 +23,7 @@ export default {
     Thanx,
     Header,
   },
+
   computed: {
     ...mapState("App", {
       showThanx: (state) => state.showThanx,

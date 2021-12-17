@@ -64,9 +64,11 @@ export default {
         count: this.selectedIngredients[ingredient.id],
       };
     },
+
     onChange(ingredientId, delta) {
       this.changeIngredient({ ingredientId, delta });
     },
+
     onDrag(event, ingredient) {
       event.dataTransfer.setData(DRAG_DATA_NAME, ingredient.id);
     },

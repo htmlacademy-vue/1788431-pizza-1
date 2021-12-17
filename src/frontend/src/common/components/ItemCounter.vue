@@ -37,14 +37,17 @@ export default {
       type: String,
       default: "",
     },
+
     additionalButtonClass: {
       type: String,
       default: "",
     },
+
     value: {
       type: Number,
       default: 0,
     },
+
     max: {
       type: Number,
       default: 100,
@@ -58,6 +61,7 @@ export default {
         this.$emit("change", -1);
       }
     },
+
     onPlus() {
       const newValue = this.value + 1;
       if (this.max && newValue > this.max) {

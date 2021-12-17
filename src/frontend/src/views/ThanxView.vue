@@ -33,6 +33,7 @@ export default {
       isAuthenticated: (state) => state.isAuthenticated,
     }),
   },
+
   methods: {
     ...mapActions("App", ["hideThanx"]),
     async close() {

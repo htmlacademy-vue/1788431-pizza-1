@@ -36,6 +36,7 @@ export default {
       "selectedIngredients",
       "getIngredientById",
     ]),
+
     pizzaFoundationStyle() {
       return (
         "pizza--foundation--" +
@@ -44,6 +45,7 @@ export default {
         this.selectedSauceId
       );
     },
+
     pizzaIngredientStyles() {
       const styles = [];
 

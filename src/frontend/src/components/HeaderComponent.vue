@@ -60,6 +60,7 @@ export default {
       user: (state) => state.user,
     }),
   },
+
   methods: {
     ...mapActions("Auth", ["logout"]),
     async onLogoutClick() {

@@ -23,17 +23,20 @@ export default {
   components: {
     Order,
   },
+
   computed: {
     ...mapState("Orders", {
       orders: (state) => state.orders,
     }),
   },
+
   async created() {
     await this.fetchAddresses();
     await this.fetchBuilderData();
     await this.fetchMiscData();
     await this.fetchOrders();
   },
+
   methods: {
     ...mapActions("Orders", { fetchOrders: "fetch" }),
     ...mapActions("Addresses", { fetchAddresses: "fetch" }),

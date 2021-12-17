@@ -38,10 +38,12 @@ export default {
       const doughs = this.doughs;
       return doughs.map((dough) => this.normalizeDough(dough));
     },
+
     selectedDough: {
       get() {
         return this.selectedDoughId;
       },
+
       set(dough) {
         this.saveDoughId(dough);
       },
