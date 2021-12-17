@@ -17,7 +17,7 @@
 import { mapActions } from "vuex";
 
 export default {
-  name: "Thanx",
+  name: "ThanxComponent",
   methods: {
     ...mapActions("App", ["hideThanx"]),
     async close() {

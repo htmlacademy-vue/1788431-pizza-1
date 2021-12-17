@@ -18,6 +18,14 @@ module.exports = {
         },
       },
     ],
+    "vue/prop-name-casing": ["error", "camelCase"],
+    "vue/match-component-file-name": [
+      "error",
+      {
+        extensions: ["vue"],
+        shouldMatchCase: true,
+      },
+    ],
   },
   overrides: [
     {
