@@ -62,7 +62,7 @@
           :address="addressItem"
           @save="onSaveAddress($event)"
           data-test="user-data-address-form"
-        ></AddressForm>
+        />
       </div>
     </template>
 

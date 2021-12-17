@@ -33,7 +33,7 @@
         additionalButtonClass="counter__button--orange"
         :value="pizza.count"
         @change="onChange(pizza.id, $event)"
-      ></ItemCounter>
+      />
 
       <div class="cart-list__price" data-test="price">
         <b>{{ pizza.price * pizza.count }} ₽</b>

@@ -74,7 +74,7 @@
         :key="misc.id"
         data-test="order-miscs"
       >
-        <span class="order-misc" :class="misc.code"></span>
+        <span class="order-misc" :class="misc.code" />
         <p>
           <span data-test="order-misc-name">{{ misc.name }}</span>
           <b data-test="order-misc-price"

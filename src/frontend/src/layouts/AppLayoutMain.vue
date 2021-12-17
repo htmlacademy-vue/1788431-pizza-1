@@ -1,10 +1,10 @@
 <template>
   <div>
     <AppNotifications />
-    <Header></Header>
+    <Header />
     <slot />
     <transition name="popup">
-      <Thanx v-if="showThanx" data-test="layout-thanx"></Thanx>
+      <Thanx v-if="showThanx" data-test="layout-thanx" />
     </transition>
   </div>
 </template>

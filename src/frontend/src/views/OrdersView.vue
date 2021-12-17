@@ -8,7 +8,7 @@
       :key="order.id"
       :order="order"
       data-test="orders-order"
-    ></Order>
+    />
   </div>
 </template>
 

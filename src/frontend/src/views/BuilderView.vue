@@ -4,9 +4,9 @@
       <div class="content__wrapper">
         <h1 class="title title--big">Конструктор пиццы</h1>
 
-        <DoughSelector></DoughSelector>
+        <DoughSelector />
 
-        <SizeSelector></SizeSelector>
+        <SizeSelector />
 
         <div class="content__ingredients">
           <div class="sheet">
@@ -15,9 +15,9 @@
             </h2>
 
             <div class="sheet__content ingredients">
-              <SauceSelector></SauceSelector>
+              <SauceSelector />
 
-              <IngredientsSelector></IngredientsSelector>
+              <IngredientsSelector />
             </div>
           </div>
         </div>
@@ -34,10 +34,10 @@
             />
           </label>
 
-          <PizzaView></PizzaView>
+          <PizzaView />
 
           <div class="content__result">
-            <PriceCounter></PriceCounter>
+            <PriceCounter />
             <button
               type="button"
               class="button"

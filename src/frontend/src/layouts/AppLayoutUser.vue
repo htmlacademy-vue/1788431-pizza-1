@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppNotifications />
-    <Header></Header>
+    <Header />
     <main class="layout">
       <div class="layout__sidebar sidebar">
         <router-link to="/" class="logo layout__logo">

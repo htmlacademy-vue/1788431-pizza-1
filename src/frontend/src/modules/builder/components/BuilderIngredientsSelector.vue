@@ -24,7 +24,7 @@
           :value="selectedIngredients[ingredient.id]"
           :max="max"
           @change="onChange(ingredient.id, $event)"
-        ></ItemCounter>
+        />
       </li>
     </ul>
   </div>

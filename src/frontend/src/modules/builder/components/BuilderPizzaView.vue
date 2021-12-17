@@ -13,7 +13,7 @@
           :key="ingredientStyle"
           class="ingredient"
           :class="ingredientStyle"
-        ></div>
+        />
       </transition-group>
     </div>
   </div>

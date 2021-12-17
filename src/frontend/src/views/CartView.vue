@@ -15,10 +15,10 @@
         </div>
 
         <template v-if="pizzasCount">
-          <PizzasList data-test="cart-pizza-list"></PizzasList>
+          <PizzasList data-test="cart-pizza-list" />
         </template>
 
-        <Misc></Misc>
+        <Misc />
 
         <div class="cart__form">
           <div class="cart-form">
