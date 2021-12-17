@@ -8,10 +8,10 @@
       class="radio ingredients__input"
     >
       <input
+        v-model="selectedSauce"
         type="radio"
         name="sauce"
         :value="sauce.id"
-        v-model="selectedSauce"
       />
       <span>{{ sauce.name }}</span>
     </label>

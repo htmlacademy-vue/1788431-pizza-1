@@ -68,16 +68,16 @@
         v-if="address.id"
         type="button"
         class="button button--transparent"
-        @click="onDeleteAddressClick(address)"
         data-test="address-delete"
+        @click="onDeleteAddressClick(address)"
       >
         Удалить
       </button>
       <button
         type="submit"
         class="button"
-        @click.prevent="onSaveAddressClick(address)"
         data-test="address-save"
+        @click.prevent="onSaveAddressClick(address)"
       >
         Сохранить
       </button>

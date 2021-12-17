@@ -13,11 +13,11 @@
           :class="dough.style"
         >
           <input
+            v-model="selectedDough"
             type="radio"
             name="dough"
             :value="dough.id"
             class="visually-hidden"
-            v-model="selectedDough"
           />
           <b>{{ dough.name }}</b>
           <span>{{ dough.description }}</span>

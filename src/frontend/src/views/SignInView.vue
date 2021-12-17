@@ -42,8 +42,8 @@
       </div>
       <button
         class="button"
-        @click.prevent="onSubmit"
         data-test="signin-button"
+        @click.prevent="onSubmit"
       >
         Авторизоваться
       </button>

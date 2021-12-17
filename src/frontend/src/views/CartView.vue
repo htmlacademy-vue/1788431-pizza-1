@@ -31,9 +31,9 @@
               <span class="cart-form__label">Получение заказа:</span>
 
               <select
+                v-model="address"
                 name="address"
                 class="select"
-                v-model="address"
                 data-test="cart-address"
               >
                 <option value="self">Заберу сам</option>
@@ -54,16 +54,16 @@
             >
               <span>Контактный телефон:</span>
               <input
+                v-model="phone"
                 type="text"
                 name="tel"
                 placeholder="+7 999-999-99-99"
-                v-model="phone"
               />
             </label>
 
             <div
-              class="cart-form__address"
               v-if="address === 'new'"
+              class="cart-form__address"
               data-test="cart-address-form"
             >
               <span class="cart-form__label">Новый адрес:</span>
@@ -72,9 +72,9 @@
                 <label class="input">
                   <span>Улица*</span>
                   <input
+                    v-model="tempAddress.street"
                     type="text"
                     name="street"
-                    v-model="tempAddress.street"
                     data-test="cart-address-street"
                   />
                 </label>
@@ -84,9 +84,9 @@
                 <label class="input">
                   <span>Дом*</span>
                   <input
+                    v-model="tempAddress.building"
                     type="text"
                     name="house"
-                    v-model="tempAddress.building"
                     data-test="cart-address-building"
                   />
                 </label>
@@ -96,9 +96,9 @@
                 <label class="input">
                   <span>Квартира</span>
                   <input
+                    v-model="tempAddress.flat"
                     type="text"
                     name="apartment"
-                    v-model="tempAddress.flat"
                     data-test="cart-address-flat"
                   />
                 </label>
@@ -126,11 +126,11 @@
 
       <div class="footer__submit">
         <button
-          @click.prevent="onOrderClick"
           :disabled="!totalPrice"
           class="button"
           :class="{ 'button--disabled': !totalPrice }"
           data-test="cart-order-button"
+          @click.prevent="onOrderClick"
         >
           Оформить заказ
         </button>

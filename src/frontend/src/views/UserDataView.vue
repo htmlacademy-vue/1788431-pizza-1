@@ -33,8 +33,8 @@
     <template v-for="(addressItem, addressIndex) in addresses">
       <div
         v-if="addressItem.id && addressItem.id !== editAddressId"
-        class="layout__address"
         :key="addressIndex"
+        class="layout__address"
         data-test="user-data-address"
       >
         <div class="sheet address-form">
@@ -42,10 +42,10 @@
             <b>{{ addressItem.name }}</b>
             <div class="address-form__edit">
               <button
-                @click="onEditAddressClick(addressItem.id)"
                 type="button"
                 class="icon"
                 data-test="user-data-address-edit"
+                @click="onEditAddressClick(addressItem.id)"
               >
                 <span class="visually-hidden">Изменить адрес</span>
               </button>
@@ -57,13 +57,13 @@
       </div>
       <div
         v-if="!addressItem.id || addressItem.id === editAddressId"
-        class="layout__address"
         :key="addressIndex"
+        class="layout__address"
       >
         <AddressForm
           :address="addressItem"
-          @save="onSaveAddress($event)"
           data-test="user-data-address-form"
+          @save="onSaveAddress($event)"
         />
       </div>
     </template>
@@ -72,8 +72,8 @@
       <button
         type="button"
         class="button button--border"
-        @click="onCreateAddressClick"
         data-test="user-data-add-address"
+        @click="onCreateAddressClick"
       >
         Добавить новый адрес
       </button>

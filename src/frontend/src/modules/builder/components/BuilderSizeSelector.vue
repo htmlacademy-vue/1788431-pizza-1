@@ -12,11 +12,11 @@
           :class="size.style"
         >
           <input
+            v-model="selectedSize"
             type="radio"
             name="diameter"
             :value="size.id"
             class="visually-hidden"
-            v-model="selectedSize"
           />
           <span>{{ size.name }}</span>
         </label>

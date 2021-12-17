@@ -2,8 +2,8 @@
   <div class="popup">
     <a
       class="close"
-      @click="close"
       data-test="thanx-close"
+      @click="close"
     >
       <span class="visually-hidden">Закрыть попап</span>
     </a>
@@ -16,8 +16,8 @@
     <div class="popup__button">
       <a
         class="button"
-        @click="close"
         data-test="thanx-ok"
+        @click="close"
       >Отлично, я жду!</a>
     </div>
   </div>

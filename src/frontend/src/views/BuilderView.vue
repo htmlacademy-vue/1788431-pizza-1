@@ -31,10 +31,10 @@
           <label class="input">
             <span class="visually-hidden">Название пиццы</span>
             <input
+              v-model="pizzaName"
               type="text"
               name="pizza_name"
               placeholder="Введите название пиццы"
-              v-model="pizzaName"
               data-test="builder-name"
             />
           </label>
@@ -48,8 +48,8 @@
               class="button"
               :class="{ 'button--disabled': !orderAllowed }"
               :disabled="!orderAllowed"
-              @click="onToCartClick"
               data-test="builder-to-cart"
+              @click="onToCartClick"
             >
               Готовьте!
             </button>

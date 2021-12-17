@@ -39,9 +39,9 @@
           <span>{{ user.name }}</span>
         </router-link>
         <a
-          @click="onLogoutClick"
           data-test="logout-btn"
           class="header__logout"
+          @click="onLogoutClick"
         ><span>Выйти</span></a>
       </template>
     </div>

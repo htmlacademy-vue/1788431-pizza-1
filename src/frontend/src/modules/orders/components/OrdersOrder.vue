@@ -16,8 +16,8 @@
         <button
           type="button"
           class="button button--border"
-          @click="onDeleteClick"
           data-test="order-delete"
+          @click="onDeleteClick"
         >
           Удалить
         </button>
@@ -26,8 +26,8 @@
         <button
           type="button"
           class="button"
-          @click="onRepeatClick"
           data-test="order-repeat"
+          @click="onRepeatClick"
         >
           Повторить
         </button>

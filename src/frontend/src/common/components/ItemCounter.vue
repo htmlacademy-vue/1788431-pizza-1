@@ -6,8 +6,8 @@
     <button
       type="button"
       class="counter__button counter__button--disabled counter__button--minus"
-      @click="onMinus"
       data-test="decrease"
+      @click="onMinus"
     >
       <span class="visually-hidden">Меньше</span>
     </button>
@@ -21,8 +21,8 @@
       type="button"
       class="counter__button counter__button--plus"
       :class="additionalButtonClass"
-      @click="onPlus"
       data-test="increase"
+      @click="onPlus"
     >
       <span class="visually-hidden">Больше</span>
     </button>
