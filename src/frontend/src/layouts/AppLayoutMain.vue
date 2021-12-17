@@ -4,7 +4,10 @@
     <Header />
     <slot />
     <transition name="popup">
-      <Thanx v-if="showThanx" data-test="layout-thanx" />
+      <Thanx
+        v-if="showThanx"
+        data-test="layout-thanx"
+      />
     </transition>
   </div>
 </template>

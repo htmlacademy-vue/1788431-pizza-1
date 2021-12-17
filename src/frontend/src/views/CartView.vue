@@ -3,7 +3,9 @@
     <main class="content cart">
       <div class="container">
         <div class="cart__title">
-          <h1 class="title title--big">Корзина</h1>
+          <h1 class="title title--big">
+            Корзина
+          </h1>
         </div>
 
         <div
@@ -22,7 +24,10 @@
 
         <div class="cart__form">
           <div class="cart-form">
-            <label class="cart-form__select" style="margin-bottom: 20px">
+            <label
+              class="cart-form__select"
+              style="margin-bottom: 20px"
+            >
               <span class="cart-form__label">Получение заказа:</span>
 
               <select
@@ -34,16 +39,19 @@
                 <option value="self">Заберу сам</option>
                 <option value="new">Новый адрес</option>
                 <option
-                  v-for="address in addresses"
-                  :key="address.id"
-                  :value="address.id"
+                  v-for="addr in addresses"
+                  :key="addr.id"
+                  :value="addr.id"
                 >
-                  {{ address.name }}
+                  {{ addr.name }}
                 </option>
               </select>
             </label>
 
-            <label class="input input--big-label" style="margin-bottom: 20px">
+            <label
+              class="input input--big-label"
+              style="margin-bottom: 20px"
+            >
               <span>Контактный телефон:</span>
               <input
                 type="text"
@@ -102,9 +110,12 @@
     </main>
     <section class="footer">
       <div class="footer__more">
-        <router-link to="/" class="button button--border button--arrow"
-          >Хочу еще одну</router-link
+        <router-link
+          to="/"
+          class="button button--border button--arrow"
         >
+          Хочу еще одну
+        </router-link>
       </div>
       <p class="footer__text">
         Перейти к конструктору<br />чтоб собрать ещё одну пиццу

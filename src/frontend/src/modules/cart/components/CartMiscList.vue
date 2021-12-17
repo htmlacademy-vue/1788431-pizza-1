@@ -7,19 +7,25 @@
         class="additional-list__item sheet"
       >
         <p class="additional-list__description">
-          <span class="misc" :class="misc.code" />
+          <span
+            class="misc"
+            :class="misc.code"
+          />
           <span>{{ misc.name }} ({{ misc.price || 0 }} ₽)</span>
         </p>
 
         <div class="additional-list__wrapper">
           <ItemCounter
-            additionalClass="additional-list__counter"
-            additionalButtonClass="counter__button--orange"
+            additional-class="additional-list__counter"
+            additional-button-class="counter__button--orange"
             :value="misc.count"
             @change="onMiscChange(misc.id, $event)"
           />
 
-          <div class="additional-list__price" data-test="price">
+          <div
+            class="additional-list__price"
+            data-test="price"
+          >
             <b>{{ misc.totalPrice || 0 }} ₽</b>
           </div>
         </div>

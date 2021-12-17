@@ -1,5 +1,8 @@
 <template>
-  <div v-if="notifications.length" class="notification__wrapper">
+  <div
+    v-if="notifications.length"
+    class="notification__wrapper"
+  >
     <div
       v-for="({ text, type }, i) in notifications"
       :key="i"

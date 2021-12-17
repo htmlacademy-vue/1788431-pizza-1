@@ -7,7 +7,11 @@
       @dragover.prevent
       @dragenter.prevent
     >
-      <transition-group name="ingredient" tag="div" class="pizza__wrapper">
+      <transition-group
+        name="ingredient"
+        tag="div"
+        class="pizza__wrapper"
+      >
         <div
           v-for="ingredientStyle of pizzaIngredientStyles"
           :key="ingredientStyle"

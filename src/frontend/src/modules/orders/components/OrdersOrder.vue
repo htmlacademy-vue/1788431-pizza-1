@@ -1,7 +1,10 @@
 <template>
   <section class="sheet order">
     <div class="order__wrapper">
-      <div class="order__number" data-test="order-number">
+      <div
+        class="order__number"
+        data-test="order-number"
+      >
         <b>Заказ #{{ order.id }}</b>
       </div>
 
@@ -47,7 +50,9 @@
             alt="Капричоза"
           />
           <div class="product__text">
-            <h2 data-test="order-pizza-name">{{ pizza.name }}</h2>
+            <h2 data-test="order-pizza-name">
+              {{ pizza.name }}
+            </h2>
             <ul>
               <li data-test="order-pizza-size">
                 {{ pizza.humanize.size }}, {{ pizza.humanize.dough }}
@@ -62,7 +67,10 @@
           </div>
         </div>
 
-        <p class="order__price" data-test="order-pizza-price">
+        <p
+          class="order__price"
+          data-test="order-pizza-price"
+        >
           {{ pizza.price }} ₽
         </p>
       </li>
@@ -74,17 +82,24 @@
         :key="misc.id"
         data-test="order-miscs"
       >
-        <span class="order-misc" :class="misc.code" />
+        <span
+          class="order-misc"
+          :class="misc.code"
+        />
         <p>
           <span data-test="order-misc-name">{{ misc.name }}</span>
-          <b data-test="order-misc-price"
-            >{{ misc.totalPrice }} ₽ ({{ misc.quantity }} * {{ misc.price }})</b
-          >
+          <b
+            data-test="order-misc-price"
+          >{{ misc.totalPrice }} ₽ ({{ misc.quantity }} * {{ misc.price }})</b>
         </p>
       </li>
     </ul>
 
-    <p v-if="order.address" class="order__address" data-test="order-address">
+    <p
+      v-if="order.address"
+      class="order__address"
+      data-test="order-address"
+    >
       Адрес доставки: {{ order.address }}
     </p>
   </section>

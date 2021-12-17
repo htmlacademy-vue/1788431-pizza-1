@@ -1,5 +1,8 @@
 <template>
-  <form method="post" class="address-form address-form--opened sheet">
+  <form
+    method="post"
+    class="address-form address-form--opened sheet"
+  >
     <div class="address-form__header">
       <b>Адрес №1</b>
     </div>
@@ -88,7 +91,12 @@ import { mapActions } from "vuex";
 
 export default {
   name: "UserDataAddressForm",
-  props: ["address"],
+  props: {
+    address: {
+      type: Object,
+      default: () => {},
+    },
+  },
   mixins: [validator],
   data() {
     return {

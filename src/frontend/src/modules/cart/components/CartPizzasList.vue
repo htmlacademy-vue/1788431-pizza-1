@@ -15,12 +15,16 @@
           alt="Капричоза"
         />
         <div class="product__text">
-          <h2 data-test="name">{{ pizza.pizzaName }}</h2>
+          <h2 data-test="name">
+            {{ pizza.pizzaName }}
+          </h2>
           <ul>
             <li data-test="size">
               {{ pizza.humanize.size }}, {{ pizza.humanize.dough }}
             </li>
-            <li data-test="sauce">Соус: {{ pizza.humanize.sauce }}</li>
+            <li data-test="sauce">
+              Соус: {{ pizza.humanize.sauce }}
+            </li>
             <li data-test="ingredients">
               Начинка: {{ pizza.humanize.ingredients }}
             </li>
@@ -29,13 +33,16 @@
       </div>
 
       <ItemCounter
-        additionalClass="cart-list__counter"
-        additionalButtonClass="counter__button--orange"
+        additional-class="cart-list__counter"
+        additional-button-class="counter__button--orange"
         :value="pizza.count"
         @change="onChange(pizza.id, $event)"
       />
 
-      <div class="cart-list__price" data-test="price">
+      <div
+        class="cart-list__price"
+        data-test="price"
+      >
         <b>{{ pizza.price * pizza.count }} ₽</b>
       </div>
 
@@ -46,8 +53,9 @@
             name: 'Builder',
             params: { pizzaIdToEdit: pizza.id },
           }"
-          >Изменить</router-link
         >
+          Изменить
+        </router-link>
       </div>
     </li>
   </ul>

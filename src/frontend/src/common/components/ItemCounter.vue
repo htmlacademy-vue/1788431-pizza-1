@@ -1,5 +1,8 @@
 <template>
-  <div class="counter" :class="additionalClass">
+  <div
+    class="counter"
+    :class="additionalClass"
+  >
     <button
       type="button"
       class="counter__button counter__button--disabled counter__button--minus"
@@ -8,7 +11,12 @@
     >
       <span class="visually-hidden">Меньше</span>
     </button>
-    <input type="text" name="counter" class="counter__input" :value="value" />
+    <input
+      type="text"
+      name="counter"
+      class="counter__input"
+      :value="value"
+    />
     <button
       type="button"
       class="counter__button counter__button--plus"
@@ -27,9 +35,11 @@ export default {
   props: {
     additionalClass: {
       type: String,
+      default: "",
     },
     additionalButtonClass: {
       type: String,
+      default: "",
     },
     value: {
       type: Number,
@@ -37,6 +47,7 @@ export default {
     },
     max: {
       type: Number,
+      default: 100,
     },
   },
 

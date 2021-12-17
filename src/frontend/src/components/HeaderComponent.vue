@@ -1,7 +1,10 @@
 <template>
   <header class="header">
     <div class="header__logo">
-      <router-link to="/" class="logo">
+      <router-link
+        to="/"
+        class="logo"
+      >
         <img
           src="@/assets/img/logo.svg"
           alt="V!U!E! Pizza logo"
@@ -11,22 +14,35 @@
       </router-link>
     </div>
     <div class="header__cart">
-      <router-link to="/cart">{{ totalPrice }} ₽</router-link>
+      <router-link to="/cart">
+        {{ totalPrice }} ₽
+      </router-link>
     </div>
     <div class="header__user">
-      <router-link v-if="!isAuthenticated" to="/login" class="header__login"
-        ><span>Войти</span></router-link
+      <router-link
+        v-if="!isAuthenticated"
+        to="/login"
+        class="header__login"
       >
+        <span>Войти</span>
+      </router-link>
       <template v-if="isAuthenticated">
         <router-link to="/profile">
           <picture>
-            <img :src="user.avatar" :alt="user.name" width="32" height="32" />
+            <img
+              :src="user.avatar"
+              :alt="user.name"
+              width="32"
+              height="32"
+            />
           </picture>
           <span>{{ user.name }}</span>
         </router-link>
-        <a @click="onLogoutClick" data-test="logout-btn" class="header__logout"
-          ><span>Выйти</span></a
-        >
+        <a
+          @click="onLogoutClick"
+          data-test="logout-btn"
+          class="header__logout"
+        ><span>Выйти</span></a>
       </template>
     </div>
   </header>

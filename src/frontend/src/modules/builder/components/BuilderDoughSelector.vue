@@ -1,7 +1,9 @@
 <template>
   <div class="content__dough">
     <div class="sheet">
-      <h2 class="title title--small sheet__title">Выберите тесто</h2>
+      <h2 class="title title--small sheet__title">
+        Выберите тесто
+      </h2>
 
       <div class="sheet__content dough">
         <label

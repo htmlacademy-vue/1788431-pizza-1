@@ -1,8 +1,13 @@
 <template>
   <main class="content">
-    <form action="#" method="post">
+    <form
+      action="#"
+      method="post"
+    >
       <div class="content__wrapper">
-        <h1 class="title title--big">Конструктор пиццы</h1>
+        <h1 class="title title--big">
+          Конструктор пиццы
+        </h1>
 
         <DoughSelector />
 
@@ -77,6 +82,7 @@ export default {
   props: {
     pizzaIdToEdit: {
       type: Number,
+      default: 0,
     },
   },
   async created() {
