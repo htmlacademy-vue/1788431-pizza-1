@@ -61,7 +61,7 @@ describe("BuilderView.vue", () => {
   };
 
   const createComponent = (options) => {
-    wrapper = shallowMount(Builder, options);
+    wrapper = shallowMount(BuilderView, options);
   };
 
   beforeEach(() => {
@@ -147,7 +147,7 @@ describe("BuilderView.vue on created", () => {
   let actions;
 
   const createComponent = (options) => {
-    wrapper = shallowMount(Builder, options);
+    wrapper = shallowMount(BuilderView, options);
   };
 
   beforeEach(() => {
