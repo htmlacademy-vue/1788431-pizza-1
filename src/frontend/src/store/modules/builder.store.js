@@ -1,11 +1,11 @@
 import Vue from "vue";
 import { MAX_SAME_INGREDIENTS } from "@/common/constants";
 import { humanizePizza, pizzaPrice } from "@/common/builderHelpers";
+import { uniqueId } from "lodash";
 
 export default {
   namespaced: true,
   state: {
-    lastId: 0,
     id: null,
     doughs: [],
     sauces: [],
@@ -112,9 +112,7 @@ export default {
       state.ingredients = ingredients;
     },
     setDefaults(state) {
-      state.id = state.lastId + 1;
-      state.lastId++;
-
+      state.id = uniqueId();
       state.selectedDoughId = state.doughs[0]?.id;
       state.selectedSauceId = state.sauces[0]?.id;
       state.selectedSizeId = state.sizes[0]?.id;

@@ -125,14 +125,16 @@ export default {
 
   methods: {
     ...mapActions("Orders", ["delete", "repeat"]),
+    ...mapActions("Cart", ["repeatFromOrder"]),
     async onDeleteClick() {
       await this.delete(this.order.id);
       this.$notifier.success("Заказ удален");
     },
 
     async onRepeatClick() {
-      await this.repeat(this.order);
-      this.$notifier.success("Заказ продублирован");
+      await this.repeatFromOrder(this.order);
+      this.$notifier.success("Заказ добавлен в корзину");
+      this.$router.push({ name: "Cart" });
     },
   },
 };
