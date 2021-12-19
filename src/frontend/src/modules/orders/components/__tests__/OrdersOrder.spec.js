@@ -13,11 +13,16 @@ describe("OrdersOrder.vue", () => {
     $notifier: {
       success: jest.fn(),
     },
+    $router: {
+      push: jest.fn(),
+    },
   };
   const actions = {
     Orders: {
       delete: jest.fn(),
-      repeat: jest.fn(),
+    },
+    Cart: {
+      repeatFromOrder: jest.fn(),
     },
   };
 
@@ -184,14 +189,14 @@ describe("OrdersOrder.vue", () => {
     expect(mocks.$notifier.success).toHaveBeenCalled();
   });
 
-  it("should call repeat action", async () => {
+  it("should call repeatFromOrder action", async () => {
     createComponent({
       store,
       propsData,
       mocks,
     });
     await wrapper.find('[data-test="order-repeat"]').trigger("click");
-    expect(actions.Orders.repeat).toHaveBeenCalledWith(
+    expect(actions.Cart.repeatFromOrder).toHaveBeenCalledWith(
       expect.any(Object),
       orderData1
     );

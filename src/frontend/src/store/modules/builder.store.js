@@ -112,7 +112,7 @@ export default {
       state.ingredients = ingredients;
     },
     setDefaults(state) {
-      state.id = uniqueId();
+      state.id = +uniqueId();
       state.selectedDoughId = state.doughs[0]?.id;
       state.selectedSauceId = state.sauces[0]?.id;
       state.selectedSizeId = state.sizes[0]?.id;

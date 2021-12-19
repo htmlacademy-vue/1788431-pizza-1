@@ -126,7 +126,7 @@ describe("BuilderView.vue", () => {
     expect(actions.Cart.addPizza).toHaveBeenCalledWith(expect.any(Object), {
       count: 1,
       humanize: expect.any(Object),
-      id: 1,
+      id: expect.any(Number),
       pizzaName: "n",
       price: 383,
       selectedDoughId: 1,

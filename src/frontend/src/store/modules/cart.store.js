@@ -159,7 +159,7 @@ export default {
         });
 
         commit("addPizza", {
-          id: uniqueId(),
+          id: +uniqueId(),
           count: pizza.quantity,
           humanize: pizza.humanize,
           price: pizzaPrice({
