@@ -1,5 +1,6 @@
 import Vue from "vue";
-import each from "lodash/each";
+import { each, uniqueId, isEmpty } from "lodash";
+import { pizzaPrice } from "@/common/builderHelpers";
 
 export default {
   namespaced: true,
@@ -130,7 +131,11 @@ export default {
     changeCount({ commit }, { id, delta }) {
       commit("changeCount", { id, delta });
     },
-    async fetchMiscData({ commit }) {
+    async fetchMiscData({ commit, state }) {
+      if (!isEmpty(state.miscData)) {
+        return;
+      }
+
       const miscData = await this.$api.misc.query();
       const reg = new RegExp(".*/([^.]+).svg");
       for (const index in miscData) {
@@ -143,6 +148,42 @@ export default {
     },
     resetCart({ commit }) {
       commit("resetCart");
+    },
+    repeatFromOrder({ commit, rootGetters }, order) {
+      const orderPizzas = order.orderPizzas;
+      each(orderPizzas, (pizza) => {
+        const selectedIngredients = {};
+        each(pizza.ingredients, (ingredientData) => {
+          selectedIngredients[ingredientData.ingredientId] =
+            ingredientData.quantity;
+        });
+
+        commit("addPizza", {
+          id: +uniqueId(),
+          count: pizza.quantity,
+          humanize: pizza.humanize,
+          price: pizzaPrice({
+            doughs: rootGetters["Builder/doughs"],
+            sauces: rootGetters["Builder/sauces"],
+            sizes: rootGetters["Builder/sizes"],
+            ingredients: rootGetters["Builder/ingredients"],
+            doughId: pizza.doughId,
+            sauceId: pizza.sauceId,
+            sizeId: pizza.sizeId,
+            selectedIngredients,
+          }),
+          pizzaName: pizza.name,
+          selectedDoughId: pizza.doughId,
+          selectedSauceId: pizza.sauceId,
+          selectedSizeId: pizza.sizeId,
+          selectedIngredients,
+        });
+      });
+
+      const orderMiscs = order.orderMisc;
+      each(orderMiscs, (misc) => {
+        commit("changeMisc", { miscId: misc.miscId, delta: misc.quantity });
+      });
     },
   },
 };

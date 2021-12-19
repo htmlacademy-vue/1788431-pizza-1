@@ -1,17 +1,20 @@
 <template>
   <div>
     <AppNotifications />
-    <Header></Header>
+    <Header />
     <slot />
     <transition name="popup">
-      <Thanx v-if="showThanx" data-test="layout-thanx"></Thanx>
+      <Thanx
+        v-if="showThanx"
+        data-test="layout-thanx"
+      />
     </transition>
   </div>
 </template>
 
 <script>
-import Header from "@/components/Header";
-import Thanx from "@/views/Thanx";
+import Header from "@/components/HeaderComponent";
+import Thanx from "@/views/ThanxView";
 import { mapState } from "vuex";
 
 export default {
@@ -20,6 +23,7 @@ export default {
     Thanx,
     Header,
   },
+
   computed: {
     ...mapState("App", {
       showThanx: (state) => state.showThanx,

@@ -1,20 +1,28 @@
 <template>
-  <div class="counter" :class="additionalClass">
+  <div
+    class="counter"
+    :class="additionalClass"
+  >
     <button
       type="button"
       class="counter__button counter__button--disabled counter__button--minus"
-      @click="onMinus"
       data-test="decrease"
+      @click="onMinus"
     >
       <span class="visually-hidden">Меньше</span>
     </button>
-    <input type="text" name="counter" class="counter__input" :value="value" />
+    <input
+      type="text"
+      name="counter"
+      class="counter__input"
+      :value="value"
+    />
     <button
       type="button"
       class="counter__button counter__button--plus"
       :class="additionalButtonClass"
-      @click="onPlus"
       data-test="increase"
+      @click="onPlus"
     >
       <span class="visually-hidden">Больше</span>
     </button>
@@ -27,16 +35,22 @@ export default {
   props: {
     additionalClass: {
       type: String,
+      default: "",
     },
+
     additionalButtonClass: {
       type: String,
+      default: "",
     },
+
     value: {
       type: Number,
       default: 0,
     },
+
     max: {
       type: Number,
+      default: 100,
     },
   },
 
@@ -47,6 +61,7 @@ export default {
         this.$emit("change", -1);
       }
     },
+
     onPlus() {
       const newValue = this.value + 1;
       if (this.max && newValue > this.max) {

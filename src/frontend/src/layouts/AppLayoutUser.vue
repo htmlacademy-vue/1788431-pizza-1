@@ -1,10 +1,13 @@
 <template>
   <div>
     <AppNotifications />
-    <Header></Header>
+    <Header />
     <main class="layout">
       <div class="layout__sidebar sidebar">
-        <router-link to="/" class="logo layout__logo">
+        <router-link
+          to="/"
+          class="logo layout__logo"
+        >
           <img
             src="@/assets/img/logo.svg"
             alt="V!U!E! Pizza logo"
@@ -13,10 +16,18 @@
           />
         </router-link>
 
-        <router-link to="/orders" class="layout__link"
-          >История заказов</router-link
+        <router-link
+          to="/orders"
+          class="layout__link"
         >
-        <router-link to="/profile" class="layout__link">Мои данные</router-link>
+          История заказов
+        </router-link>
+        <router-link
+          to="/profile"
+          class="layout__link"
+        >
+          Мои данные
+        </router-link>
       </div>
 
       <div class="layout__content">
@@ -27,7 +38,7 @@
 </template>
 
 <script>
-import Header from "@/components/Header";
+import Header from "@/components/HeaderComponent";
 
 export default {
   name: "AppLayoutUser",
@@ -38,9 +49,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "~@/assets/scss/layout/layout.scss";
-
 .router-link-active {
-  @extend .layout__link--active;
+  background-color: rgba(65, 182, 25, 0.1);
 }
 </style>
