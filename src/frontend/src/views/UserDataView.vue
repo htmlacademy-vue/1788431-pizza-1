@@ -144,4 +144,11 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+@import "~@/assets/scss/mixins/mixins.scss";
+@import "~@/assets/scss/blocks/user.scss";
+@import "~@/assets/scss/blocks/title.scss";
+@import "~@/assets/scss/blocks/button.scss";
+@import "~@/assets/scss/blocks/address-form.scss";
+@import "~@/assets/scss/blocks/icon.scss";
+</style>

@@ -140,7 +140,12 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import "~@/assets/scss/mixins/mixins.scss";
+@import "~@/assets/scss/blocks/order.scss";
+@import "~@/assets/scss/blocks/product.scss";
+@import "~@/assets/scss/blocks/button.scss";
+
 .order-misc {
   display: inline-block;
   width: 20px !important;

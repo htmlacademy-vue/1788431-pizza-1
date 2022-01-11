@@ -216,7 +216,15 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import "~@/assets/scss/mixins/mixins.scss";
+@import "~@/assets/scss/blocks/cart.scss";
+@import "~@/assets/scss/blocks/cart-form.scss";
+@import "~@/assets/scss/blocks/select.scss";
+@import "~@/assets/scss/blocks/input.scss";
+@import "~@/assets/scss/blocks/footer.scss";
+@import "~@/assets/scss/blocks/button.scss";
+
 .misc {
   display: inline-block;
   width: 39px !important;

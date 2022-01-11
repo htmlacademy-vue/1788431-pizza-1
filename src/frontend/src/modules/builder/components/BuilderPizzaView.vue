@@ -87,7 +87,10 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
+@import "~@/assets/scss/mixins/mixins.scss";
+@import "~@/assets/scss/blocks/pizza.scss";
+
 .ingredient {
   transition: all 1s;
 }

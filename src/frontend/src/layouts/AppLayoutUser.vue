@@ -48,7 +48,9 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
+@import "~@/assets/scss/blocks/logo.scss";
+
 .router-link-active {
   background-color: rgba(65, 182, 25, 0.1);
 }
