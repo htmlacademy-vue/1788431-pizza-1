@@ -83,3 +83,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import "~@/assets/scss/mixins/mixins.scss";
+@import "~@/assets/scss/blocks/cart-list.scss";
+@import "~@/assets/scss/blocks/product.scss";
+</style>

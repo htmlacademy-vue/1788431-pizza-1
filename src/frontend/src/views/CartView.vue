@@ -216,20 +216,13 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.misc {
-  display: inline-block;
-  width: 39px !important;
-  height: 60px !important;
-  background-repeat: no-repeat;
-}
-.cola {
-  background-image: url("~@/assets/img/cola.svg");
-}
-.sauce {
-  background-image: url("~@/assets/img/sauce.svg");
-}
-.potato {
-  background-image: url("~@/assets/img/potato.svg");
-}
+<style lang="scss" scoped>
+@import "~@/assets/scss/mixins/mixins.scss";
+@import "~@/assets/scss/blocks/cart.scss";
+@import "~@/assets/scss/blocks/cart-form.scss";
+@import "~@/assets/scss/blocks/select.scss";
+@import "~@/assets/scss/blocks/input.scss";
+@import "~@/assets/scss/blocks/footer.scss";
+@import "~@/assets/scss/blocks/button.scss";
+@import "~@/assets/scss/blocks/title.scss";
 </style>

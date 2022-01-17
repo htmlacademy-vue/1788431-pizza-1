@@ -56,3 +56,25 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import "~@/assets/scss/mixins/mixins.scss";
+@import "~@/assets/scss/blocks/cart.scss";
+@import "~@/assets/scss/blocks/additional-list.scss";
+
+.misc {
+  display: inline-block;
+  width: 39px !important;
+  height: 60px !important;
+  background-repeat: no-repeat;
+}
+.cola {
+  background-image: url("~@/assets/img/cola.svg");
+}
+.sauce {
+  background-image: url("~@/assets/img/sauce.svg");
+}
+.potato {
+  background-image: url("~@/assets/img/potato.svg");
+}
+</style>

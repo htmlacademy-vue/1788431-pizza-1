@@ -71,7 +71,9 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
+@import "~@/assets/scss/blocks/logo.scss";
+
 .header {
   z-index: 1000;
 }
